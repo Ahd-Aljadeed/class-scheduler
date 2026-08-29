@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.timetable-grid {
+  display: grid;
+  grid-template-columns: 65px repeat(7, 1fr);
+  background: #111;
+  color: white;
+  font-family: sans-serif;
+}
+.time-header-cell, .day-header-cell {
+  background: #222;
+  padding: 10px;
+  border: 1px solid #444;
+}
+.time-slot-label {
+  border: 1px solid #333;
+  height: 50px;
+}
+.time-slot-cell {
+  border: 1px solid #333;
+  height: 50px;
+}
+.day-column-overlay {
+  position: relative;
+}
+.calendar-event {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  background: purple;
+  color: white;
+  border-radius: 4px;
+  padding: 4px;
+}
+</style>
+</head>
+<body>
+<div id="grid" class="timetable-grid"></div>
+<script>
+const grid = document.getElementById("grid");
+// 1. Header
+const corner = document.createElement("div");
+corner.className = "time-header-cell";
+corner.textContent = "Time";
+grid.appendChild(corner);
+
+for(let i=0; i<7; i++) {
+  const d = document.createElement("div");
+  d.className = "day-header-cell";
+  d.textContent = "Day " + i;
+  grid.appendChild(d);
+}
+
+// 2. Time slots (8 to 20 = 13 hours)
+for(let h=8; h<=20; h++) {
+  const lbl = document.createElement("div");
+  lbl.className = "time-slot-label";
+  lbl.textContent = h + ":00";
+  grid.appendChild(lbl);
+  for(let i=0; i<7; i++) {
+    const c = document.createElement("div");
+    c.className = "time-slot-cell";
+    grid.appendChild(c);
+  }
+}
+
+// 3. Overlays
+for(let i=0; i<7; i++) {
+  const col = document.createElement("div");
+  col.className = "day-column-overlay";
+  col.style.gridColumn = (i + 2);
+  col.style.gridRow = "2 / span 13";
+  
+  if (i === 0) { // Mon
+    // Add cards
+    const card1 = document.createElement("div");
+    card1.className = "calendar-event";
+    card1.style.top = "0px";
+    card1.style.height = "75px";
+    card1.textContent = "Compiler 8:00-9:30";
+    col.appendChild(card1);
+
+    const card2 = document.createElement("div");
+    card2.className = "calendar-event";
+    card2.style.top = "75px";
+    card2.style.height = "75px";
+    card2.textContent = "Data Mining 9:30-11:00";
+    col.appendChild(card2);
+
+    const card3 = document.createElement("div");
+    card3.className = "calendar-event";
+    card3.style.top = "150px";
+    card3.style.height = "50px";
+    card3.textContent = "1 hr gap";
+    col.appendChild(card3);
+
+    const card4 = document.createElement("div");
+    card4.className = "calendar-event";
+    card4.style.top = "200px";
+    card4.style.height = "100px";
+    card4.textContent = "Research 12:00-14:00";
+    col.appendChild(card4);
+
+    const card5 = document.createElement("div");
+    card5.className = "calendar-event";
+    card5.style.top = "300px";
+    card5.style.height = "75px";
+    card5.textContent = "Image Proc 14:00-15:30";
+    col.appendChild(card5);
+  }
+  grid.appendChild(col);
+}
+</script>
+</body>
+</html>

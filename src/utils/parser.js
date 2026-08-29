@@ -1,0 +1,126 @@
+import { PALETTE_COLORS } from '../data/sampleCourses.js';
+
+/**
+ * Parses raw user-entered text into Course & Section objects
+ */
+export function parseRawTextToCourses(rawText) {
+  if (!rawText || !rawText.trim()) return [];
+
+  const lines = rawText.split("\n").map(l => l.trim()).filter(Boolean);
+  const courses = [];
+  let currentCourse = null;
+  let colorIdx = 0;
+
+  const dayRegex = /(Mon|Tue|Wed|Thu|Fri|Sat|Sun|M|T|W|Th|F|Sa|Su|MW|TTH|TTh|MWF)/gi;
+  const timeRangeRegex = /(\d{1,2}:\d{2}\s*(?:AM|PM)?)\s*[-–to]+\s*(\d{1,2}:\d{2}\s*(?:AM|PM)?)/i;
+
+  const normalizeDays = (dayStr) => {
+    const uppercase = dayStr.toUpperCase();
+    const days = [];
+    if (uppercase.includes("MON") || uppercase === "M" || uppercase.includes("MW")) days.push("Mon");
+    if (uppercase.includes("TUE") || uppercase === "T" || uppercase.includes("TTH")) days.push("Tue");
+    if (uppercase.includes("WED") || uppercase === "W" || uppercase.includes("MW")) days.push("Wed");
+    if (uppercase.includes("THU") || uppercase === "TH" || uppercase.includes("TTH")) days.push("Thu");
+    if (uppercase.includes("FRI") || uppercase === "F") days.push("Fri");
+    if (uppercase.includes("SAT") || uppercase.includes("SA")) days.push("Sat");
+    if (uppercase.includes("SUN") || uppercase.includes("SU")) days.push("Sun");
+    
+    // Deduplicate
+    return Array.from(new Set(days));
+  };
+
+  const convert24h = (timeStr) => {
+    let [h, m] = timeStr.replace(/(AM|PM)/i, '').trim().split(':').map(Number);
+    const isPM = /PM/i.test(timeStr);
+    const isAM = /AM/i.test(timeStr);
+
+    if (isPM && h < 12) h += 12;
+    if (isAM && h === 12) h = 0;
+
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+  };
+
+  lines.forEach((line) => {
+    // Check if line starts a new Course Header (e.g. "CS101 - Intro to Computer Science" or "MATH 201")
+    const courseCodeMatch = line.match(/^([A-Z]{2,5}\s*\d{3}[A-Z]?)(?:\s*[:-]?\s*(.*))?$/i);
+    const isSectionLine = /Sec|Section|\d{1,2}:\d{2}/i.test(line);
+
+    if (courseCodeMatch && !isSectionLine) {
+      const code = courseCodeMatch[1].toUpperCase();
+      const title = courseCodeMatch[2] ? courseCodeMatch[2].trim() : code;
+
+      currentCourse = {
+        id: `course-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+        code,
+        title,
+        color: PALETTE_COLORS[colorIdx % PALETTE_COLORS.length],
+        sections: []
+      };
+      colorIdx++;
+      courses.push(currentCourse);
+      return;
+    }
+
+    // If no course header has been created yet, create a fallback generic course
+    if (!currentCourse) {
+      currentCourse = {
+        id: `course-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+        code: "COURSE 101",
+        title: "Imported Class",
+        color: PALETTE_COLORS[colorIdx % PALETTE_COLORS.length],
+        sections: []
+      };
+      colorIdx++;
+      courses.push(currentCourse);
+    }
+
+    // Parse section line
+    const secNameMatch = line.match(/(Sec(?:tion)?\s*\w+|\bS\d+\b|\b\d{1,2}\b)/i);
+    const secName = secNameMatch ? secNameMatch[1] : `Sec 0${currentCourse.sections.length + 1}`;
+
+    const timeMatch = line.match(timeRangeRegex);
+    if (timeMatch) {
+      const startTime = convert24h(timeMatch[1]);
+      const endTime = convert24h(timeMatch[2]);
+
+      // Extract days
+      const daysFound = [];
+      let match;
+      const regexCopy = new RegExp(dayRegex);
+      while ((match = regexCopy.exec(line)) !== null) {
+        const parsedDays = normalizeDays(match[0]);
+        parsedDays.forEach(d => {
+          if (!daysFound.includes(d)) daysFound.push(d);
+        });
+      }
+
+      const finalDays = daysFound.length > 0 ? daysFound : ["Mon"];
+
+      const times = finalDays.map(day => ({
+        day,
+        startTime,
+        endTime
+      }));
+
+      // Extract room / instructor if available
+      let room = "TBD";
+      const roomMatch = line.match(/(?:Rm|Room|Hall|Bldg|Lab)\s*[\w\d]+/i);
+      if (roomMatch) room = roomMatch[0];
+
+      let instructor = "Staff";
+      const instMatch = line.match(/(?:Dr\.|Prof\.)\s*[A-Z][a-z]+/i);
+      if (instMatch) instructor = instMatch[0];
+
+      currentCourse.sections.push({
+        id: `sec-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+        name: secName,
+        instructor,
+        location: room,
+        times
+      });
+    }
+  });
+
+  // Remove empty courses
+  return courses.filter(c => c.sections.length > 0);
+}
