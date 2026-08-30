@@ -127,7 +127,8 @@ export const INITIAL_COURSES = [
         instructor: "Staff",
         location: "P-G04",
         times: [
-          { day: "Wed", startTime: "12:00", endTime: "13:30" }
+          { day: "Wed", startTime: "12:00", endTime: "13:30" },
+          { day: "Thu", startTime: "9:30", endTime: "11:30" }
         ]
       }
     ]
