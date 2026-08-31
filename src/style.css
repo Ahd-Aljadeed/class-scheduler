@@ -65,6 +65,66 @@
   --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.12);
 }
 
+/* ARCADE MODE OVERRIDES */
+[data-mode="arcade"] {
+  --bg-main: #070512;
+  --bg-card: rgba(18, 12, 38, 0.92);
+  --bg-card-hover: rgba(30, 20, 62, 0.95);
+  --bg-panel: #0d0822;
+  --bg-input: #170f36;
+  --border-color: rgba(0, 240, 255, 0.35);
+  --border-color-strong: rgba(255, 0, 127, 0.6);
+
+  --text-primary: #ffffff;
+  --text-secondary: #00f0ff;
+  --text-muted: #b0a6e0;
+
+  --accent-primary: #ff007f;
+  --accent-primary-hover: #e0006f;
+  --accent-primary-glow: rgba(255, 0, 127, 0.6);
+
+  --accent-danger: #ff2a6d;
+  --accent-danger-bg: rgba(255, 42, 109, 0.25);
+  --accent-warning: #ffe600;
+  --accent-warning-bg: rgba(255, 230, 0, 0.25);
+  --accent-success: #00ff66;
+  --accent-success-bg: rgba(0, 255, 102, 0.25);
+  --accent-info: #00f0ff;
+
+  --gap-pattern-bg: rgba(255, 230, 0, 0.15);
+  --gap-border-color: #ffe600;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+
+  --shadow-sm: 3px 3px 0px #000000;
+  --shadow-md: 4px 4px 0px #000000, 0 0 10px rgba(0, 240, 255, 0.25);
+  --shadow-lg: 6px 6px 0px #000000, 0 0 18px rgba(255, 0, 127, 0.35);
+}
+
+[data-mode="arcade"][data-theme="light"] {
+  --bg-main: #f5f0ff;
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-card-hover: #ffffff;
+  --bg-panel: #ffffff;
+  --bg-input: #ebdfff;
+  --border-color: rgba(107, 0, 139, 0.3);
+  --border-color-strong: rgba(255, 0, 127, 0.6);
+
+  --text-primary: #170a38;
+  --text-secondary: #6b008b;
+  --text-muted: #7d6b9e;
+
+  --shadow-sm: 3px 3px 0px rgba(0, 0, 0, 0.15);
+  --shadow-md: 4px 4px 0px rgba(0, 0, 0, 0.2), 0 0 10px rgba(107, 0, 139, 0.15);
+  --shadow-lg: 6px 6px 0px rgba(0, 0, 0, 0.25), 0 0 18px rgba(255, 0, 127, 0.2);
+}
+
 /* RESET & BASE */
 * {
   box-sizing: border-box;
@@ -1325,17 +1385,6 @@ body {
   display: none !important;
 }
 
-/* RESPONSIVE DESIGN */
-@media (max-width: 1200px) {
-  .app-main-grid {
-    grid-template-columns: 300px 1fr;
-  }
-
-  .analytics-panel {
-    grid-column: span 2;
-  }
-}
-
 @media (max-width: 800px) {
   .app-container {
     height: auto;
@@ -1352,3 +1401,289 @@ body {
     height: 500px;
   }
 }
+
+/* ==========================================================================
+   RETRO ARCADE THEME UI STYLES [data-mode="arcade"]
+   ========================================================================== */
+
+/* CRT SCANLINE OVERLAY */
+.crt-scanlines {
+  display: none;
+}
+
+[data-mode="arcade"] .crt-scanlines {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  opacity: 0.5;
+}
+
+/* BRAND & BADGE */
+.arcade-badge-tag {
+  display: none;
+}
+
+[data-mode="arcade"] .arcade-badge-tag {
+  display: inline-block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  padding: 2px 6px;
+  background: #ff007f;
+  color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 0 8px #ff007f;
+  letter-spacing: 1px;
+  animation: arcade-pulse 1.5s infinite alternate;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+@keyframes arcade-pulse {
+  0% { box-shadow: 0 0 6px #ff007f; transform: scale(1); }
+  100% { box-shadow: 0 0 14px #00f0ff; transform: scale(1.05); }
+}
+
+/* ARCADE GENERAL TYPOGRAPHY & HIGH READABILITY */
+[data-mode="arcade"] body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.2px;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255, 0, 127, 0.12), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(0, 240, 255, 0.1), transparent 50%);
+}
+
+[data-mode="arcade"] .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: #00f0ff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+[data-mode="arcade"] .panel-title,
+[data-mode="arcade"] .drawer-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #ffe600;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(255, 230, 0, 0.4);
+}
+
+[data-mode="arcade"] .panel-subtitle,
+[data-mode="arcade"] .drawer-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ARCADE BUTTONS */
+[data-mode="arcade"] .btn {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0px #000000;
+  border: 1px solid var(--border-color);
+  transition: all 0.1s ease;
+}
+
+[data-mode="arcade"] .btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #000000, 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+[data-mode="arcade"] .btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+[data-mode="arcade"] .btn-primary {
+  background: linear-gradient(135deg, #ff007f 0%, #d6006b 100%);
+  color: #ffffff;
+  border: 1px solid #ff59ab;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+[data-mode="arcade"] .btn-primary:hover {
+  box-shadow: 4px 4px 0px #000000, 0 0 16px rgba(255, 0, 127, 0.7);
+}
+
+.btn-mode-switcher {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+[data-mode="arcade"] .btn-mode-switcher {
+  background: #170f36;
+  border: 1px solid #00f0ff;
+  color: #00f0ff;
+  box-shadow: 3px 3px 0px #000000, 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+[data-mode="arcade"] .btn-mode-switcher:hover {
+  background: #00f0ff;
+  color: #070512;
+  box-shadow: 4px 4px 0px #000000, 0 0 14px #00f0ff;
+}
+
+[data-mode="regular"] .btn-mode-switcher {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color-strong);
+  color: var(--text-primary);
+}
+
+/* ARCADE PANELS & CARDS */
+[data-mode="arcade"] .sidebar-panel,
+[data-mode="arcade"] .timetable-panel,
+[data-mode="arcade"] .analytics-panel,
+[data-mode="arcade"] .drawer-content,
+[data-mode="arcade"] .modal-card {
+  border: 2px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 5px 5px 0px #000000, inset 0 0 15px rgba(0, 240, 255, 0.05);
+}
+
+[data-mode="arcade"] .app-header {
+  border-bottom: 2px solid rgba(255, 0, 127, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* STAT HUD CARDS */
+[data-mode="arcade"] .stat-card {
+  border: 2px solid rgba(255, 230, 0, 0.35);
+  box-shadow: 4px 4px 0px #000000;
+}
+
+[data-mode="arcade"] .stat-card.gap-card {
+  border-color: rgba(255, 230, 0, 0.6);
+}
+
+[data-mode="arcade"] .stat-card.campus-card {
+  border-color: rgba(0, 240, 255, 0.6);
+}
+
+[data-mode="arcade"] .stat-card.class-card {
+  border-color: rgba(255, 0, 127, 0.6);
+}
+
+[data-mode="arcade"] .stat-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+[data-mode="arcade"] .stat-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.25rem;
+  color: #00ff66;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+}
+
+/* COURSE SECTION LIST IN ARCADE */
+[data-mode="arcade"] .course-card {
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  box-shadow: 3px 3px 0px #000000;
+}
+
+[data-mode="arcade"] .course-card:hover {
+  border-color: #00f0ff;
+  box-shadow: 4px 4px 0px #000000, 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+[data-mode="arcade"] .course-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #00f0ff;
+}
+
+[data-mode="arcade"] .section-btn {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 4px;
+}
+
+[data-mode="arcade"] .section-btn.selected {
+  background: linear-gradient(135deg, rgba(255, 0, 127, 0.4) 0%, rgba(0, 240, 255, 0.3) 100%);
+  border-color: #ff007f;
+  box-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+  color: #ffffff;
+}
+
+/* TIMETABLE GRID IN ARCADE */
+[data-mode="arcade"] .time-header-cell,
+[data-mode="arcade"] .day-header-cell {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #ffe600;
+  border-color: rgba(255, 230, 0, 0.25);
+  text-shadow: 0 0 4px rgba(255, 230, 0, 0.4);
+}
+
+[data-mode="arcade"] .time-slot-cell {
+  border-color: rgba(0, 240, 255, 0.12);
+}
+
+[data-mode="arcade"] .time-slot-cell:hover {
+  background: rgba(0, 240, 255, 0.08);
+}
+
+[data-mode="arcade"] .time-block-card {
+  border: 1px solid #ffffff;
+  box-shadow: 3px 3px 0px #000000, 0 0 8px rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+[data-mode="arcade"] .time-block-card .block-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-shadow: 0 1px 2px #000;
+}
+
+[data-mode="arcade"] .time-block-card .block-sec {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+/* BADGES & HIGHLIGHTS IN ARCADE */
+[data-mode="arcade"] .badge-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  background: #ff007f;
+  color: #fff;
+  border: 1px solid #ff59ab;
+}
+
+[data-mode="arcade"] .conflict-banner {
+  border: 2px solid #ff2a6d;
+  box-shadow: 0 0 15px rgba(255, 42, 109, 0.5), 4px 4px 0px #000;
+  background: rgba(40, 10, 25, 0.95);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+}

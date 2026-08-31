@@ -11,6 +11,7 @@ import {
   generateICS
 } from './utils/scheduler.js';
 import { parseRawTextToCourses } from './utils/parser.js';
+import { arcadeAudio } from './utils/arcadeAudio.js';
 
 export function getIconSvg(name, size = 14, className = "") {
   const classAttr = className ? ` class="${className}"` : '';
@@ -51,6 +52,8 @@ export function getIconSvg(name, size = 14, className = "") {
 // LOCAL STORAGE KEYS
 const STORAGE_KEY_COURSES = "unischedule_courses_v1";
 const STORAGE_KEY_SELECTIONS = "unischedule_selections_v1";
+const STORAGE_KEY_MODE = "unischedule_mode_v1";
+const STORAGE_KEY_THEME = "unischedule_theme_v1";
 
 class UniScheduleApp {
   constructor() {
@@ -59,8 +62,12 @@ class UniScheduleApp {
     this.hoveredSection = null;
     this.showWeekends = true; // Default to showing weekends (Sun) as user has Sun classes
     this.sortPreference = 'gaps'; // 'gaps' | 'daysoff' | 'mornings' | 'spread'
+    this.currentMode = this.loadMode();
+    this.currentTheme = this.loadTheme();
 
     this.initElements();
+    this.applyMode(this.currentMode);
+    this.applyTheme(this.currentTheme);
     this.initEventListeners();
 
     // Check showWeekends toggle element
@@ -72,6 +79,50 @@ class UniScheduleApp {
   }
 
   // LOAD / SAVE PERSISTENCE
+  loadMode() {
+    return localStorage.getItem(STORAGE_KEY_MODE) || 'arcade';
+  }
+
+  applyMode(mode) {
+    this.currentMode = mode;
+    document.documentElement.setAttribute("data-mode", mode);
+    localStorage.setItem(STORAGE_KEY_MODE, mode);
+
+    const elArcadeIcon = document.getElementById("mode-icon-arcade");
+    const elRegularIcon = document.getElementById("mode-icon-regular");
+
+    if (elArcadeIcon) elArcadeIcon.classList.toggle("hidden", mode !== "arcade");
+    if (elRegularIcon) elRegularIcon.classList.toggle("hidden", mode !== "regular");
+  }
+
+  toggleMode() {
+    const nextMode = this.currentMode === 'arcade' ? 'regular' : 'arcade';
+    this.applyMode(nextMode);
+    arcadeAudio.playThemeSwitch();
+  }
+
+  loadTheme() {
+    return localStorage.getItem(STORAGE_KEY_THEME) || 'dark';
+  }
+
+  applyTheme(theme) {
+    this.currentTheme = theme;
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem(STORAGE_KEY_THEME, theme);
+
+    const elSun = document.getElementById("theme-icon-sun");
+    const elMoon = document.getElementById("theme-icon-moon");
+
+    if (elSun) elSun.classList.toggle("hidden", theme !== "light");
+    if (elMoon) elMoon.classList.toggle("hidden", theme !== "dark");
+  }
+
+  toggleTheme() {
+    const nextTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+    this.applyTheme(nextTheme);
+    arcadeAudio.playClick();
+  }
+
   loadCourses() {
     // Return the updated user course data directly
     return JSON.parse(JSON.stringify(INITIAL_COURSES));
@@ -124,7 +175,14 @@ class UniScheduleApp {
     this.btnImportModal = document.getElementById("btn-import-modal");
     this.btnExportICal = document.getElementById("btn-export-ical");
     this.btnResetDemo = document.getElementById("btn-reset-demo");
+    this.btnModeToggle = document.getElementById("btn-mode-toggle");
     this.btnThemeToggle = document.getElementById("btn-theme-toggle");
+    this.btnSoundToggle = document.getElementById("btn-sound-toggle");
+    this.elSoundIcon = document.getElementById("sound-icon");
+
+    if (this.elSoundIcon) {
+      this.elSoundIcon.textContent = arcadeAudio.isMuted ? "🔇" : "🔊";
+    }
 
     // Drawers & Modals
     this.elDrawerOverlay = document.getElementById("combinations-drawer-overlay");
@@ -147,20 +205,32 @@ class UniScheduleApp {
     // Show Weekends toggle
     this.elToggleWeekends.addEventListener("change", (e) => {
       this.showWeekends = e.target.checked;
+      arcadeAudio.playClick();
       this.renderTimetable();
     });
 
-    // Theme toggle
-    this.btnThemeToggle.addEventListener("click", () => {
-      const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", newTheme);
-      document.getElementById("theme-icon-sun").classList.toggle("hidden", newTheme === "light");
-      document.getElementById("theme-icon-moon").classList.toggle("hidden", newTheme === "dark");
-    });
+    // Mode toggle (Arcade vs Regular)
+    if (this.btnModeToggle) {
+      this.btnModeToggle.addEventListener("click", () => this.toggleMode());
+    }
+
+    // Theme toggle (Dark vs Light)
+    if (this.btnThemeToggle) {
+      this.btnThemeToggle.addEventListener("click", () => this.toggleTheme());
+    }
+
+    // Sound toggle
+    if (this.btnSoundToggle) {
+      this.btnSoundToggle.addEventListener("click", () => {
+        const isMuted = arcadeAudio.toggleMute();
+        if (this.elSoundIcon) this.elSoundIcon.textContent = isMuted ? "🔇" : "🔊";
+        if (!isMuted) arcadeAudio.playClick();
+      });
+    }
 
     // Reset Demo
     this.btnResetDemo.addEventListener("click", () => {
+      arcadeAudio.playClick();
       if (confirm("Reset to default sample university courses?")) {
         this.courses = JSON.parse(JSON.stringify(INITIAL_COURSES));
         this.selectedSectionsMap = {};
@@ -175,12 +245,19 @@ class UniScheduleApp {
 
     // Resolve Conflict Button
     this.btnResolveConflict.addEventListener("click", () => {
+      arcadeAudio.playAutoFix();
       this.openAutoCombinationsDrawer();
     });
 
     // Auto-Combinations Drawer
-    this.btnAutoCombos.addEventListener("click", () => this.openAutoCombinationsDrawer());
-    this.btnCloseDrawer.addEventListener("click", () => this.elDrawerOverlay.classList.add("hidden"));
+    this.btnAutoCombos.addEventListener("click", () => {
+      arcadeAudio.playAutoFix();
+      this.openAutoCombinationsDrawer();
+    });
+    this.btnCloseDrawer.addEventListener("click", () => {
+      arcadeAudio.playClick();
+      this.elDrawerOverlay.classList.add("hidden");
+    });
     this.elDrawerOverlay.addEventListener("click", (e) => {
       if (e.target === this.elDrawerOverlay) this.elDrawerOverlay.classList.add("hidden");
     });
@@ -188,6 +265,7 @@ class UniScheduleApp {
     // Sort Filter Tabs in Drawer
     document.querySelectorAll(".filter-tab").forEach(btn => {
       btn.addEventListener("click", (e) => {
+        arcadeAudio.playClick();
         document.querySelectorAll(".filter-tab").forEach(b => b.classList.remove("active"));
         e.target.classList.add("active");
         this.sortPreference = e.target.dataset.sort;
@@ -196,8 +274,14 @@ class UniScheduleApp {
     });
 
     // Import Modal
-    this.btnImportModal.addEventListener("click", () => this.elModalOverlay.classList.remove("hidden"));
-    this.btnCloseModal.addEventListener("click", () => this.elModalOverlay.classList.add("hidden"));
+    this.btnImportModal.addEventListener("click", () => {
+      arcadeAudio.playClick();
+      this.elModalOverlay.classList.remove("hidden");
+    });
+    this.btnCloseModal.addEventListener("click", () => {
+      arcadeAudio.playClick();
+      this.elModalOverlay.classList.add("hidden");
+    });
     this.elModalOverlay.addEventListener("click", (e) => {
       if (e.target === this.elModalOverlay) this.elModalOverlay.classList.add("hidden");
     });
@@ -205,6 +289,7 @@ class UniScheduleApp {
     // Modal Tabs
     document.querySelectorAll(".modal-tab").forEach(tab => {
       tab.addEventListener("click", (e) => {
+        arcadeAudio.playClick();
         document.querySelectorAll(".modal-tab").forEach(t => t.classList.remove("active"));
         document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
         e.target.classList.add("active");
@@ -214,6 +299,7 @@ class UniScheduleApp {
 
     // Load Sample Text
     this.btnLoadSampleText.addEventListener("click", () => {
+      arcadeAudio.playClick();
       this.elImportTextarea.value = `CS101 Intro to Computer Science\nSec 01 - Dr. Turing - Mon/Wed 09:00-10:30 Tech Bldg 101\nSec 02 - Grace Hopper - Tue/Thu 11:00-12:30 Tech Bldg 102\n\nMATH201 Calculus II\nSec 01: Mon/Wed 11:00-12:30 Math Hall 301\nSec 02: Tue/Thu 09:00-10:30 Math Hall 304`;
     });
 
@@ -393,6 +479,7 @@ class UniScheduleApp {
 
         // Click to select
         item.addEventListener("click", () => {
+          arcadeAudio.playSelect();
           if (this.selectedSectionsMap[cId] === sId) {
             delete this.selectedSectionsMap[cId]; // Deselect
           } else {
@@ -797,6 +884,7 @@ class UniScheduleApp {
       `;
 
       card.querySelector(".btn-apply-combo").addEventListener("click", () => {
+        arcadeAudio.playVictory();
         this.selectedSectionsMap = { ...combo.selectionMap };
         this.saveSelections();
         this.render();
