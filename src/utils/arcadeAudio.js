@@ -9,11 +9,13 @@ class ArcadeAudioEngine {
   }
 
   loadState() {
+    if (typeof localStorage === "undefined") return;
     const saved = localStorage.getItem("unischedule_sound_muted");
     this.isMuted = saved ? JSON.parse(saved) : false;
   }
 
   saveState() {
+    if (typeof localStorage === "undefined") return;
     localStorage.setItem("unischedule_sound_muted", JSON.stringify(this.isMuted));
   }
 
@@ -35,9 +37,18 @@ class ArcadeAudioEngine {
     return this.isMuted;
   }
 
+  isSoundEnabled() {
+    if (this.isMuted) return false;
+    if (typeof document !== "undefined" && document.documentElement) {
+      const mode = document.documentElement.getAttribute("data-mode") || "arcade";
+      if (mode !== "arcade") return false;
+    }
+    return true;
+  }
+
   // 1. Short retro click / blip sound
   playClick() {
-    if (this.isMuted) return;
+    if (!this.isSoundEnabled()) return;
     this.initContext();
     if (!this.ctx) return;
 
@@ -65,7 +76,7 @@ class ArcadeAudioEngine {
 
   // 2. Section select / toggle retro chime
   playSelect() {
-    if (this.isMuted) return;
+    if (!this.isSoundEnabled()) return;
     this.initContext();
     if (!this.ctx) return;
 
@@ -95,7 +106,7 @@ class ArcadeAudioEngine {
 
   // 3. Power-up / Auto-Fix / Schedule optimizer sound
   playAutoFix() {
-    if (this.isMuted) return;
+    if (!this.isSoundEnabled()) return;
     this.initContext();
     if (!this.ctx) return;
 
@@ -125,7 +136,7 @@ class ArcadeAudioEngine {
 
   // 4. Retro Warning / Conflict buzz sound
   playConflict() {
-    if (this.isMuted) return;
+    if (!this.isSoundEnabled()) return;
     this.initContext();
     if (!this.ctx) return;
 
@@ -151,7 +162,7 @@ class ArcadeAudioEngine {
 
   // 5. Classic Arcade "Insert Coin / Game Start" theme switch sound
   playThemeSwitch() {
-    if (this.isMuted) return;
+    if (!this.isSoundEnabled()) return;
     this.initContext();
     if (!this.ctx) return;
 
@@ -181,7 +192,7 @@ class ArcadeAudioEngine {
 
   // 6. Level Up / Victory fanfare
   playVictory() {
-    if (this.isMuted) return;
+    if (!this.isSoundEnabled()) return;
     this.initContext();
     if (!this.ctx) return;
 

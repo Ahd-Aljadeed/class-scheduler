@@ -1420,10 +1420,8 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 9999;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
-  );
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%);
   background-size: 100% 4px;
   opacity: 0.5;
 }
@@ -1431,6 +1429,7 @@ body {
 /* BRAND & BADGE */
 .arcade-badge-tag {
   display: none;
+  color: white;
 }
 
 [data-mode="arcade"] .arcade-badge-tag {
@@ -1449,15 +1448,22 @@ body {
 }
 
 @keyframes arcade-pulse {
-  0% { box-shadow: 0 0 6px #ff007f; transform: scale(1); }
-  100% { box-shadow: 0 0 14px #00f0ff; transform: scale(1.05); }
+  0% {
+    box-shadow: 0 0 6px #ff007f;
+    transform: scale(1);
+  }
+
+  100% {
+    box-shadow: 0 0 14px #00f0ff;
+    transform: scale(1.05);
+  }
 }
 
 /* ARCADE GENERAL TYPOGRAPHY & HIGH READABILITY */
 [data-mode="arcade"] body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   letter-spacing: 0.2px;
-  background-image: 
+  background-image:
     radial-gradient(circle at 50% 0%, rgba(255, 0, 127, 0.12), transparent 60%),
     radial-gradient(circle at 100% 100%, rgba(0, 240, 255, 0.1), transparent 50%);
 }
@@ -1686,4 +1692,260 @@ body {
   background: rgba(40, 10, 25, 0.95);
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.95rem;
-}
+}
+
+/* CUSTOM ALERT & CONFIRMATION MODAL SYSTEM */
+.custom-modal-wrapper {
+  position: relative;
+  z-index: 10000;
+}
+
+.custom-alert-overlay {
+  z-index: 10000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.custom-alert-card {
+  width: 440px;
+  max-width: 90vw;
+  animation: modalPopIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.custom-alert-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-card);
+}
+
+.custom-alert-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-alert-icon {
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-alert-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.custom-alert-body {
+  padding: 20px 18px;
+}
+
+.custom-alert-message {
+  font-size: 0.925rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.custom-alert-footer {
+  padding: 12px 18px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-card);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@keyframes modalPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(12px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* ARCADE THEME OVERRIDES FOR CUSTOM ALERT MODAL */
+[data-mode="arcade"] .custom-alert-card {
+  border: 2px solid #ff007f;
+  box-shadow: 6px 6px 0px #000000, 0 0 20px rgba(255, 0, 127, 0.25);
+  background: #110d24;
+}
+
+[data-mode="arcade"] .custom-alert-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  color: #ff007f;
+  text-shadow: 1px 1px 0px #000;
+}
+
+[data-mode="arcade"] .custom-alert-message {
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  color: #00f0ff;
+  letter-spacing: 0.5px;
+}
+
+/* CUSTOM COURSE & MULTI-SECTION BUILDER STYLES */
+.required-asterisk {
+  color: #ef4444;
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+.optional-tag {
+  font-weight: 400;
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  opacity: 0.85;
+  margin-left: 4px;
+}
+
+.flex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  margin-bottom: 12px;
+}
+
+.form-section-divider-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sections-builder-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+  margin-bottom: 16px;
+}
+
+.section-builder-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.section-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color-muted, rgba(255, 255, 255, 0.06));
+  padding-bottom: 8px;
+  margin-bottom: 2px;
+}
+
+.section-card-number {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.schedule-slots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.slots-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.time-slots-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.time-slot-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  flex-wrap: wrap;
+}
+
+.time-slot-row select,
+.time-slot-row input[type="time"] {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  outline: none;
+  font-family: inherit;
+}
+
+.time-slot-row select {
+  cursor: pointer;
+  min-width: 100px;
+}
+
+.time-input-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.time-label {
+  font-size: 0.725rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.btn-xs {
+  padding: 3px 8px;
+  font-size: 0.725rem;
+  border-radius: var(--radius-sm);
+}
+
+/* ARCADE THEME OVERRIDES FOR SECTION BUILDER */
+[data-mode="arcade"] .section-builder-card {
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 3px 3px 0px #000;
+  background: #16122e;
+}
+
+[data-mode="arcade"] .section-card-number {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  color: #ff007f;
+}
+
+[data-mode="arcade"] .time-slot-row {
+  border: 1px solid rgba(255, 230, 0, 0.4);
+}

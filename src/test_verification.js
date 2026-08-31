@@ -66,4 +66,28 @@ if (parsed.length > 0 && parsed[0].sections.length === 2) {
   console.log("✅ Smart Text Parser VERIFIED PERFECTLY!");
 }
 
+// 6. Test Arcade Audio Theme Muting Logic
+import { arcadeAudio } from './utils/arcadeAudio.js';
+
+// Mock document for testing mode-based sound muting
+globalThis.document = {
+  documentElement: {
+    getAttribute: (attr) => globalThis._mockMode || "arcade"
+  }
+};
+
+globalThis._mockMode = "arcade";
+const arcadeEnabled = arcadeAudio.isSoundEnabled();
+
+globalThis._mockMode = "regular";
+const regularEnabled = arcadeAudio.isSoundEnabled();
+
+console.log(`Arcade theme sound enabled: ${arcadeEnabled}, Regular theme sound enabled: ${regularEnabled}`);
+if (arcadeEnabled === true && regularEnabled === false) {
+  console.log("✅ Arcade Theme Audio Muting Logic VERIFIED PERFECTLY!");
+} else {
+  console.error("❌ Audio muting test failed!");
+}
+
 console.log("=== ALL UNIT TESTS PASSED ===");
+

@@ -295,59 +295,35 @@
 
           <!-- TAB 2: MANUAL COURSE BUILDER -->
           <div id="tab-manual-entry" class="tab-pane">
-            <form id="manual-course-form" class="form-grid">
-              <div class="form-group">
-                <label>Course Code</label>
-                <input type="text" id="manual-code" placeholder="e.g. CS 101" required />
-              </div>
-              <div class="form-group">
-                <label>Course Title</label>
-                <input type="text" id="manual-title" placeholder="e.g. Intro to Computer Science" required />
-              </div>
-              <div class="form-group">
-                <label>Course Theme Color</label>
-                <input type="color" id="manual-color" value="#6366f1" />
-              </div>
-
-              <div class="form-section-divider">Section Details</div>
-
-              <div class="form-group">
-                <label>Section Name</label>
-                <input type="text" id="manual-sec-name" placeholder="e.g. Sec 01" required />
-              </div>
-              <div class="form-group">
-                <label>Instructor</label>
-                <input type="text" id="manual-instructor" placeholder="e.g. Dr. Turing" />
-              </div>
-              <div class="form-group">
-                <label>Location / Room</label>
-                <input type="text" id="manual-location" placeholder="e.g. Science Bldg 101" />
-              </div>
-
-              <div class="form-group full-width">
-                <label>Class Days</label>
-                <div class="days-checkbox-group">
-                  <label class="day-chip"><input type="checkbox" name="manual-days" value="Mon"> Mon</label>
-                  <label class="day-chip"><input type="checkbox" name="manual-days" value="Tue"> Tue</label>
-                  <label class="day-chip"><input type="checkbox" name="manual-days" value="Wed"> Wed</label>
-                  <label class="day-chip"><input type="checkbox" name="manual-days" value="Thu"> Thu</label>
-                  <label class="day-chip"><input type="checkbox" name="manual-days" value="Fri"> Fri</label>
-                  <label class="day-chip"><input type="checkbox" name="manual-days" value="Sat"> Sat</label>
-                  <label class="day-chip"><input type="checkbox" name="manual-days" value="Sun"> Sun</label>
+            <form id="manual-course-form" class="custom-course-form">
+              <div class="form-section-divider">Course Details</div>
+              
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="manual-title">Course Title <span class="required-asterisk">*</span></label>
+                  <input type="text" id="manual-title" placeholder="e.g. Intro to Computer Science" required />
+                </div>
+                <div class="form-group">
+                  <label for="manual-code">Course Code <span class="optional-tag">(optional)</span></label>
+                  <input type="text" id="manual-code" placeholder="e.g. CS 101" />
+                </div>
+                <div class="form-group full-width">
+                  <label for="manual-color">Course Theme Color <span class="optional-tag">(optional)</span></label>
+                  <input type="color" id="manual-color" value="#6366f1" />
                 </div>
               </div>
 
-              <div class="form-group">
-                <label>Start Time</label>
-                <input type="time" id="manual-start-time" value="09:00" required />
+              <div class="form-section-header flex-header">
+                <span class="form-section-divider-text">Sections & Schedules</span>
+                <button type="button" id="btn-add-section" class="btn btn-sm btn-outline">+ Add Another Section</button>
               </div>
-              <div class="form-group">
-                <label>End Time</label>
-                <input type="time" id="manual-end-time" value="10:30" required />
+
+              <div id="sections-builder-container" class="sections-builder-container">
+                <!-- Section cards will be rendered here dynamically -->
               </div>
 
               <div class="modal-footer full-width">
-                <button type="submit" class="btn btn-primary">Add Course & Section</button>
+                <button type="submit" class="btn btn-primary">Save Course & Sections</button>
               </div>
             </form>
           </div>

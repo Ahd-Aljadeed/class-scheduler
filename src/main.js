@@ -12,12 +12,13 @@ import {
 } from './utils/scheduler.js';
 import { parseRawTextToCourses } from './utils/parser.js';
 import { arcadeAudio } from './utils/arcadeAudio.js';
+import { showAlert, showConfirm, installGlobalAlertOverrides } from './utils/customModal.js';
 
 export function getIconSvg(name, size = 14, className = "") {
   const classAttr = className ? ` class="${className}"` : '';
   const sizeAttr = `width="${size}" height="${size}"`;
   const base = `<svg ${sizeAttr}${classAttr} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">`;
-  
+
   switch (name) {
     case 'map-pin':
     case 'pin':
@@ -50,8 +51,8 @@ export function getIconSvg(name, size = 14, className = "") {
 
 
 // LOCAL STORAGE KEYS
-const STORAGE_KEY_COURSES = "unischedule_courses_v1";
-const STORAGE_KEY_SELECTIONS = "unischedule_selections_v1";
+const STORAGE_KEY_COURSES = "unischedule_courses_v2";
+const STORAGE_KEY_SELECTIONS = "unischedule_selections_v2";
 const STORAGE_KEY_MODE = "unischedule_mode_v1";
 const STORAGE_KEY_THEME = "unischedule_theme_v1";
 
@@ -75,7 +76,150 @@ class UniScheduleApp {
       this.elToggleWeekends.checked = true;
     }
 
+    this.initCustomCourseFormState();
     this.render();
+  }
+
+  // CUSTOM COURSE SECTION BUILDER STATE & RENDER
+  initCustomCourseFormState() {
+    this.customFormSections = [
+      {
+        name: "Sec 01",
+        instructor: "",
+        location: "",
+        slots: [
+          { day: "Mon", startTime: "09:00", endTime: "10:30" }
+        ]
+      }
+    ];
+    this.renderCustomFormSections();
+  }
+
+  renderCustomFormSections() {
+    const container = document.getElementById("sections-builder-container");
+    if (!container) return;
+    container.innerHTML = "";
+
+    this.customFormSections.forEach((sec, secIdx) => {
+      const card = document.createElement("div");
+      card.className = "section-builder-card";
+
+      const canRemoveSec = this.customFormSections.length > 1;
+
+      card.innerHTML = `
+        <div class="section-card-header">
+          <span class="section-card-number">Section #${secIdx + 1}</span>
+          ${canRemoveSec ? `<button type="button" class="btn btn-ghost icon-only btn-sm btn-remove-section" data-sec-idx="${secIdx}" title="Remove Section">&times;</button>` : ''}
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Section Name <span class="required-asterisk">*</span></label>
+            <input type="text" class="input-sec-name" data-sec-idx="${secIdx}" value="${sec.name}" placeholder="e.g. Sec 01" required />
+          </div>
+          <div class="form-group">
+            <label>Instructor <span class="optional-tag">(optional)</span></label>
+            <input type="text" class="input-sec-instructor" data-sec-idx="${secIdx}" value="${sec.instructor}" placeholder="e.g. Dr. Turing" />
+          </div>
+          <div class="form-group full-width">
+            <label>Location / Room <span class="optional-tag">(optional)</span></label>
+            <input type="text" class="input-sec-location" data-sec-idx="${secIdx}" value="${sec.location}" placeholder="e.g. Science Bldg 101" />
+          </div>
+        </div>
+
+        <div class="schedule-slots-header">
+          <label class="slots-label">Class Schedule Days & Times <span class="required-asterisk">*</span></label>
+          <button type="button" class="btn btn-xs btn-outline btn-add-time-slot" data-sec-idx="${secIdx}">+ Add Day & Time</button>
+        </div>
+
+        <div class="time-slots-container">
+          ${sec.slots.map((slot, slotIdx) => `
+            <div class="time-slot-row">
+              <select class="input-slot-day" data-sec-idx="${secIdx}" data-slot-idx="${slotIdx}" required>
+                ${DAYS.map(d => `<option value="${d}" ${slot.day === d ? 'selected' : ''}>${FULL_DAYS[d]}</option>`).join("")}
+              </select>
+              <div class="time-input-group">
+                <span class="time-label">Start:</span>
+                <input type="time" class="input-slot-start" data-sec-idx="${secIdx}" data-slot-idx="${slotIdx}" value="${slot.startTime}" required />
+              </div>
+              <div class="time-input-group">
+                <span class="time-label">End:</span>
+                <input type="time" class="input-slot-end" data-sec-idx="${secIdx}" data-slot-idx="${slotIdx}" value="${slot.endTime}" required />
+              </div>
+              ${sec.slots.length > 1 ? `<button type="button" class="btn btn-ghost icon-only btn-xs btn-remove-time-slot" data-sec-idx="${secIdx}" data-slot-idx="${slotIdx}" title="Remove Day">&times;</button>` : ''}
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      // Sync text inputs
+      card.querySelector(".input-sec-name").addEventListener("input", (e) => {
+        this.customFormSections[secIdx].name = e.target.value;
+      });
+      card.querySelector(".input-sec-instructor").addEventListener("input", (e) => {
+        this.customFormSections[secIdx].instructor = e.target.value;
+      });
+      card.querySelector(".input-sec-location").addEventListener("input", (e) => {
+        this.customFormSections[secIdx].location = e.target.value;
+      });
+
+      // Time slot inputs
+      card.querySelectorAll(".input-slot-day").forEach(sel => {
+        sel.addEventListener("change", (e) => {
+          const slotIdx = parseInt(e.target.dataset.slotIdx);
+          this.customFormSections[secIdx].slots[slotIdx].day = e.target.value;
+        });
+      });
+      card.querySelectorAll(".input-slot-start").forEach(inp => {
+        inp.addEventListener("input", (e) => {
+          const slotIdx = parseInt(e.target.dataset.slotIdx);
+          this.customFormSections[secIdx].slots[slotIdx].startTime = e.target.value;
+        });
+      });
+      card.querySelectorAll(".input-slot-end").forEach(inp => {
+        inp.addEventListener("input", (e) => {
+          const slotIdx = parseInt(e.target.dataset.slotIdx);
+          this.customFormSections[secIdx].slots[slotIdx].endTime = e.target.value;
+        });
+      });
+
+      // Remove section button
+      const btnRemoveSec = card.querySelector(".btn-remove-section");
+      if (btnRemoveSec) {
+        btnRemoveSec.addEventListener("click", () => {
+          arcadeAudio.playClick();
+          this.customFormSections.splice(secIdx, 1);
+          this.renderCustomFormSections();
+        });
+      }
+
+      // Add time slot button
+      const btnAddSlot = card.querySelector(".btn-add-time-slot");
+      if (btnAddSlot) {
+        btnAddSlot.addEventListener("click", () => {
+          arcadeAudio.playClick();
+          const dayOptions = ["Wed", "Fri", "Tue", "Thu"];
+          const nextDay = dayOptions[this.customFormSections[secIdx].slots.length % dayOptions.length] || "Wed";
+          this.customFormSections[secIdx].slots.push({
+            day: nextDay,
+            startTime: "11:00",
+            endTime: "12:30"
+          });
+          this.renderCustomFormSections();
+        });
+      }
+
+      // Remove time slot button
+      card.querySelectorAll(".btn-remove-time-slot").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          arcadeAudio.playClick();
+          const slotIdx = parseInt(e.currentTarget.dataset.slotIdx);
+          this.customFormSections[secIdx].slots.splice(slotIdx, 1);
+          this.renderCustomFormSections();
+        });
+      });
+
+      container.appendChild(card);
+    });
   }
 
   // LOAD / SAVE PERSISTENCE
@@ -124,7 +268,15 @@ class UniScheduleApp {
   }
 
   loadCourses() {
-    // Return the updated user course data directly
+    const saved = localStorage.getItem(STORAGE_KEY_COURSES);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      } catch (e) {
+        console.error("Failed to parse saved courses", e);
+      }
+    }
     return JSON.parse(JSON.stringify(INITIAL_COURSES));
   }
 
@@ -133,15 +285,16 @@ class UniScheduleApp {
   }
 
   loadSelections() {
-    // Default optimal non-conflicting schedule selection:
-    // Compiler Sec 1, Data Mining Sec 1, Image Processing Sec 1, Research Sec 2, IoT Sec 1
-    return {
-      "course-compiler": "sec-compiler-1",
-      "course-dm": "sec-dm-1",
-      "course-ipcv": "sec-ipcv-1",
-      "course-rm": "sec-rm-2",
-      "course-iot": "sec-iot-1"
-    };
+    const saved = localStorage.getItem(STORAGE_KEY_SELECTIONS);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === 'object') return parsed;
+      } catch (e) {
+        console.error("Failed to parse saved selections", e);
+      }
+    }
+    return {};
   }
 
   saveSelections() {
@@ -229,9 +382,10 @@ class UniScheduleApp {
     }
 
     // Reset Demo
-    this.btnResetDemo.addEventListener("click", () => {
+    this.btnResetDemo.addEventListener("click", async () => {
       arcadeAudio.playClick();
-      if (confirm("Reset to default sample university courses?")) {
+      const confirmed = await showConfirm("Reset to default sample university courses?", "Reset Planner");
+      if (confirmed) {
         this.courses = JSON.parse(JSON.stringify(INITIAL_COURSES));
         this.selectedSectionsMap = {};
         this.courses.forEach(c => {
@@ -304,11 +458,11 @@ class UniScheduleApp {
     });
 
     // Parse Import Text
-    this.btnParseImport.addEventListener("click", () => {
+    this.btnParseImport.addEventListener("click", async () => {
       const rawText = this.elImportTextarea.value;
       const parsed = parseRawTextToCourses(rawText);
       if (parsed.length === 0) {
-        alert("Could not parse valid course details. Please ensure day and time formats (e.g. Mon 09:00-10:30) are included.");
+        await showAlert("Could not parse valid course details. Please ensure day and time formats (e.g. Mon 09:00-10:30) are included.", "Import Error");
         return;
       }
       this.courses = [...this.courses, ...parsed];
@@ -321,29 +475,53 @@ class UniScheduleApp {
       this.render();
     });
 
+    // Add Section button in Header
+    const btnAddSection = document.getElementById("btn-add-section");
+    if (btnAddSection) {
+      btnAddSection.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        const nextNum = this.customFormSections.length + 1;
+        this.customFormSections.push({
+          name: `Sec 0${nextNum}`,
+          instructor: "",
+          location: "",
+          slots: [
+            { day: "Mon", startTime: "09:00", endTime: "10:30" }
+          ]
+        });
+        this.renderCustomFormSections();
+      });
+    }
+
     // Manual Course Form Submit
-    this.formManualCourse.addEventListener("submit", (e) => {
+    this.formManualCourse.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const code = document.getElementById("manual-code").value.trim().toUpperCase();
       const title = document.getElementById("manual-title").value.trim();
-      const color = document.getElementById("manual-color").value;
-      const secName = document.getElementById("manual-sec-name").value.trim();
-      const instructor = document.getElementById("manual-instructor").value.trim() || "Staff";
-      const location = document.getElementById("manual-location").value.trim() || "Campus";
-      const startTime = document.getElementById("manual-start-time").value;
-      const endTime = document.getElementById("manual-end-time").value;
+      let code = document.getElementById("manual-code").value.trim().toUpperCase();
+      const color = document.getElementById("manual-color").value || "#6366f1";
 
-      const checkedDays = Array.from(document.querySelectorAll('input[name="manual-days"]:checked')).map(cb => cb.value);
-
-      if (checkedDays.length === 0) {
-        alert("Please select at least 1 day for the class.");
+      if (!title) {
+        await showAlert("Please enter a Course Title.", "Missing Title");
         return;
       }
 
-      const times = checkedDays.map(day => ({ day, startTime, endTime }));
+      if (!code) {
+        // Auto-generate a short code if optional code was omitted
+        const words = title.split(/\s+/).filter(Boolean);
+        if (words.length === 1) {
+          code = words[0].substring(0, 4).toUpperCase() + " 101";
+        } else {
+          code = words.map(w => w[0]).join("").toUpperCase() + " 101";
+        }
+      }
 
-      // Find or create course
-      let course = this.courses.find(c => c.code === code);
+      if (this.customFormSections.length === 0) {
+        await showAlert("Please add at least 1 section for the course.", "Missing Section");
+        return;
+      }
+
+      // Find existing course or create new
+      let course = this.courses.find(c => c.code === code || c.title.toLowerCase() === title.toLowerCase());
       if (!course) {
         course = {
           id: `course-${Date.now()}`,
@@ -355,29 +533,60 @@ class UniScheduleApp {
         this.courses.push(course);
       }
 
-      const newSec = {
-        id: `sec-${Date.now()}`,
-        name: secName,
-        instructor,
-        location,
-        times
-      };
+      // Validate all sections have required valid schedule times
+      for (let idx = 0; idx < this.customFormSections.length; idx++) {
+        const sec = this.customFormSections[idx];
+        const secName = sec.name.trim() || `Sec 0${idx + 1}`;
+        const validTimes = sec.slots.filter(s => s.day && s.startTime && s.endTime);
 
-      course.sections.push(newSec);
-      this.selectedSectionsMap[course.id] = newSec.id;
+        if (validTimes.length === 0) {
+          await showAlert(`Please specify at least 1 valid class day and time schedule for "${secName}".`, "Missing Schedule");
+          return;
+        }
+      }
+
+      // Process all sections from builder
+      this.customFormSections.forEach((sec, idx) => {
+        const secName = sec.name.trim() || `Sec 0${idx + 1}`;
+        const instructor = sec.instructor.trim() || "Staff";
+        const location = sec.location.trim() || "Campus";
+
+        const validTimes = sec.slots.filter(s => s.day && s.startTime && s.endTime).map(s => ({
+          day: s.day,
+          startTime: s.startTime,
+          endTime: s.endTime
+        }));
+
+        const newSec = {
+          id: `sec-${Date.now()}-${idx}`,
+          name: secName,
+          instructor,
+          location,
+          times: validTimes
+        };
+
+        course.sections.push(newSec);
+        if (idx === 0 || !this.selectedSectionsMap[course.id]) {
+          this.selectedSectionsMap[course.id] = newSec.id;
+        }
+      });
 
       this.saveCourses();
       this.saveSelections();
+
+      // Reset form state & close modal
       this.formManualCourse.reset();
+      this.initCustomCourseFormState();
       this.elModalOverlay.classList.add("hidden");
+      arcadeAudio.playVictory();
       this.render();
     });
 
     // Export iCal
-    this.btnExportICal.addEventListener("click", () => {
+    this.btnExportICal.addEventListener("click", async () => {
       const selectedSecs = this.getSelectedSections();
       if (selectedSecs.length === 0) {
-        alert("Please select at least one course section to export.");
+        await showAlert("Please select at least one course section to export.", "Export iCal");
         return;
       }
       const icsData = generateICS(selectedSecs, this.courses);
@@ -424,6 +633,36 @@ class UniScheduleApp {
 
     let selectedCount = 0;
 
+    if (filteredCourses.length === 0) {
+      if (this.courses.length === 0) {
+        this.elCourseList.innerHTML = `
+          <div class="empty-course-state">
+            <div class="empty-icon">📚</div>
+            <p class="empty-title">No Classes Added Yet</p>
+            <p class="empty-sub">Add your classes manually or import them from text to build your schedule.</p>
+            <button id="btn-empty-add-course" class="btn btn-primary btn-sm">
+              + Add Class Manually
+            </button>
+          </div>
+        `;
+        const btnEmptyAdd = this.elCourseList.querySelector("#btn-empty-add-course");
+        if (btnEmptyAdd) {
+          btnEmptyAdd.addEventListener("click", () => {
+            arcadeAudio.playClick();
+            this.elModalOverlay.classList.remove("hidden");
+          });
+        }
+      } else {
+        this.elCourseList.innerHTML = `
+          <div class="empty-search-state">
+            No courses match "${query}"
+          </div>
+        `;
+      }
+      this.elSelectedCount.textContent = `0 / ${this.courses.length} Selected`;
+      return;
+    }
+
     filteredCourses.forEach(course => {
       const selectedSecId = this.selectedSectionsMap[course.id];
       if (selectedSecId) selectedCount++;
@@ -431,10 +670,13 @@ class UniScheduleApp {
       const card = document.createElement("div");
       card.className = "course-card";
 
+      const displayBadge = course.code ? course.code : (course.title ? course.title.substring(0, 8).toUpperCase() : "COURSE");
+      const displayTitle = course.title || course.code || "Course";
+
       card.innerHTML = `
         <div class="course-header">
-          <span class="course-badge" style="background-color: ${course.color}">${course.code}</span>
-          <span class="course-title" title="${course.title}">${course.title}</span>
+          <span class="course-badge" style="background-color: ${course.color}">${displayBadge}</span>
+          <span class="course-title" title="${displayTitle}">${displayTitle}</span>
           <button class="btn btn-ghost icon-only btn-sm btn-delete-course" data-course-id="${course.id}" title="Remove course">&times;</button>
         </div>
         <div class="sections-group">
@@ -502,9 +744,10 @@ class UniScheduleApp {
 
       // Delete Course button
       const btnDelete = card.querySelector(".btn-delete-course");
-      btnDelete.addEventListener("click", (e) => {
+      btnDelete.addEventListener("click", async (e) => {
         e.stopPropagation();
-        if (confirm(`Remove ${course.code} from planner?`)) {
+        const confirmed = await showConfirm(`Remove ${course.code} from planner?`, "Remove Course");
+        if (confirmed) {
           this.courses = this.courses.filter(c => c.id !== course.id);
           delete this.selectedSectionsMap[course.id];
           this.saveCourses();
@@ -899,5 +1142,6 @@ class UniScheduleApp {
 
 // INITIALIZE APP ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
+  installGlobalAlertOverrides();
   window.app = new UniScheduleApp();
 });
