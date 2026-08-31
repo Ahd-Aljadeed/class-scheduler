@@ -47,11 +47,11 @@
           <span id="valid-combos-count-badge" class="badge-pill">0</span>
         </button>
 
-        <button id="btn-import-modal" class="btn btn-secondary">
+        <button id="btn-import-modal" class="btn btn-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 5v14M5 12h14" />
           </svg>
-          Edit / Import Courses
+          + Add Class / Import
         </button>
 
         <button id="btn-export-ical" class="btn btn-secondary">
@@ -67,10 +67,11 @@
           <span id="sound-icon" class="sound-icon">🔊</span>
         </button>
 
-        <button id="btn-reset-demo" class="btn btn-ghost" title="Reset sample courses">
+        <button id="btn-reset-demo" class="btn btn-ghost" title="Clear all courses">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-            <path d="M3 3v5h5" />
+            <path d="M3 6h18" />
+            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
           </svg>
         </button>
 
@@ -270,31 +271,15 @@
       <div class="modal-card">
         <div class="modal-header">
           <div class="modal-tabs">
-            <button class="modal-tab active" data-tab="text-import">Smart Text Parser</button>
-            <button class="modal-tab" data-tab="manual-entry">Add Custom Course</button>
+            <button class="modal-tab active" data-tab="manual-entry">Add Class Manually</button>
+            <button class="modal-tab" data-tab="text-import">Smart Text Parser</button>
           </div>
           <button id="btn-close-modal" class="btn btn-ghost icon-only">&times;</button>
         </div>
 
         <div class="modal-body">
-          <!-- TAB 1: SMART TEXT PARSER -->
-          <div id="tab-text-import" class="tab-pane active">
-            <p class="modal-hint">
-              Paste raw class schedule text from your portal/syllabus. Our parser will extract course codes, section
-              names, days, times, and rooms automatically!
-            </p>
-            <div class="textarea-wrapper">
-              <textarea id="import-textarea"
-                placeholder="Example format:&#10;CS101 Intro to Programming&#10;Sec 01 - Dr. Turing - Mon/Wed 09:00-10:30 Tech Bldg 101&#10;Sec 02 - Grace Hopper - Tue/Thu 11:00-12:30 Tech Bldg 102&#10;&#10;MATH201 Calculus II&#10;Sec 01: Mon/Wed 11:00-12:30 Math Hall 301"></textarea>
-            </div>
-            <div class="modal-footer">
-              <button id="btn-load-sample-text" class="btn btn-outline">Load Example Snippet</button>
-              <button id="btn-parse-import" class="btn btn-primary">Parse & Load Courses</button>
-            </div>
-          </div>
-
-          <!-- TAB 2: MANUAL COURSE BUILDER -->
-          <div id="tab-manual-entry" class="tab-pane">
+          <!-- TAB 1: MANUAL COURSE BUILDER -->
+          <div id="tab-manual-entry" class="tab-pane active">
             <form id="manual-course-form" class="custom-course-form">
               <div class="form-section-divider">Course Details</div>
               
@@ -326,6 +311,22 @@
                 <button type="submit" class="btn btn-primary">Save Course & Sections</button>
               </div>
             </form>
+          </div>
+
+          <!-- TAB 2: SMART TEXT PARSER -->
+          <div id="tab-text-import" class="tab-pane">
+            <p class="modal-hint">
+              Paste raw class schedule text from your portal/syllabus. Our parser will extract course codes, section
+              names, days, times, and rooms automatically!
+            </p>
+            <div class="textarea-wrapper">
+              <textarea id="import-textarea"
+                placeholder="Example format:&#10;CS101 Intro to Programming&#10;Sec 01 - Dr. Turing - Mon/Wed 09:00-10:30 Tech Bldg 101&#10;Sec 02 - Grace Hopper - Tue/Thu 11:00-12:30 Tech Bldg 102&#10;&#10;MATH201 Calculus II&#10;Sec 01: Mon/Wed 11:00-12:30 Math Hall 301"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button id="btn-load-sample-text" class="btn btn-outline">Load Example Snippet</button>
+              <button id="btn-parse-import" class="btn btn-primary">Parse & Load Courses</button>
+            </div>
           </div>
         </div>
       </div>
