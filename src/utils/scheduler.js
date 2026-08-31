@@ -211,22 +211,22 @@ export function calculateScheduleMetrics(selectedSections, courses) {
   // Badges & Insights
   const badges = [];
   if (dailyBreakdown["Fri"].hasClasses === false) {
-    badges.push({ text: "No Friday Classes 🎉", type: "success" });
+    badges.push({ text: "No Friday Classes", icon: "calendar-off", type: "success" });
   }
   if (daysOffCount >= 3) {
-    badges.push({ text: `${daysOffCount}-Day Weekend 🏖️`, type: "success" });
+    badges.push({ text: `${daysOffCount}-Day Weekend`, icon: "sun", type: "success" });
   }
   if (totalGapHours === 0 && activeDaysCount > 0) {
-    badges.push({ text: "Zero Gap Hours! ⚡", type: "primary" });
+    badges.push({ text: "Zero Gap Hours", icon: "zap", type: "primary" });
   } else if (totalGapHours > 8) {
-    badges.push({ text: "High Gap Hours ⚠️", type: "warning" });
+    badges.push({ text: "High Gap Hours", icon: "alert-triangle", type: "warning" });
   }
 
   const earlyClasses = activeSlots.filter(s => s.startMins < 540); // before 9:00 AM
   if (earlyClasses.length === 0 && activeDaysCount > 0) {
-    badges.push({ text: "No Early Mornings ☕", type: "info" });
+    badges.push({ text: "No Early Mornings", icon: "coffee", type: "info" });
   } else if (earlyClasses.length > 0) {
-    badges.push({ text: `${earlyClasses.length} Early Class(es) ⏰`, type: "default" });
+    badges.push({ text: `${earlyClasses.length} Early Class(es)`, icon: "clock", type: "default" });
   }
 
   return {

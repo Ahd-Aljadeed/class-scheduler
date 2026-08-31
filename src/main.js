@@ -12,6 +12,42 @@ import {
 } from './utils/scheduler.js';
 import { parseRawTextToCourses } from './utils/parser.js';
 
+export function getIconSvg(name, size = 14, className = "") {
+  const classAttr = className ? ` class="${className}"` : '';
+  const sizeAttr = `width="${size}" height="${size}"`;
+  const base = `<svg ${sizeAttr}${classAttr} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">`;
+  
+  switch (name) {
+    case 'map-pin':
+    case 'pin':
+      return `${base}<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`;
+    case 'clock':
+      return `${base}<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
+    case 'calendar-off':
+      return `${base}<path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><path d="M14 2v6h6"/><path d="m3 3 18 18"/></svg>`;
+    case 'calendar':
+      return `${base}<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`;
+    case 'sun':
+      return `${base}<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`;
+    case 'check-circle':
+    case 'check':
+      return `${base}<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+    case 'alert-triangle':
+    case 'alert':
+      return `${base}<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+    case 'zap':
+      return `${base}<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`;
+    case 'building':
+    case 'campus':
+      return `${base}<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`;
+    case 'coffee':
+      return `${base}<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>`;
+    default:
+      return `${base}<circle cx="12" cy="12" r="10"/></svg>`;
+  }
+}
+
+
 // LOCAL STORAGE KEYS
 const STORAGE_KEY_COURSES = "unischedule_courses_v1";
 const STORAGE_KEY_SELECTIONS = "unischedule_selections_v1";
@@ -336,11 +372,11 @@ class UniScheduleApp {
                   </label>
                   <span class="section-instructor">${sec.instructor}</span>
                 </div>
-                <div class="section-location">📍 ${sec.location}</div>
+                <div class="section-location">${getIconSvg('map-pin', 12)} <span>${sec.location}</span></div>
                 <div class="section-time-tags">${timeBadges}</div>
                 ${hasConflict && !isSelected ? `
                   <div class="conflict-tag">
-                    ⚠️ Overlaps ${conflicts[0].conflictingCourseCode} ${conflicts[0].conflictingSecName}
+                    ${getIconSvg('alert-triangle', 12)} <span>Overlaps ${conflicts[0].conflictingCourseCode} ${conflicts[0].conflictingSecName}</span>
                   </div>
                 ` : ''}
               </div>
@@ -396,48 +432,6 @@ class UniScheduleApp {
     this.elSelectedCount.textContent = `${selectedCount} / ${this.courses.length} Selected`;
   }
 
-  initElements() {
-    this.elCourseList = document.getElementById("course-section-list");
-    this.elSearchInput = document.getElementById("course-search-input");
-    this.elSelectedCount = document.getElementById("courses-selected-count");
-    this.elTimetableGrid = document.getElementById("timetable-grid");
-    this.elToggleWeekends = document.getElementById("toggle-weekends");
-
-    // Conflict Banner
-    this.elConflictBanner = document.getElementById("conflict-banner");
-    this.elConflictBannerText = document.getElementById("conflict-banner-text");
-    this.btnResolveConflict = document.getElementById("btn-resolve-conflict");
-
-    // Analytics
-    this.elStatGapHours = document.getElementById("stat-gap-hours");
-    this.elStatGapBadge = document.getElementById("stat-gap-badge");
-    this.elStatCampusHours = document.getElementById("stat-campus-hours");
-    this.elStatClassHours = document.getElementById("stat-class-hours");
-    this.elStatDaysOff = document.getElementById("stat-days-off");
-    this.elBadgesContainer = document.getElementById("schedule-badges-container");
-    this.elDailyBreakdownList = document.getElementById("daily-breakdown-list");
-
-    // Header Actions & Buttons
-    this.btnAutoCombos = document.getElementById("btn-auto-combinations");
-    this.badgeCombosCount = document.getElementById("valid-combos-count-badge");
-    this.btnImportModal = document.getElementById("btn-import-modal");
-    this.btnExportICal = document.getElementById("btn-export-ical");
-    this.btnResetDemo = document.getElementById("btn-reset-demo");
-    this.btnThemeToggle = document.getElementById("btn-theme-toggle");
-
-    // Drawers & Modals
-    this.elDrawerOverlay = document.getElementById("combinations-drawer-overlay");
-    this.btnCloseDrawer = document.getElementById("btn-close-drawer");
-    this.elCombinationsList = document.getElementById("combinations-list");
-    this.elComboSummaryText = document.getElementById("combo-summary-text");
-
-    this.elModalOverlay = document.getElementById("import-modal-overlay");
-    this.btnCloseModal = document.getElementById("btn-close-modal");
-    this.elImportTextarea = document.getElementById("import-textarea");
-    this.btnLoadSampleText = document.getElementById("btn-load-sample-text");
-    this.btnParseImport = document.getElementById("btn-parse-import");
-    this.formManualCourse = document.getElementById("manual-course-form");
-  }
 
   // RENDER VISUAL TIMETABLE MATRIX
   renderTimetable() {
@@ -534,7 +528,7 @@ class UniScheduleApp {
           gapBand.style.height = `${heightPx}px`;
           gapBand.innerHTML = `
             <div class="gap-band-content">
-              <span>⏳ ${gap.durationHours} hr gap</span>
+              <span>${getIconSvg('clock', 12)} ${gap.durationHours} hr gap</span>
             </div>
           `;
           colDiv.appendChild(gapBand);
@@ -564,7 +558,7 @@ class UniScheduleApp {
             <div class="event-sec">${slot.sectionName}</div>
           </div>
           <div>
-            <div class="event-location">📍 ${slot.location}</div>
+            <div class="event-location">${getIconSvg('map-pin', 11)} <span>${slot.location}</span></div>
             <div class="event-time">${slot.startTime} - ${slot.endTime}</div>
           </div>
         `;
@@ -641,13 +635,13 @@ class UniScheduleApp {
 
     // Gap Badge
     if (metrics.totalGapHours === 0) {
-      this.elStatGapBadge.textContent = "Zero Gaps 🎉";
+      this.elStatGapBadge.innerHTML = `${getIconSvg('check-circle', 12)} <span>Zero Gaps</span>`;
       this.elStatGapBadge.className = "stat-footer-badge success";
     } else if (metrics.totalGapHours <= 4) {
-      this.elStatGapBadge.textContent = "Optimal Gaps 👍";
+      this.elStatGapBadge.innerHTML = `${getIconSvg('check-circle', 12)} <span>Optimal Gaps</span>`;
       this.elStatGapBadge.className = "stat-footer-badge success";
     } else {
-      this.elStatGapBadge.textContent = "High Gap Alert ⚠️";
+      this.elStatGapBadge.innerHTML = `${getIconSvg('alert-triangle', 12)} <span>High Gap Alert</span>`;
       this.elStatGapBadge.className = "stat-footer-badge warning";
     }
 
@@ -656,7 +650,8 @@ class UniScheduleApp {
     metrics.badges.forEach(b => {
       const tag = document.createElement("span");
       tag.className = `badge-tag ${b.type}`;
-      tag.textContent = b.text;
+      const iconSvg = b.icon ? getIconSvg(b.icon, 13) : '';
+      tag.innerHTML = `${iconSvg}<span>${b.text}</span>`;
       this.elBadgesContainer.appendChild(tag);
     });
 
@@ -665,25 +660,26 @@ class UniScheduleApp {
     DAYS.forEach(day => {
       const info = metrics.dailyBreakdown[day];
       const card = document.createElement("div");
-      card.className = "day-breakdown-card";
 
       if (!info.hasClasses) {
+        card.className = "day-breakdown-card day-off";
         card.innerHTML = `
           <div class="day-breakdown-header">
-            <span>${FULL_DAYS[day]}</span>
-            <span class="day-free-text">No Classes 🌴</span>
+            <span class="day-title">${FULL_DAYS[day]}</span>
+            <span class="day-free-status">${getIconSvg('sun', 13)} <span>No Classes</span></span>
           </div>
         `;
       } else {
+        card.className = "day-breakdown-card";
         card.innerHTML = `
           <div class="day-breakdown-header">
-            <span>${FULL_DAYS[day]}</span>
+            <span class="day-title">${FULL_DAYS[day]}</span>
             <span class="day-breakdown-time">${info.firstStart} – ${info.lastEnd}</span>
           </div>
           <div class="day-breakdown-metrics">
             <span>Campus: ${info.campusHours}h</span>
             <span>Class: ${info.classHours}h</span>
-            <span style="color: ${info.gapHours > 0 ? 'var(--accent-warning)' : 'var(--accent-success)'}">
+            <span class="gap-metric ${info.gapHours > 0 ? 'has-gap' : 'no-gap'}">
               Gap: ${info.gapHours}h
             </span>
           </div>
@@ -783,10 +779,10 @@ class UniScheduleApp {
         <div class="combo-card-header">
           <span class="combo-rank">Option #${idx + 1} ${isActive ? ' (Current Active)' : ''}</span>
           <div class="combo-metrics">
-            <span>⏳ ${combo.metrics.totalGapHours}h gap</span>
-            <span>🏫 ${combo.metrics.totalCampusHours}h campus</span>
-            <span>🏖️ ${combo.metrics.daysOffCount} days off</span>
-            <span>${b2bCount === 0 ? '✅' : '⚠️'} ${b2bCount} back-to-back</span>
+            <span>${getIconSvg('clock', 13)} ${combo.metrics.totalGapHours}h gap</span>
+            <span>${getIconSvg('building', 13)} ${combo.metrics.totalCampusHours}h campus</span>
+            <span>${getIconSvg('sun', 13)} ${combo.metrics.daysOffCount} days off</span>
+            <span>${b2bCount === 0 ? getIconSvg('check-circle', 13) : getIconSvg('alert-triangle', 13)} ${b2bCount} back-to-back</span>
           </div>
         </div>
         <div class="combo-sections-list">
