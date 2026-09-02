@@ -181,6 +181,14 @@ body {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(12px);
+  gap: 16px;
+}
+
+.header-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .brand {
@@ -199,6 +207,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px var(--accent-primary-glow);
+  flex-shrink: 0;
 }
 
 .brand-title {
@@ -208,18 +217,27 @@ body {
   background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  white-space: nowrap;
 }
 
 .brand-subtitle {
   font-size: 0.75rem;
   color: var(--text-secondary);
   font-weight: 500;
+  white-space: nowrap;
+}
+
+.header-quick-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 /* BUTTONS */
@@ -1097,7 +1115,7 @@ body {
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
-  z-index: 100;
+  z-index: 3000;
   display: flex;
   justify-content: flex-end;
   animation: fadeIn 0.2s ease;
@@ -1260,7 +1278,7 @@ body {
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
-  z-index: 100;
+  z-index: 3000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2062,6 +2080,18 @@ body {
   line-height: 1.45;
 }
 
+.welcome-tag-badge.device-badge {
+  color: var(--accent-info);
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.35);
+}
+
+[data-mode="arcade"] .welcome-tag-badge.device-badge {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: #00f0ff;
+  color: #00f0ff;
+}
+
 .welcome-section {
   display: flex;
   flex-direction: column;
@@ -2292,3 +2322,509 @@ body {
   box-shadow: 3px 3px 0px #000;
   background: #120c2e;
 }
+
+/* ==========================================================================
+   MOBILE-FIRST RESPONSIVE & UX ENHANCEMENTS
+   ========================================================================== */
+
+/* MOBILE DAY VIEW SWITCHER */
+.mobile-day-switcher {
+  display: none; /* Hidden by default on desktop */
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 2px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.mobile-day-switcher::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-day-tab {
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-day-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+}
+
+.mobile-day-tab.active {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
+  box-shadow: 0 2px 8px var(--accent-primary-glow);
+}
+
+[data-mode="arcade"] .mobile-day-tab {
+  border: 1.5px solid var(--border-color);
+  box-shadow: 2px 2px 0px #000;
+  font-family: var(--font-mono);
+}
+
+[data-mode="arcade"] .mobile-day-tab.active {
+  background: #ff007f;
+  border-color: #ff007f;
+  box-shadow: 3px 3px 0px #000, 0 0 10px rgba(255, 0, 127, 0.4);
+}
+
+/* EVENT DETAILS BOTTOM SHEET */
+.bottom-sheet-card {
+  max-width: 500px;
+  width: 100%;
+  border-radius: var(--radius-xl);
+  position: relative;
+}
+
+.bottom-sheet-drag-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--border-color-strong);
+  border-radius: 99px;
+  margin: 8px auto 0 auto;
+}
+
+.sheet-body {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sheet-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+}
+
+.sheet-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.sheet-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.sheet-value {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.warning-text {
+  color: var(--accent-warning);
+}
+
+.sheet-actions {
+  margin-top: 6px;
+}
+
+/* MOBILE BOTTOM NAVIGATION BAR */
+.mobile-bottom-nav {
+  display: none; /* Hidden on desktop */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.mobile-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.725rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.mobile-nav-btn svg {
+  transition: transform 0.2s ease, stroke 0.2s ease;
+}
+
+.mobile-nav-btn.active {
+  color: var(--accent-primary);
+}
+
+.mobile-nav-btn.active svg {
+  stroke: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.mobile-nav-btn:active {
+  transform: scale(0.94);
+}
+
+.nav-badge {
+  position: absolute;
+  top: 6px;
+  right: 25%;
+  background: var(--accent-primary);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 99px;
+}
+
+[data-mode="arcade"] .mobile-bottom-nav {
+  background: #0d0822;
+  border-top: 2px solid #00f0ff;
+  box-shadow: 0 -4px 0px #000, 0 0 16px rgba(0, 240, 255, 0.25);
+}
+
+[data-mode="arcade"] .mobile-nav-btn {
+  font-family: var(--font-mono);
+}
+
+[data-mode="arcade"] .mobile-nav-btn.active {
+  color: #ff007f;
+}
+
+[data-mode="arcade"] .mobile-nav-btn.active svg {
+  stroke: #ff007f;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (RESPONSIVE BREAKPOINTS)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  /* App container adjustments for fixed bottom nav bar */
+  .app-container {
+    height: 100vh;
+    padding: 10px 10px calc(64px + env(safe-area-inset-bottom, 10px)) 10px;
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  /* Show mobile bottom nav */
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  /* Mobile Header: Zero-Scroll Compact Layout */
+  .brand-text {
+    display: none !important;
+  }
+
+  .brand {
+    gap: 0;
+  }
+
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .app-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 10px;
+    gap: 8px;
+    height: auto;
+  }
+
+  .header-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .header-quick-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .header-quick-controls .btn {
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .header-actions .btn-mobile-action {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 4px;
+    font-size: 0.75rem;
+    height: 34px;
+    white-space: nowrap;
+  }
+
+  /* Convert 3-column grid to panel switcher mode */
+  .app-main-grid {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  /* Hide non-active panels on mobile */
+  .app-main-grid > aside,
+  .app-main-grid > section {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .app-main-grid[data-active-panel="courses"] .sidebar-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-main-grid[data-active-panel="schedule"] .timetable-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-main-grid[data-active-panel="analytics"] .analytics-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Mobile Day Switcher Zero-Scroll Grid */
+  .mobile-day-switcher {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2px;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .mobile-day-tab {
+    padding: 6px 1px;
+    font-size: 0.7rem;
+    text-align: center;
+    border-radius: var(--radius-sm);
+  }
+
+  .timetable-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .timetable-legend {
+    display: none; /* Hide legend on mobile header to save vertical space */
+  }
+
+  /* Timetable container touch scroll optimizations */
+  .timetable-container {
+    flex: 1;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+  }
+
+  .timetable-grid {
+    min-width: 780px; /* Ensures all 7 days (Sun-Sat) fit with full legibility */
+  }
+
+  .timetable-grid.single-day-grid {
+    min-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .time-header-cell {
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: 35;
+    background: var(--bg-panel);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .day-header-cell {
+    position: sticky;
+    top: 0;
+    z-index: 25;
+    background: var(--bg-panel);
+  }
+
+  .time-slot-label {
+    position: sticky;
+    left: 0;
+    z-index: 20;
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border-color-strong);
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Drawer & Modal Mobile Bottom Sheet Conversion */
+  .modal-overlay,
+  .drawer-overlay {
+    z-index: 3000 !important;
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-card,
+  .drawer-content,
+  .bottom-sheet-card {
+    max-height: 82vh;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    margin-top: auto;
+    margin-bottom: 0;
+    z-index: 3001;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .modal-body,
+  .welcome-modal-body,
+  .combinations-list {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px;
+  }
+
+  .modal-footer,
+  .welcome-modal-footer,
+  .sheet-actions {
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    margin-top: 0;
+    flex-shrink: 0;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  /* Header action button text hiding for compact mobile screens */
+  .header-actions .btn {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  #btn-export-ical span,
+  #btn-mode-toggle .mode-icon-label {
+    font-size: 0.75rem;
+  }
+
+  /* Text hiding for auto combinations button text */
+  #btn-auto-combinations {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  /* Mobile manual course entry form responsive 1-column layout */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vibe-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Touch event block tap affordance on timetable */
+  .calendar-event {
+    padding: 4px 6px;
+    font-size: 0.725rem;
+  }
+
+  .calendar-event .event-code {
+    font-size: 0.775rem;
+    font-weight: 800;
+  }
+
+  .calendar-event .event-location {
+    font-size: 0.675rem;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Super small phone screens */
+  .header-actions {
+    gap: 4px;
+  }
+
+  .btn-primary {
+    padding: 6px 8px;
+  }
+
+  .brand-title {
+    font-size: 0.95rem;
+  }
+
+  .arcade-badge-tag {
+    display: none;
+  }
+}

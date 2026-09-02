@@ -20,84 +20,86 @@
   <div id="app" class="app-container">
     <!-- TOP HEADER -->
     <header class="app-header">
-      <div class="header-left">
+      <div class="header-top-bar">
         <div class="brand">
           <div class="brand-logo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
               stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
               <path d="M8 7h6" />
               <path d="M8 11h8" />
             </svg>
           </div>
-          <div>
+          <div class="brand-text">
             <h1 class="brand-title">UniSchedule <span class="arcade-badge-tag">ARCADE</span></h1>
             <span class="brand-subtitle">Registration & Gap Hours Planner</span>
           </div>
         </div>
+
+        <div class="header-quick-controls">
+          <button id="btn-sound-toggle" class="btn btn-ghost icon-only" title="Toggle Arcade Sound Effects">
+            <span id="sound-icon" class="sound-icon">🔊</span>
+          </button>
+
+          <button id="btn-reset-demo" class="btn btn-ghost icon-only" title="Clear all courses">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 6h18" />
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+            </svg>
+          </button>
+
+          <!-- WELCOME & GUIDE TOGGLE -->
+          <button id="btn-welcome-modal" class="btn btn-ghost icon-only" title="Welcome & How to Use Guide">
+            <span style="font-size: 1rem; display: inline-block;">👋</span>
+          </button>
+
+          <!-- UI MODE TOGGLE (Arcade vs Regular) -->
+          <button id="btn-mode-toggle" class="btn btn-mode-switcher icon-only" title="Toggle UI Style (Arcade / Regular)">
+            <span id="mode-icon-arcade" class="mode-icon-label">🕹️</span>
+            <span id="mode-icon-regular" class="mode-icon-label hidden">📱</span>
+          </button>
+
+          <!-- DARK / LIGHT THEME TOGGLE -->
+          <button id="btn-theme-toggle" class="btn btn-ghost icon-only" title="Toggle Dark / Light Mode">
+            <svg id="theme-icon-sun" class="theme-icon hidden" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+            <svg id="theme-icon-moon" class="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div class="header-actions">
-        <button id="btn-auto-combinations" class="btn btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button id="btn-auto-combinations" class="btn btn-primary btn-mobile-action">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path
               d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
           </svg>
-          Auto Combinations
+          <span class="btn-text">Auto</span>
           <span id="valid-combos-count-badge" class="badge-pill">0</span>
         </button>
 
-        <button id="btn-import-modal" class="btn btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button id="btn-import-modal" class="btn btn-primary btn-mobile-action">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 5v14M5 12h14" />
           </svg>
-          + Add Class / Import
+          <span class="btn-text">+ Class</span>
         </button>
 
-        <button id="btn-export-ical" class="btn btn-secondary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button id="btn-export-ical" class="btn btn-secondary btn-mobile-action">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          Export iCal
-        </button>
-
-        <button id="btn-sound-toggle" class="btn btn-ghost" title="Toggle Arcade Sound Effects">
-          <span id="sound-icon" class="sound-icon">🔊</span>
-        </button>
-
-        <button id="btn-reset-demo" class="btn btn-ghost" title="Clear all courses">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 6h18" />
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-          </svg>
-        </button>
-
-        <!-- WELCOME & GUIDE TOGGLE -->
-        <button id="btn-welcome-modal" class="btn btn-ghost" title="Welcome & How to Use Guide">
-          <span style="font-size: 1.1rem; display: inline-block;">👋</span>
-        </button>
-
-        <!-- UI MODE TOGGLE (Arcade vs Regular) -->
-        <button id="btn-mode-toggle" class="btn btn-mode-switcher" title="Toggle UI Style (Arcade / Regular)">
-          <span id="mode-icon-arcade" class="mode-icon-label">🕹️ ARCADE UI</span>
-          <span id="mode-icon-regular" class="mode-icon-label hidden">📱 REGULAR UI</span>
-        </button>
-
-        <!-- DARK / LIGHT THEME TOGGLE -->
-        <button id="btn-theme-toggle" class="btn btn-ghost" title="Toggle Dark / Light Mode">
-          <svg id="theme-icon-sun" class="theme-icon hidden" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="4" />
-            <path
-              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-          </svg>
-          <svg id="theme-icon-moon" class="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2">
-            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-          </svg>
+          <span class="btn-text">Export</span>
         </button>
       </div>
     </header>
@@ -153,12 +155,16 @@
             </span>
           </div>
 
-          <div class="view-controls">
-            <label class="toggle-switch">
-              <input type="checkbox" id="toggle-weekends">
-              <span class="toggle-slider"></span>
-              <span class="toggle-label">Show Weekends</span>
-            </label>
+          <!-- MOBILE DAY VIEW SWITCHER -->
+          <div class="mobile-day-switcher" id="mobile-day-switcher">
+            <button class="mobile-day-tab active" data-day="ALL">Full Week</button>
+            <button class="mobile-day-tab" data-day="Sun">Sun</button>
+            <button class="mobile-day-tab" data-day="Mon">Mon</button>
+            <button class="mobile-day-tab" data-day="Tue">Tue</button>
+            <button class="mobile-day-tab" data-day="Wed">Wed</button>
+            <button class="mobile-day-tab" data-day="Thu">Thu</button>
+            <button class="mobile-day-tab" data-day="Fri">Fri</button>
+            <button class="mobile-day-tab" data-day="Sat">Sat</button>
           </div>
         </div>
 
@@ -338,7 +344,7 @@
     </div>
 
     <!-- MODAL: WELCOME & HOW TO USE -->
-    <div id="welcome-modal-overlay" class="modal-overlay">
+    <div id="welcome-modal-overlay" class="modal-overlay hidden">
       <div class="modal-card welcome-modal-card">
         <div class="modal-header welcome-modal-header">
           <div class="welcome-header-title">
@@ -358,6 +364,9 @@
             </p>
             <div class="welcome-tag-badge">
               ⚡ <strong>100% Free:</strong> No subscriptions, no hidden payments, no strings attached. Just drop in your classes and find the ultimate schedule combinations.
+            </div>
+            <div class="welcome-tag-badge device-badge">
+              💻📱 <strong>Device Compatibility:</strong> Fully supported on both mobile phones and computer screens, though viewing on a computer is recommended for the ultimate experience!
             </div>
           </div>
 
@@ -428,6 +437,79 @@
         </div>
       </div>
     </div>
+
+    <!-- MODAL: MOBILE CLASS / GAP DETAILS BOTTOM SHEET -->
+    <div id="event-details-overlay" class="modal-overlay hidden">
+      <div class="modal-card bottom-sheet-card">
+        <div class="bottom-sheet-drag-handle"></div>
+        <div class="modal-header">
+          <div>
+            <h3 id="sheet-course-code" class="modal-title">CS 101</h3>
+            <p id="sheet-course-title" class="modal-subtitle">Intro to Computer Science</p>
+          </div>
+          <button id="btn-close-event-sheet" class="btn btn-ghost icon-only">&times;</button>
+        </div>
+        <div class="modal-body sheet-body">
+          <div class="sheet-info-grid">
+            <div class="sheet-info-row">
+              <span class="sheet-label">Section:</span>
+              <span id="sheet-section-name" class="sheet-value">Sec 01</span>
+            </div>
+            <div class="sheet-info-row">
+              <span class="sheet-label">Instructor:</span>
+              <span id="sheet-instructor" class="sheet-value">Dr. Turing</span>
+            </div>
+            <div class="sheet-info-row">
+              <span class="sheet-label">Location:</span>
+              <span id="sheet-location" class="sheet-value">Tech Hall 101</span>
+            </div>
+            <div class="sheet-info-row">
+              <span class="sheet-label">Time & Day:</span>
+              <span id="sheet-time-slot" class="sheet-value">Mon 09:00 - 10:30</span>
+            </div>
+            <div id="sheet-gap-info" class="sheet-info-row hidden">
+              <span class="sheet-label">Gap Duration:</span>
+              <span id="sheet-gap-duration" class="sheet-value warning-text">1.5 Hours</span>
+            </div>
+          </div>
+          <div class="sheet-actions">
+            <button id="btn-sheet-deselect" class="btn btn-outline-danger full-width">
+              Deselect / Change Section
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE BOTTOM NAVIGATION BAR -->
+    <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+      <button class="mobile-nav-btn" data-panel="courses">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+          <path d="M8 7h6" />
+          <path d="M8 11h8" />
+        </svg>
+        <span>Courses</span>
+        <span id="mobile-courses-badge" class="nav-badge hidden">0</span>
+      </button>
+
+      <button class="mobile-nav-btn active" data-panel="schedule">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+          <line x1="16" x2="16" y1="2" y2="6"/>
+          <line x1="8" x2="8" y1="2" y2="6"/>
+          <line x1="3" x2="21" y1="10" y2="10"/>
+        </svg>
+        <span>Schedule</span>
+      </button>
+
+      <button class="mobile-nav-btn" data-panel="analytics">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+        </svg>
+        <span>Analytics</span>
+      </button>
+    </nav>
   </div>
 
   <script type="module" src="./src/main.js"></script>

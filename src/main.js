@@ -66,16 +66,14 @@ class UniScheduleApp {
     this.sortPreference = 'gaps'; // 'gaps' | 'daysoff' | 'mornings' | 'spread'
     this.currentMode = this.loadMode();
     this.currentTheme = this.loadTheme();
+    this.currentMobilePanel = 'schedule'; // 'courses' | 'schedule' | 'analytics'
+    this.currentDayFilter = 'ALL'; // 'ALL' | 'Sun' | 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat'
 
     this.initElements();
     this.applyMode(this.currentMode);
     this.applyTheme(this.currentTheme);
+    this.switchMobilePanel(this.currentMobilePanel);
     this.initEventListeners();
-
-    // Check showWeekends toggle element
-    if (this.elToggleWeekends) {
-      this.elToggleWeekends.checked = true;
-    }
 
     this.initCustomCourseFormState();
     this.render();
@@ -381,21 +379,34 @@ class UniScheduleApp {
     this.btnWelcomeModal = document.getElementById("btn-welcome-modal");
     this.welcomeSelectArcade = document.getElementById("welcome-select-arcade");
     this.welcomeSelectRegular = document.getElementById("welcome-select-regular");
+
+    // Mobile Layout & Navigation
+    this.elMainGrid = document.querySelector(".app-main-grid");
+    this.elMobileBottomNav = document.getElementById("mobile-bottom-nav");
+    this.elMobileDaySwitcher = document.getElementById("mobile-day-switcher");
+    this.elMobileCoursesBadge = document.getElementById("mobile-courses-badge");
+
+    // Event Details Bottom Sheet Modal
+    this.elEventDetailsOverlay = document.getElementById("event-details-overlay");
+    this.btnCloseEventSheet = document.getElementById("btn-close-event-sheet");
+    this.btnSheetDeselect = document.getElementById("btn-sheet-deselect");
+    this.sheetCourseCode = document.getElementById("sheet-course-code");
+    this.sheetCourseTitle = document.getElementById("sheet-course-title");
+    this.sheetSectionName = document.getElementById("sheet-section-name");
+    this.sheetInstructor = document.getElementById("sheet-instructor");
+    this.sheetLocation = document.getElementById("sheet-location");
+    this.sheetTimeSlot = document.getElementById("sheet-time-slot");
+    this.sheetGapInfo = document.getElementById("sheet-gap-info");
+    this.sheetGapDuration = document.getElementById("sheet-gap-duration");
+
+    this.activeSheetCourseId = null;
+    this.activeSheetSectionId = null;
   }
 
   initEventListeners() {
     // Search Filter
     if (this.elSearchInput) {
       this.elSearchInput.addEventListener("input", () => this.renderCourseList());
-    }
-
-    // Show Weekends toggle
-    if (this.elToggleWeekends) {
-      this.elToggleWeekends.addEventListener("change", (e) => {
-        this.showWeekends = e.target.checked;
-        arcadeAudio.playClick();
-        this.renderTimetable();
-      });
     }
 
     // Mode toggle (Arcade vs Regular)
@@ -728,6 +739,102 @@ class UniScheduleApp {
         this.updateWelcomeVibeCards();
       });
     }
+
+    // Mobile Navigation Buttons
+    if (this.elMobileBottomNav) {
+      this.elMobileBottomNav.querySelectorAll(".mobile-nav-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          arcadeAudio.playClick();
+          const targetPanel = e.currentTarget.dataset.panel;
+          this.switchMobilePanel(targetPanel);
+        });
+      });
+    }
+
+    // Mobile Day Switcher Tabs
+    if (this.elMobileDaySwitcher) {
+      this.elMobileDaySwitcher.querySelectorAll(".mobile-day-tab").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          arcadeAudio.playClick();
+          const selectedDay = e.currentTarget.dataset.day;
+          this.setDayFilter(selectedDay);
+        });
+      });
+    }
+
+    // Event Details Bottom Sheet Modal Listeners
+    if (this.btnCloseEventSheet) {
+      this.btnCloseEventSheet.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        if (this.elEventDetailsOverlay) this.elEventDetailsOverlay.classList.add("hidden");
+      });
+    }
+
+    if (this.elEventDetailsOverlay) {
+      this.elEventDetailsOverlay.addEventListener("click", (e) => {
+        if (e.target === this.elEventDetailsOverlay) {
+          this.elEventDetailsOverlay.classList.add("hidden");
+        }
+      });
+    }
+
+    if (this.btnSheetDeselect) {
+      this.btnSheetDeselect.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        if (this.activeSheetCourseId) {
+          delete this.selectedSectionsMap[this.activeSheetCourseId];
+          this.saveSelections();
+          this.render();
+        }
+        if (this.elEventDetailsOverlay) this.elEventDetailsOverlay.classList.add("hidden");
+      });
+    }
+  }
+
+  // MOBILE PANEL SWITCHER LOGIC
+  switchMobilePanel(panelName) {
+    this.currentMobilePanel = panelName;
+    if (this.elMainGrid) {
+      this.elMainGrid.setAttribute("data-active-panel", panelName);
+    }
+    if (this.elMobileBottomNav) {
+      this.elMobileBottomNav.querySelectorAll(".mobile-nav-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.panel === panelName);
+      });
+    }
+  }
+
+  // MOBILE DAY FILTER LOGIC
+  setDayFilter(day) {
+    this.currentDayFilter = day;
+    if (this.elMobileDaySwitcher) {
+      this.elMobileDaySwitcher.querySelectorAll(".mobile-day-tab").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.day === day);
+      });
+    }
+    this.renderTimetable();
+  }
+
+  // EVENT DETAILS BOTTOM SHEET
+  openEventDetailsSheet(slot) {
+    const course = this.courses.find(c => c.code === slot.courseCode || c.sections.some(s => s.name === slot.sectionName));
+    if (!course) return;
+    const section = course.sections.find(s => s.name === slot.sectionName);
+
+    this.activeSheetCourseId = course.id;
+    this.activeSheetSectionId = section ? section.id : null;
+
+    if (this.sheetCourseCode) this.sheetCourseCode.textContent = course.code || course.title;
+    if (this.sheetCourseTitle) this.sheetCourseTitle.textContent = course.title || course.code;
+    if (this.sheetSectionName) this.sheetSectionName.textContent = slot.sectionName;
+    if (this.sheetInstructor) this.sheetInstructor.textContent = section ? section.instructor : "Staff";
+    if (this.sheetLocation) this.sheetLocation.textContent = slot.location;
+    if (this.sheetTimeSlot) this.sheetTimeSlot.textContent = `${slot.day} ${slot.startTime} - ${slot.endTime}`;
+    if (this.sheetGapInfo) this.sheetGapInfo.classList.add("hidden");
+
+    if (this.elEventDetailsOverlay) {
+      this.elEventDetailsOverlay.classList.remove("hidden");
+    }
   }
 
   openWelcomeModal() {
@@ -756,10 +863,6 @@ class UniScheduleApp {
     const hasSeenWelcome = localStorage.getItem(STORAGE_KEY_WELCOME_SEEN);
     if (!hasSeenWelcome) {
       this.openWelcomeModal();
-    } else {
-      if (this.elWelcomeOverlay) {
-        this.elWelcomeOverlay.classList.add("hidden");
-      }
     }
   }
 
@@ -922,6 +1025,10 @@ class UniScheduleApp {
     });
 
     this.elSelectedCount.textContent = `${selectedCount} / ${this.courses.length} Selected`;
+    if (this.elMobileCoursesBadge) {
+      this.elMobileCoursesBadge.textContent = selectedCount;
+      this.elMobileCoursesBadge.classList.toggle("hidden", selectedCount === 0);
+    }
   }
 
 
@@ -930,10 +1037,16 @@ class UniScheduleApp {
     this.elTimetableGrid = document.getElementById("timetable-grid");
     if (!this.elTimetableGrid) return;
 
-    const daysToDisplay = this.showWeekends ? DAYS : DAYS.slice(0, 5); // Mon-Fri or Mon-Sun
+    const daysToDisplay = this.currentDayFilter === 'ALL' ? DAYS : DAYS.filter(d => d === this.currentDayFilter);
     const gridCols = daysToDisplay.length;
     this.elTimetableGrid.style.setProperty("--day-count", gridCols);
     this.elTimetableGrid.innerHTML = "";
+
+    if (this.currentDayFilter !== 'ALL') {
+      this.elTimetableGrid.classList.add("single-day-grid");
+    } else {
+      this.elTimetableGrid.classList.remove("single-day-grid");
+    }
 
     const startHour = 8;
     const endHour = 20; // 13 hours total (08:00 to 20:00)
@@ -1054,6 +1167,11 @@ class UniScheduleApp {
             <div class="event-time">${slot.startTime} - ${slot.endTime}</div>
           </div>
         `;
+
+        card.addEventListener("click", () => {
+          arcadeAudio.playSelect();
+          this.openEventDetailsSheet(slot);
+        });
 
         colDiv.appendChild(card);
       });
