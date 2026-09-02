@@ -152,33 +152,45 @@ class UniScheduleApp {
       `;
 
       // Sync text inputs
-      card.querySelector(".input-sec-name").addEventListener("input", (e) => {
-        this.customFormSections[secIdx].name = e.target.value;
-      });
-      card.querySelector(".input-sec-instructor").addEventListener("input", (e) => {
-        this.customFormSections[secIdx].instructor = e.target.value;
-      });
-      card.querySelector(".input-sec-location").addEventListener("input", (e) => {
-        this.customFormSections[secIdx].location = e.target.value;
+      const secNameInp = card.querySelector(".input-sec-name");
+      const instInp = card.querySelector(".input-sec-instructor");
+      const locInp = card.querySelector(".input-sec-location");
+
+      ['input', 'change'].forEach(evt => {
+        if (secNameInp) secNameInp.addEventListener(evt, (e) => { this.customFormSections[secIdx].name = e.target.value; });
+        if (instInp) instInp.addEventListener(evt, (e) => { this.customFormSections[secIdx].instructor = e.target.value; });
+        if (locInp) locInp.addEventListener(evt, (e) => { this.customFormSections[secIdx].location = e.target.value; });
       });
 
       // Time slot inputs
       card.querySelectorAll(".input-slot-day").forEach(sel => {
-        sel.addEventListener("change", (e) => {
-          const slotIdx = parseInt(e.target.dataset.slotIdx);
-          this.customFormSections[secIdx].slots[slotIdx].day = e.target.value;
+        ['input', 'change'].forEach(evt => {
+          sel.addEventListener(evt, (e) => {
+            const slotIdx = parseInt(e.target.dataset.slotIdx);
+            if (this.customFormSections[secIdx]?.slots[slotIdx]) {
+              this.customFormSections[secIdx].slots[slotIdx].day = e.target.value;
+            }
+          });
         });
       });
       card.querySelectorAll(".input-slot-start").forEach(inp => {
-        inp.addEventListener("input", (e) => {
-          const slotIdx = parseInt(e.target.dataset.slotIdx);
-          this.customFormSections[secIdx].slots[slotIdx].startTime = e.target.value;
+        ['input', 'change'].forEach(evt => {
+          inp.addEventListener(evt, (e) => {
+            const slotIdx = parseInt(e.target.dataset.slotIdx);
+            if (this.customFormSections[secIdx]?.slots[slotIdx]) {
+              this.customFormSections[secIdx].slots[slotIdx].startTime = e.target.value;
+            }
+          });
         });
       });
       card.querySelectorAll(".input-slot-end").forEach(inp => {
-        inp.addEventListener("input", (e) => {
-          const slotIdx = parseInt(e.target.dataset.slotIdx);
-          this.customFormSections[secIdx].slots[slotIdx].endTime = e.target.value;
+        ['input', 'change'].forEach(evt => {
+          inp.addEventListener(evt, (e) => {
+            const slotIdx = parseInt(e.target.dataset.slotIdx);
+            if (this.customFormSections[secIdx]?.slots[slotIdx]) {
+              this.customFormSections[secIdx].slots[slotIdx].endTime = e.target.value;
+            }
+          });
         });
       });
 
@@ -268,37 +280,45 @@ class UniScheduleApp {
   }
 
   loadCourses() {
-    const saved = localStorage.getItem(STORAGE_KEY_COURSES);
-    if (saved) {
-      try {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_COURSES);
+      if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) return parsed;
-      } catch (e) {
-        console.error("Failed to parse saved courses", e);
       }
+    } catch (e) {
+      console.error("Failed to parse saved courses", e);
     }
     return JSON.parse(JSON.stringify(INITIAL_COURSES));
   }
 
   saveCourses() {
-    localStorage.setItem(STORAGE_KEY_COURSES, JSON.stringify(this.courses));
+    try {
+      localStorage.setItem(STORAGE_KEY_COURSES, JSON.stringify(this.courses));
+    } catch (e) {
+      console.error("Failed to save courses", e);
+    }
   }
 
   loadSelections() {
-    const saved = localStorage.getItem(STORAGE_KEY_SELECTIONS);
-    if (saved) {
-      try {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_SELECTIONS);
+      if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed && typeof parsed === 'object') return parsed;
-      } catch (e) {
-        console.error("Failed to parse saved selections", e);
       }
+    } catch (e) {
+      console.error("Failed to parse saved selections", e);
     }
     return {};
   }
 
   saveSelections() {
-    localStorage.setItem(STORAGE_KEY_SELECTIONS, JSON.stringify(this.selectedSectionsMap));
+    try {
+      localStorage.setItem(STORAGE_KEY_SELECTIONS, JSON.stringify(this.selectedSectionsMap));
+    } catch (e) {
+      console.error("Failed to save selections", e);
+    }
   }
 
   initElements() {
@@ -496,6 +516,30 @@ class UniScheduleApp {
     // Manual Course Form Submit
     this.formManualCourse.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      // Sync DOM input values directly into customFormSections before validation & submission
+      const sectionCards = document.querySelectorAll("#sections-builder-container .section-builder-card");
+      sectionCards.forEach((card, secIdx) => {
+        if (!this.customFormSections[secIdx]) return;
+        const nameInp = card.querySelector(".input-sec-name");
+        const instInp = card.querySelector(".input-sec-instructor");
+        const locInp = card.querySelector(".input-sec-location");
+        if (nameInp) this.customFormSections[secIdx].name = nameInp.value;
+        if (instInp) this.customFormSections[secIdx].instructor = instInp.value;
+        if (locInp) this.customFormSections[secIdx].location = locInp.value;
+
+        const slotRows = card.querySelectorAll(".time-slot-row");
+        slotRows.forEach((row, slotIdx) => {
+          if (!this.customFormSections[secIdx].slots[slotIdx]) return;
+          const daySel = row.querySelector(".input-slot-day");
+          const startInp = row.querySelector(".input-slot-start");
+          const endInp = row.querySelector(".input-slot-end");
+          if (daySel) this.customFormSections[secIdx].slots[slotIdx].day = daySel.value;
+          if (startInp) this.customFormSections[secIdx].slots[slotIdx].startTime = startInp.value;
+          if (endInp) this.customFormSections[secIdx].slots[slotIdx].endTime = endInp.value;
+        });
+      });
+
       const title = document.getElementById("manual-title").value.trim();
       let code = document.getElementById("manual-code").value.trim().toUpperCase();
       const color = document.getElementById("manual-color").value || "#6366f1";
@@ -524,7 +568,7 @@ class UniScheduleApp {
       let course = this.courses.find(c => c.code === code || c.title.toLowerCase() === title.toLowerCase());
       if (!course) {
         course = {
-          id: `course-${Date.now()}`,
+          id: `course-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
           code,
           title,
           color,
@@ -558,7 +602,7 @@ class UniScheduleApp {
         }));
 
         const newSec = {
-          id: `sec-${Date.now()}-${idx}`,
+          id: `sec-${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 7)}`,
           name: secName,
           instructor,
           location,
