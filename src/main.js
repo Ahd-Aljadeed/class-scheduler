@@ -385,14 +385,18 @@ class UniScheduleApp {
 
   initEventListeners() {
     // Search Filter
-    this.elSearchInput.addEventListener("input", () => this.renderCourseList());
+    if (this.elSearchInput) {
+      this.elSearchInput.addEventListener("input", () => this.renderCourseList());
+    }
 
     // Show Weekends toggle
-    this.elToggleWeekends.addEventListener("change", (e) => {
-      this.showWeekends = e.target.checked;
-      arcadeAudio.playClick();
-      this.renderTimetable();
-    });
+    if (this.elToggleWeekends) {
+      this.elToggleWeekends.addEventListener("change", (e) => {
+        this.showWeekends = e.target.checked;
+        arcadeAudio.playClick();
+        this.renderTimetable();
+      });
+    }
 
     // Mode toggle (Arcade vs Regular)
     if (this.btnModeToggle) {
@@ -414,39 +418,49 @@ class UniScheduleApp {
     }
 
     // Reset Demo / Clear All
-    this.btnResetDemo.addEventListener("click", async () => {
-      arcadeAudio.playClick();
-      const confirmed = await showConfirm("Clear all courses and start fresh?", "Clear All Courses");
-      if (confirmed) {
-        this.courses = JSON.parse(JSON.stringify(INITIAL_COURSES));
-        this.selectedSectionsMap = {};
-        this.courses.forEach(c => {
-          if (c.sections[0]) this.selectedSectionsMap[c.id] = c.sections[0].id;
-        });
-        this.saveCourses();
-        this.saveSelections();
-        this.render();
-      }
-    });
+    if (this.btnResetDemo) {
+      this.btnResetDemo.addEventListener("click", async () => {
+        arcadeAudio.playClick();
+        const confirmed = await showConfirm("Clear all courses and start fresh?", "Clear All Courses");
+        if (confirmed) {
+          this.courses = JSON.parse(JSON.stringify(INITIAL_COURSES));
+          this.selectedSectionsMap = {};
+          this.courses.forEach(c => {
+            if (c.sections[0]) this.selectedSectionsMap[c.id] = c.sections[0].id;
+          });
+          this.saveCourses();
+          this.saveSelections();
+          this.render();
+        }
+      });
+    }
 
     // Resolve Conflict Button
-    this.btnResolveConflict.addEventListener("click", () => {
-      arcadeAudio.playAutoFix();
-      this.openAutoCombinationsDrawer();
-    });
+    if (this.btnResolveConflict) {
+      this.btnResolveConflict.addEventListener("click", () => {
+        arcadeAudio.playAutoFix();
+        this.openAutoCombinationsDrawer();
+      });
+    }
 
     // Auto-Combinations Drawer
-    this.btnAutoCombos.addEventListener("click", () => {
-      arcadeAudio.playAutoFix();
-      this.openAutoCombinationsDrawer();
-    });
-    this.btnCloseDrawer.addEventListener("click", () => {
-      arcadeAudio.playClick();
-      this.elDrawerOverlay.classList.add("hidden");
-    });
-    this.elDrawerOverlay.addEventListener("click", (e) => {
-      if (e.target === this.elDrawerOverlay) this.elDrawerOverlay.classList.add("hidden");
-    });
+    if (this.btnAutoCombos) {
+      this.btnAutoCombos.addEventListener("click", () => {
+        arcadeAudio.playAutoFix();
+        this.openAutoCombinationsDrawer();
+      });
+    }
+    if (this.btnCloseDrawer) {
+      this.btnCloseDrawer.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        if (this.elDrawerOverlay) this.elDrawerOverlay.classList.add("hidden");
+      });
+    }
+    if (this.elDrawerOverlay) {
+      this.elDrawerOverlay.addEventListener("click", (e) => {
+        if (e.target === this.elDrawerOverlay) this.elDrawerOverlay.classList.add("hidden");
+      });
+    }
 
     // Sort Filter Tabs in Drawer
     document.querySelectorAll(".filter-tab").forEach(btn => {
@@ -460,17 +474,23 @@ class UniScheduleApp {
     });
 
     // Import Modal
-    this.btnImportModal.addEventListener("click", () => {
-      arcadeAudio.playClick();
-      this.elModalOverlay.classList.remove("hidden");
-    });
-    this.btnCloseModal.addEventListener("click", () => {
-      arcadeAudio.playClick();
-      this.elModalOverlay.classList.add("hidden");
-    });
-    this.elModalOverlay.addEventListener("click", (e) => {
-      if (e.target === this.elModalOverlay) this.elModalOverlay.classList.add("hidden");
-    });
+    if (this.btnImportModal) {
+      this.btnImportModal.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        if (this.elModalOverlay) this.elModalOverlay.classList.remove("hidden");
+      });
+    }
+    if (this.btnCloseModal) {
+      this.btnCloseModal.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        if (this.elModalOverlay) this.elModalOverlay.classList.add("hidden");
+      });
+    }
+    if (this.elModalOverlay) {
+      this.elModalOverlay.addEventListener("click", (e) => {
+        if (e.target === this.elModalOverlay) this.elModalOverlay.classList.add("hidden");
+      });
+    }
 
     // Modal Tabs
     document.querySelectorAll(".modal-tab").forEach(tab => {
@@ -479,33 +499,40 @@ class UniScheduleApp {
         document.querySelectorAll(".modal-tab").forEach(t => t.classList.remove("active"));
         document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
         e.target.classList.add("active");
-        document.getElementById(`tab-${e.target.dataset.tab}`).classList.add("active");
+        const pane = document.getElementById(`tab-${e.target.dataset.tab}`);
+        if (pane) pane.classList.add("active");
       });
     });
 
     // Load Sample Text
-    this.btnLoadSampleText.addEventListener("click", () => {
-      arcadeAudio.playClick();
-      this.elImportTextarea.value = `CS101 Intro to Computer Science\nSec 01 - Dr. Turing - Mon/Wed 09:00-10:30 Tech Bldg 101\nSec 02 - Grace Hopper - Tue/Thu 11:00-12:30 Tech Bldg 102\n\nMATH201 Calculus II\nSec 01: Mon/Wed 11:00-12:30 Math Hall 301\nSec 02: Tue/Thu 09:00-10:30 Math Hall 304`;
-    });
+    if (this.btnLoadSampleText) {
+      this.btnLoadSampleText.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        if (this.elImportTextarea) {
+          this.elImportTextarea.value = `CS101 Intro to Computer Science\nSec 01 - Dr. Turing - Mon/Wed 09:00-10:30 Tech Bldg 101\nSec 02 - Grace Hopper - Tue/Thu 11:00-12:30 Tech Bldg 102\n\nMATH201 Calculus II\nSec 01: Mon/Wed 11:00-12:30 Math Hall 301\nSec 02: Tue/Thu 09:00-10:30 Math Hall 304`;
+        }
+      });
+    }
 
     // Parse Import Text
-    this.btnParseImport.addEventListener("click", async () => {
-      const rawText = this.elImportTextarea.value;
-      const parsed = parseRawTextToCourses(rawText);
-      if (parsed.length === 0) {
-        await showAlert("Could not parse valid course details. Please ensure day and time formats (e.g. Mon 09:00-10:30) are included.", "Import Error");
-        return;
-      }
-      this.courses = [...this.courses, ...parsed];
-      parsed.forEach(c => {
-        if (c.sections[0]) this.selectedSectionsMap[c.id] = c.sections[0].id;
+    if (this.btnParseImport) {
+      this.btnParseImport.addEventListener("click", async () => {
+        const rawText = this.elImportTextarea ? this.elImportTextarea.value : "";
+        const parsed = parseRawTextToCourses(rawText);
+        if (parsed.length === 0) {
+          await showAlert("Could not parse valid course details. Please ensure day and time formats (e.g. Mon 09:00-10:30) are included.", "Import Error");
+          return;
+        }
+        this.courses = [...this.courses, ...parsed];
+        parsed.forEach(c => {
+          if (c.sections[0]) this.selectedSectionsMap[c.id] = c.sections[0].id;
+        });
+        this.saveCourses();
+        this.saveSelections();
+        if (this.elModalOverlay) this.elModalOverlay.classList.add("hidden");
+        this.render();
       });
-      this.saveCourses();
-      this.saveSelections();
-      this.elModalOverlay.classList.add("hidden");
-      this.render();
-    });
+    }
 
     // Add Section button in Header
     const btnAddSection = document.getElementById("btn-add-section");
@@ -526,134 +553,142 @@ class UniScheduleApp {
     }
 
     // Manual Course Form Submit
-    this.formManualCourse.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    if (this.formManualCourse) {
+      this.formManualCourse.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      // Sync DOM input values directly into customFormSections before validation & submission
-      const sectionCards = document.querySelectorAll("#sections-builder-container .section-builder-card");
-      sectionCards.forEach((card, secIdx) => {
-        if (!this.customFormSections[secIdx]) return;
-        const nameInp = card.querySelector(".input-sec-name");
-        const instInp = card.querySelector(".input-sec-instructor");
-        const locInp = card.querySelector(".input-sec-location");
-        if (nameInp) this.customFormSections[secIdx].name = nameInp.value;
-        if (instInp) this.customFormSections[secIdx].instructor = instInp.value;
-        if (locInp) this.customFormSections[secIdx].location = locInp.value;
+        // Sync DOM input values directly into customFormSections before validation & submission
+        const sectionCards = document.querySelectorAll("#sections-builder-container .section-builder-card");
+        sectionCards.forEach((card, secIdx) => {
+          if (!this.customFormSections[secIdx]) return;
+          const nameInp = card.querySelector(".input-sec-name");
+          const instInp = card.querySelector(".input-sec-instructor");
+          const locInp = card.querySelector(".input-sec-location");
+          if (nameInp) this.customFormSections[secIdx].name = nameInp.value;
+          if (instInp) this.customFormSections[secIdx].instructor = instInp.value;
+          if (locInp) this.customFormSections[secIdx].location = locInp.value;
 
-        const slotRows = card.querySelectorAll(".time-slot-row");
-        slotRows.forEach((row, slotIdx) => {
-          if (!this.customFormSections[secIdx].slots[slotIdx]) return;
-          const daySel = row.querySelector(".input-slot-day");
-          const startInp = row.querySelector(".input-slot-start");
-          const endInp = row.querySelector(".input-slot-end");
-          if (daySel) this.customFormSections[secIdx].slots[slotIdx].day = daySel.value;
-          if (startInp) this.customFormSections[secIdx].slots[slotIdx].startTime = startInp.value;
-          if (endInp) this.customFormSections[secIdx].slots[slotIdx].endTime = endInp.value;
+          const slotRows = card.querySelectorAll(".time-slot-row");
+          slotRows.forEach((row, slotIdx) => {
+            if (!this.customFormSections[secIdx].slots[slotIdx]) return;
+            const daySel = row.querySelector(".input-slot-day");
+            const startInp = row.querySelector(".input-slot-start");
+            const endInp = row.querySelector(".input-slot-end");
+            if (daySel) this.customFormSections[secIdx].slots[slotIdx].day = daySel.value;
+            if (startInp) this.customFormSections[secIdx].slots[slotIdx].startTime = startInp.value;
+            if (endInp) this.customFormSections[secIdx].slots[slotIdx].endTime = endInp.value;
+          });
         });
-      });
 
-      const title = document.getElementById("manual-title").value.trim();
-      let code = document.getElementById("manual-code").value.trim().toUpperCase();
-      const color = document.getElementById("manual-color").value || "#6366f1";
+        const titleEl = document.getElementById("manual-title");
+        const codeEl = document.getElementById("manual-code");
+        const colorEl = document.getElementById("manual-color");
 
-      if (!title) {
-        await showAlert("Please enter a Course Title.", "Missing Title");
-        return;
-      }
+        const title = titleEl ? titleEl.value.trim() : "";
+        let code = codeEl ? codeEl.value.trim().toUpperCase() : "";
+        const color = colorEl ? colorEl.value || "#6366f1" : "#6366f1";
 
-      if (!code) {
-        // Auto-generate a short code if optional code was omitted
-        const words = title.split(/\s+/).filter(Boolean);
-        if (words.length === 1) {
-          code = words[0].substring(0, 4).toUpperCase() + " 101";
-        } else {
-          code = words.map(w => w[0]).join("").toUpperCase() + " 101";
-        }
-      }
-
-      if (this.customFormSections.length === 0) {
-        await showAlert("Please add at least 1 section for the course.", "Missing Section");
-        return;
-      }
-
-      // Find existing course or create new
-      let course = this.courses.find(c => c.code === code || c.title.toLowerCase() === title.toLowerCase());
-      if (!course) {
-        course = {
-          id: `course-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
-          code,
-          title,
-          color,
-          sections: []
-        };
-        this.courses.push(course);
-      }
-
-      // Validate all sections have required valid schedule times
-      for (let idx = 0; idx < this.customFormSections.length; idx++) {
-        const sec = this.customFormSections[idx];
-        const secName = sec.name.trim() || `Sec 0${idx + 1}`;
-        const validTimes = sec.slots.filter(s => s.day && s.startTime && s.endTime);
-
-        if (validTimes.length === 0) {
-          await showAlert(`Please specify at least 1 valid class day and time schedule for "${secName}".`, "Missing Schedule");
+        if (!title) {
+          await showAlert("Please enter a Course Title.", "Missing Title");
           return;
         }
-      }
 
-      // Process all sections from builder
-      this.customFormSections.forEach((sec, idx) => {
-        const secName = sec.name.trim() || `Sec 0${idx + 1}`;
-        const instructor = sec.instructor.trim() || "Staff";
-        const location = sec.location.trim() || "Campus";
-
-        const validTimes = sec.slots.filter(s => s.day && s.startTime && s.endTime).map(s => ({
-          day: s.day,
-          startTime: s.startTime,
-          endTime: s.endTime
-        }));
-
-        const newSec = {
-          id: `sec-${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 7)}`,
-          name: secName,
-          instructor,
-          location,
-          times: validTimes
-        };
-
-        course.sections.push(newSec);
-        if (idx === 0 || !this.selectedSectionsMap[course.id]) {
-          this.selectedSectionsMap[course.id] = newSec.id;
+        if (!code) {
+          // Auto-generate a short code if optional code was omitted
+          const words = title.split(/\s+/).filter(Boolean);
+          if (words.length === 1) {
+            code = words[0].substring(0, 4).toUpperCase() + " 101";
+          } else {
+            code = words.map(w => w[0]).join("").toUpperCase() + " 101";
+          }
         }
+
+        if (this.customFormSections.length === 0) {
+          await showAlert("Please add at least 1 section for the course.", "Missing Section");
+          return;
+        }
+
+        // Find existing course or create new
+        let course = this.courses.find(c => c.code === code || c.title.toLowerCase() === title.toLowerCase());
+        if (!course) {
+          course = {
+            id: `course-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+            code,
+            title,
+            color,
+            sections: []
+          };
+          this.courses.push(course);
+        }
+
+        // Validate all sections have required valid schedule times
+        for (let idx = 0; idx < this.customFormSections.length; idx++) {
+          const sec = this.customFormSections[idx];
+          const secName = sec.name.trim() || `Sec 0${idx + 1}`;
+          const validTimes = sec.slots.filter(s => s.day && s.startTime && s.endTime);
+
+          if (validTimes.length === 0) {
+            await showAlert(`Please specify at least 1 valid class day and time schedule for "${secName}".`, "Missing Schedule");
+            return;
+          }
+        }
+
+        // Process all sections from builder
+        this.customFormSections.forEach((sec, idx) => {
+          const secName = sec.name.trim() || `Sec 0${idx + 1}`;
+          const instructor = sec.instructor.trim() || "Staff";
+          const location = sec.location.trim() || "Campus";
+
+          const validTimes = sec.slots.filter(s => s.day && s.startTime && s.endTime).map(s => ({
+            day: s.day,
+            startTime: s.startTime,
+            endTime: s.endTime
+          }));
+
+          const newSec = {
+            id: `sec-${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 7)}`,
+            name: secName,
+            instructor,
+            location,
+            times: validTimes
+          };
+
+          course.sections.push(newSec);
+          if (idx === 0 || !this.selectedSectionsMap[course.id]) {
+            this.selectedSectionsMap[course.id] = newSec.id;
+          }
+        });
+
+        this.saveCourses();
+        this.saveSelections();
+
+        // Reset form state & close modal
+        this.formManualCourse.reset();
+        this.initCustomCourseFormState();
+        if (this.elModalOverlay) this.elModalOverlay.classList.add("hidden");
+        arcadeAudio.playVictory();
+        this.render();
       });
-
-      this.saveCourses();
-      this.saveSelections();
-
-      // Reset form state & close modal
-      this.formManualCourse.reset();
-      this.initCustomCourseFormState();
-      this.elModalOverlay.classList.add("hidden");
-      arcadeAudio.playVictory();
-      this.render();
-    });
+    }
 
     // Export iCal
-    this.btnExportICal.addEventListener("click", async () => {
-      const selectedSecs = this.getSelectedSections();
-      if (selectedSecs.length === 0) {
-        await showAlert("Please select at least one course section to export.", "Export iCal");
-        return;
-      }
-      const icsData = generateICS(selectedSecs, this.courses);
-      const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "UniSchedule.ics";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
+    if (this.btnExportICal) {
+      this.btnExportICal.addEventListener("click", async () => {
+        const selectedSecs = this.getSelectedSections();
+        if (selectedSecs.length === 0) {
+          await showAlert("Please select at least one course section to export.", "Export iCal");
+          return;
+        }
+        const icsData = generateICS(selectedSecs, this.courses);
+        const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "UniSchedule.ics";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
 
     // Welcome Modal Listeners
     if (this.btnWelcomeModal) {
