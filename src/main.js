@@ -720,7 +720,6 @@ class UniScheduleApp {
       card.innerHTML = `
         <div class="course-header">
           <span class="course-badge" style="background-color: ${course.color}">${displayBadge}</span>
-          <span class="course-title" title="${displayTitle}">${displayTitle}</span>
           <button class="btn btn-ghost icon-only btn-sm btn-delete-course" data-course-id="${course.id}" title="Remove course">&times;</button>
         </div>
         <div class="sections-group">
