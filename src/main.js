@@ -1183,8 +1183,15 @@ class UniScheduleApp {
   }
 }
 
-// INITIALIZE APP ON DOM LOADED
-document.addEventListener("DOMContentLoaded", () => {
+// INITIALIZE APP ON DOM LOADED (or immediately if DOM is already parsed)
+function initApp() {
   installGlobalAlertOverrides();
   window.app = new UniScheduleApp();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}
+
