@@ -51,8 +51,8 @@ export function getIconSvg(name, size = 14, className = "") {
 
 
 // LOCAL STORAGE KEYS
-const STORAGE_KEY_COURSES = "unischedule_courses_v2";
-const STORAGE_KEY_SELECTIONS = "unischedule_selections_v2";
+const STORAGE_KEY_COURSES = "unischedule_courses_v3";
+const STORAGE_KEY_SELECTIONS = "unischedule_selections_v3";
 const STORAGE_KEY_MODE = "unischedule_mode_v1";
 const STORAGE_KEY_THEME = "unischedule_theme_v1";
 
@@ -401,10 +401,10 @@ class UniScheduleApp {
       });
     }
 
-    // Reset Demo
+    // Reset Demo / Clear All
     this.btnResetDemo.addEventListener("click", async () => {
       arcadeAudio.playClick();
-      const confirmed = await showConfirm("Reset to default sample university courses?", "Reset Planner");
+      const confirmed = await showConfirm("Clear all courses and start fresh?", "Clear All Courses");
       if (confirmed) {
         this.courses = JSON.parse(JSON.stringify(INITIAL_COURSES));
         this.selectedSectionsMap = {};
