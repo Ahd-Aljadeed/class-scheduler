@@ -17,13 +17,13 @@ export function parseRawTextToCourses(rawText) {
   const normalizeDays = (dayStr) => {
     const uppercase = dayStr.toUpperCase();
     const days = [];
+    if (uppercase.includes("SUN") || uppercase.includes("SU")) days.push("Sun");
     if (uppercase.includes("MON") || uppercase === "M" || uppercase.includes("MW")) days.push("Mon");
     if (uppercase.includes("TUE") || uppercase === "T" || uppercase.includes("TTH")) days.push("Tue");
     if (uppercase.includes("WED") || uppercase === "W" || uppercase.includes("MW")) days.push("Wed");
     if (uppercase.includes("THU") || uppercase === "TH" || uppercase.includes("TTH")) days.push("Thu");
     if (uppercase.includes("FRI") || uppercase === "F") days.push("Fri");
     if (uppercase.includes("SAT") || uppercase.includes("SA")) days.push("Sat");
-    if (uppercase.includes("SUN") || uppercase.includes("SU")) days.push("Sun");
     
     // Deduplicate
     return Array.from(new Set(days));

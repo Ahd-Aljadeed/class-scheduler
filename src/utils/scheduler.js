@@ -1,12 +1,12 @@
-export const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+export const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export const FULL_DAYS = {
+  Sun: "Sunday",
   Mon: "Monday",
   Tue: "Tuesday",
   Wed: "Wednesday",
   Thu: "Thursday",
   Fri: "Friday",
-  Sat: "Saturday",
-  Sun: "Sunday"
+  Sat: "Saturday"
 };
 
 /**
@@ -327,12 +327,12 @@ export function generateICS(selectedSections, courses) {
     Sun: "SU"
   };
 
-  // Assume current semester start date is next Monday
+  // Assume current semester start date is next Sunday
   const today = new Date();
-  const nextMon = new Date(today);
-  nextMon.setDate(today.getDate() + ((1 + 7 - today.getDay()) % 7 || 7));
+  const nextSun = new Date(today);
+  nextSun.setDate(today.getDate() + ((0 + 7 - today.getDay()) % 7 || 7));
 
-  const dayOffsets = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 };
+  const dayOffsets = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
 
   selectedSections.forEach(sec => {
     const course = courses.find(c => c.sections.some(s => s.id === sec.id));
@@ -340,8 +340,8 @@ export function generateICS(selectedSections, courses) {
 
     sec.times.forEach(t => {
       const offset = dayOffsets[t.day] || 0;
-      const classDate = new Date(nextMon);
-      classDate.setDate(nextMon.getDate() + offset);
+      const classDate = new Date(nextSun);
+      classDate.setDate(nextSun.getDate() + offset);
 
       const [startH, startM] = t.startTime.split(":").map(Number);
       const [endH, endM] = t.endTime.split(":").map(Number);
