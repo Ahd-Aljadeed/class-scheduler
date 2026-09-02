@@ -55,6 +55,7 @@ const STORAGE_KEY_COURSES = "unischedule_courses_v3";
 const STORAGE_KEY_SELECTIONS = "unischedule_selections_v3";
 const STORAGE_KEY_MODE = "unischedule_mode_v1";
 const STORAGE_KEY_THEME = "unischedule_theme_v1";
+const STORAGE_KEY_WELCOME_SEEN = "unischedule_welcome_seen_v1";
 
 class UniScheduleApp {
   constructor() {
@@ -78,6 +79,9 @@ class UniScheduleApp {
 
     this.initCustomCourseFormState();
     this.render();
+
+    // Automatically show welcome guide on first visit
+    this.checkWelcomeOnFirstVisit();
   }
 
   // CUSTOM COURSE SECTION BUILDER STATE & RENDER
@@ -369,6 +373,14 @@ class UniScheduleApp {
     this.btnLoadSampleText = document.getElementById("btn-load-sample-text");
     this.btnParseImport = document.getElementById("btn-parse-import");
     this.formManualCourse = document.getElementById("manual-course-form");
+
+    // Welcome Modal
+    this.elWelcomeOverlay = document.getElementById("welcome-modal-overlay");
+    this.btnCloseWelcomeModal = document.getElementById("btn-close-welcome-modal");
+    this.btnStartExploring = document.getElementById("btn-start-exploring");
+    this.btnWelcomeModal = document.getElementById("btn-welcome-modal");
+    this.welcomeSelectArcade = document.getElementById("welcome-select-arcade");
+    this.welcomeSelectRegular = document.getElementById("welcome-select-regular");
   }
 
   initEventListeners() {
@@ -642,6 +654,76 @@ class UniScheduleApp {
       link.click();
       document.body.removeChild(link);
     });
+
+    // Welcome Modal Listeners
+    if (this.btnWelcomeModal) {
+      this.btnWelcomeModal.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        this.openWelcomeModal();
+      });
+    }
+    if (this.btnCloseWelcomeModal) {
+      this.btnCloseWelcomeModal.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        this.closeWelcomeModal();
+      });
+    }
+    if (this.btnStartExploring) {
+      this.btnStartExploring.addEventListener("click", () => {
+        arcadeAudio.playClick();
+        this.closeWelcomeModal();
+      });
+    }
+    if (this.elWelcomeOverlay) {
+      this.elWelcomeOverlay.addEventListener("click", (e) => {
+        if (e.target === this.elWelcomeOverlay) this.closeWelcomeModal();
+      });
+    }
+    if (this.welcomeSelectArcade) {
+      this.welcomeSelectArcade.addEventListener("click", () => {
+        this.applyMode('arcade');
+        arcadeAudio.playThemeSwitch();
+        this.updateWelcomeVibeCards();
+      });
+    }
+    if (this.welcomeSelectRegular) {
+      this.welcomeSelectRegular.addEventListener("click", () => {
+        this.applyMode('regular');
+        arcadeAudio.playThemeSwitch();
+        this.updateWelcomeVibeCards();
+      });
+    }
+  }
+
+  openWelcomeModal() {
+    if (this.elWelcomeOverlay) {
+      this.updateWelcomeVibeCards();
+      this.elWelcomeOverlay.classList.remove("hidden");
+    }
+  }
+
+  closeWelcomeModal() {
+    if (this.elWelcomeOverlay) {
+      this.elWelcomeOverlay.classList.add("hidden");
+    }
+    localStorage.setItem(STORAGE_KEY_WELCOME_SEEN, "true");
+  }
+
+  updateWelcomeVibeCards() {
+    if (this.welcomeSelectArcade && this.welcomeSelectRegular) {
+      const isArcade = this.currentMode === 'arcade';
+      this.welcomeSelectArcade.classList.toggle("active-vibe", isArcade);
+      this.welcomeSelectRegular.classList.toggle("active-vibe", !isArcade);
+    }
+  }
+
+  checkWelcomeOnFirstVisit() {
+    const hasSeenWelcome = localStorage.getItem(STORAGE_KEY_WELCOME_SEEN);
+    if (!hasSeenWelcome) {
+      setTimeout(() => {
+        this.openWelcomeModal();
+      }, 300);
+    }
   }
 
   // GET ACTIVE SELECTIONS ARRAY

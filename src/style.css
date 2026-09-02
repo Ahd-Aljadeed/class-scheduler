@@ -1987,3 +1987,308 @@ body {
 [data-mode="arcade"] .time-slot-row {
   border: 1px solid rgba(255, 230, 0, 0.4);
 }
+
+/* WELCOME & HOW-TO-USE MODAL STYLES */
+.welcome-modal-card {
+  width: 640px;
+  max-width: 92vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: var(--bg-panel);
+}
+
+.welcome-modal-header {
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+}
+
+.welcome-header-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.welcome-emoji {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.welcome-subtitle {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.welcome-modal-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.welcome-hero-banner {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.08));
+  border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.welcome-intro-text {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.welcome-tag-badge {
+  font-size: 0.85rem;
+  color: var(--accent-success);
+  background: var(--accent-success-bg);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  line-height: 1.45;
+}
+
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.welcome-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.welcome-section-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.vibe-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+@media (max-width: 540px) {
+  .vibe-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vibe-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.vibe-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.vibe-card.active-vibe {
+  border-color: var(--accent-primary);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
+  box-shadow: 0 0 16px var(--accent-primary-glow);
+}
+
+.vibe-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.vibe-icon {
+  font-size: 1.3rem;
+}
+
+.vibe-name {
+  font-weight: 700;
+  font-size: 0.925rem;
+  color: var(--text-primary);
+}
+
+.vibe-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: var(--accent-primary);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+}
+
+.vibe-desc {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.vibe-action-btn {
+  margin-top: 4px;
+  width: 100%;
+}
+
+.welcome-steps-list {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.welcome-steps-list strong {
+  color: var(--text-primary);
+}
+
+.welcome-conclusion {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  background: var(--bg-card);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  text-align: center;
+  margin-top: 4px;
+}
+
+.welcome-github-card {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.github-card-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-primary);
+}
+
+.github-title {
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.github-subtitle {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+}
+
+.github-link-btn {
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  text-decoration: none;
+}
+
+.welcome-modal-footer {
+  padding: 14px 22px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-card);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-lg {
+  padding: 10px 24px;
+  font-size: 1rem;
+  border-radius: var(--radius-md);
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* ARCADE STYLES FOR WELCOME MODAL */
+[data-mode="arcade"] .welcome-modal-card {
+  border: 2px solid #00f0ff;
+  box-shadow: 6px 6px 0px #000, 0 0 20px rgba(0, 240, 255, 0.3);
+  background: #0d0822;
+}
+
+[data-mode="arcade"] .welcome-hero-banner {
+  background: rgba(255, 0, 127, 0.1);
+  border-color: #ff007f;
+}
+
+[data-mode="arcade"] .welcome-tag-badge {
+  background: rgba(0, 255, 102, 0.15);
+  border-color: #00ff66;
+  color: #00ff66;
+}
+
+[data-mode="arcade"] .welcome-section-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  color: #ffe600;
+  text-shadow: 1px 1px 0 #000;
+}
+
+[data-mode="arcade"] .vibe-card {
+  border: 2px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 3px 3px 0px #000;
+  background: #170f36;
+}
+
+[data-mode="arcade"] .vibe-card.active-vibe {
+  border-color: #ff007f;
+  background: rgba(255, 0, 127, 0.2);
+  box-shadow: 4px 4px 0px #000, 0 0 16px rgba(255, 0, 127, 0.5);
+}
+
+[data-mode="arcade"] .vibe-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+[data-mode="arcade"] .welcome-conclusion {
+  color: #00f0ff;
+  border-color: #00f0ff;
+  box-shadow: 3px 3px 0px #000;
+}
+
+[data-mode="arcade"] .welcome-github-card {
+  border: 1px solid #ff007f;
+  box-shadow: 3px 3px 0px #000;
+  background: #120c2e;
+}

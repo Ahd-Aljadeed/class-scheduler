@@ -75,6 +75,11 @@
           </svg>
         </button>
 
+        <!-- WELCOME & GUIDE TOGGLE -->
+        <button id="btn-welcome-modal" class="btn btn-ghost" title="Welcome & How to Use Guide">
+          <span style="font-size: 1.1rem; display: inline-block;">👋</span>
+        </button>
+
         <!-- UI MODE TOGGLE (Arcade vs Regular) -->
         <button id="btn-mode-toggle" class="btn btn-mode-switcher" title="Toggle UI Style (Arcade / Regular)">
           <span id="mode-icon-arcade" class="mode-icon-label">🕹️ ARCADE UI</span>
@@ -328,6 +333,96 @@
               <button id="btn-parse-import" class="btn btn-primary">Parse & Load Courses</button>
             </div>
           </div>
+        </div>
+      </div>
+    <!-- MODAL: WELCOME & HOW TO USE -->
+    <div id="welcome-modal-overlay" class="modal-overlay hidden">
+      <div class="modal-card welcome-modal-card">
+        <div class="modal-header welcome-modal-header">
+          <div class="welcome-header-title">
+            <span class="welcome-emoji">👋</span>
+            <div>
+              <h2 class="modal-title">Welcome to Class Scheduler!</h2>
+              <span class="welcome-subtitle">Your ultimate semester schedule optimizer</span>
+            </div>
+          </div>
+          <button id="btn-close-welcome-modal" class="btn btn-ghost icon-only" title="Close">&times;</button>
+        </div>
+
+        <div class="modal-body welcome-modal-body custom-scrollbar">
+          <div class="welcome-hero-banner">
+            <p class="welcome-intro-text">
+              Built purely for fun, time saving, and figuring out the absolute best schedule every semester—for myself, my friends, and anyone who wants to use it.
+            </p>
+            <div class="welcome-tag-badge">
+              ⚡ <strong>100% Free:</strong> No subscriptions, no hidden payments, no strings attached. Just drop in your classes and find the ultimate schedule combinations.
+            </div>
+          </div>
+
+          <div class="welcome-section">
+            <h3 class="welcome-section-title">🕹️ Choose Your Vibe</h3>
+            <p class="welcome-section-desc">Select how you want the website to feel (you can toggle anytime at the top bar!):</p>
+            
+            <div class="vibe-cards-grid">
+              <div class="vibe-card arcade-vibe" id="welcome-select-arcade">
+                <div class="vibe-header">
+                  <span class="vibe-icon">🕹️</span>
+                  <span class="vibe-name">Arcade Mode</span>
+                  <span class="vibe-badge">RECOMMENDED</span>
+                </div>
+                <p class="vibe-desc">The superior choice. Packed with fun sound effects for cultured people.</p>
+                <button type="button" class="btn btn-sm btn-primary vibe-action-btn">Select Arcade Mode</button>
+              </div>
+
+              <div class="vibe-card normal-vibe" id="welcome-select-regular">
+                <div class="vibe-header">
+                  <span class="vibe-icon">📱</span>
+                  <span class="vibe-name">Normal Mode</span>
+                </div>
+                <p class="vibe-desc">For everyone else.</p>
+                <button type="button" class="btn btn-sm btn-outline vibe-action-btn">Select Normal Mode</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="welcome-section">
+            <h3 class="welcome-section-title">💡 How to Use It (The Right Way)</h3>
+            <p class="welcome-section-desc">To get the most accurate and optimized schedule, you need to feed the system all available options:</p>
+            
+            <ol class="welcome-steps-list">
+              <li>
+                <strong>Add all your classes and sections:</strong> If you are taking Calculus and Computer Skills, and each course has 3 different sections, you need to enter all 6 sections into the system.
+              </li>
+              <li>
+                <strong>Let the math work:</strong> Once your options are in, the website will crunch the numbers and calculate the absolute best schedule combination for you.
+              </li>
+            </ol>
+            
+            <div class="welcome-conclusion">
+              That’s it. Dive in and enjoy!
+            </div>
+          </div>
+
+          <div class="welcome-github-card">
+            <div class="github-card-content">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+              <div>
+                <div class="github-title">Want to peek under the hood?</div>
+                <div class="github-subtitle">You can check out the source code on GitHub:</div>
+              </div>
+            </div>
+            <a href="https://github.com/SahandMBaba/class-scheduler" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline github-link-btn">
+              github.com/SahandMBaba/class scheduler ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="welcome-modal-footer">
+          <button id="btn-start-exploring" class="btn btn-primary btn-lg full-width">
+            Got it, Let’s Go! 🚀
+          </button>
         </div>
       </div>
     </div>
