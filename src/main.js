@@ -755,9 +755,11 @@ class UniScheduleApp {
   checkWelcomeOnFirstVisit() {
     const hasSeenWelcome = localStorage.getItem(STORAGE_KEY_WELCOME_SEEN);
     if (!hasSeenWelcome) {
-      setTimeout(() => {
-        this.openWelcomeModal();
-      }, 300);
+      this.openWelcomeModal();
+    } else {
+      if (this.elWelcomeOverlay) {
+        this.elWelcomeOverlay.classList.add("hidden");
+      }
     }
   }
 
