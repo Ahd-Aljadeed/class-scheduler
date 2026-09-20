@@ -1,4 +1,5 @@
 import { arcadeAudio } from './arcadeAudio.js';
+import { escapeHtml } from './sanitize.js';
 
 let modalContainer = null;
 
@@ -10,11 +11,6 @@ function getOrCreateContainer() {
     document.body.appendChild(modalContainer);
   }
   return modalContainer;
-}
-
-function escapeHtml(str) {
-  if (typeof str !== 'string') return str;
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 /**
@@ -51,6 +47,10 @@ export function showAlert(message, title = 'Notification') {
 
     const close = () => {
       arcadeAudio.playClick();
+      // Detach from every dismissal path (OK, close button, backdrop, keyboard).
+      // Previously only the keyboard path removed it, so each mouse-dismissed
+      // alert left a permanent document listener holding the detached overlay.
+      document.removeEventListener('keydown', handleKeyDown);
       overlay.classList.add('fade-out');
       setTimeout(() => {
         if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
@@ -68,12 +68,11 @@ export function showAlert(message, title = 'Notification') {
       if (e.target === overlay) close();
     });
 
-    const handleKeyDown = (e) => {
+    function handleKeyDown(e) {
       if (e.key === 'Escape' || e.key === 'Enter') {
-        document.removeEventListener('keydown', handleKeyDown);
         close();
       }
-    };
+    }
     document.addEventListener('keydown', handleKeyDown);
 
     container.appendChild(overlay);

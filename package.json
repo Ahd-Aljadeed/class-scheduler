@@ -2,17 +2,22 @@
   "name": "unischedule-planner",
   "private": true,
   "version": "1.0.0",
+  "description": "A client-side university class scheduler that finds conflict-free timetables and reports gap hours, campus time and days off.",
+  "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "vite",
+    "test": "node --test",
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "canvas-confetti": "^1.9.4",
-    "jsdom": "^29.1.1"
+    "canvas-confetti": "^1.9.4"
   },
   "devDependencies": {
     "gh-pages": "^6.3.0",
