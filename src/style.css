@@ -1496,21 +1496,33 @@ body {
   background: #ff007f;
   color: #ffffff;
   border-radius: 3px;
-  box-shadow: 0 0 8px #ff007f;
   letter-spacing: 1px;
-  animation: arcade-pulse 1.5s infinite alternate;
+  filter: drop-shadow(0 0 6px #ff007f);
   vertical-align: middle;
   margin-left: 6px;
 }
 
+/*
+  The badge pulse runs forever. Animating box-shadow forced a full repaint on
+  every frame of an otherwise idle page — and because this badge sits inside a
+  backdrop-filter'd header, each repaint also re-sampled the blur. filter and
+  transform are composited on the GPU instead.
+  Gated on prefers-reduced-motion so it is not forced on anyone.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  .arcade-badge-tag {
+    animation: arcade-pulse 1.5s infinite alternate;
+  }
+}
+
 @keyframes arcade-pulse {
   0% {
-    box-shadow: 0 0 6px #ff007f;
+    filter: drop-shadow(0 0 4px #ff007f);
     transform: scale(1);
   }
 
   100% {
-    box-shadow: 0 0 14px #00f0ff;
+    filter: drop-shadow(0 0 10px #00f0ff);
     transform: scale(1.05);
   }
 }
@@ -2826,5 +2838,20 @@ body {
 
   .arcade-badge-tag {
     display: none;
+  }
+}
+/*
+  Global reduced-motion honouring. Users who ask their OS to minimise motion
+  get a static interface rather than the arcade animations.
+*/
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

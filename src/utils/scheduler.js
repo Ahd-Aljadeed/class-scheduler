@@ -1,3 +1,5 @@
+import { escapeICS } from "./sanitize.js";
+
 export const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export const FULL_DAYS = {
   Sun: "Sunday",
@@ -102,19 +104,43 @@ export function getSectionConflicts(candidateSection, selectedSectionsMap, cours
 }
 
 /**
- * Calculates gap hours and campus stay metrics for selected sections
+ * Builds a sectionId -> course lookup table.
+ * Callers that run metrics in a loop should build this once and pass it in,
+ * instead of paying an O(courses x sections) scan per section.
+ * @param {Array<object>} courses
+ * @returns {Map<string, object>}
  */
-export function calculateScheduleMetrics(selectedSections, courses) {
+export function buildCourseIndex(courses) {
+  const index = new Map();
+  courses.forEach(course => {
+    course.sections.forEach(section => index.set(section.id, course));
+  });
+  return index;
+}
+
+/**
+ * Calculates gap hours and campus stay metrics for selected sections
+ * @param {Array<object>} selectedSections
+ * @param {Array<object>} courses
+ * @param {Map<string, object>} [courseIndex] - optional prebuilt sectionId -> course map
+ */
+export function calculateScheduleMetrics(selectedSections, courses, courseIndex) {
+  const index = courseIndex || buildCourseIndex(courses);
+
   // Collect all slots from selected sections with course meta
   const activeSlots = [];
-  
+
   selectedSections.forEach(sec => {
-    const course = courses.find(c => c.sections.some(s => s.id === sec.id));
+    const course = index.get(sec.id);
     sec.times.forEach(t => {
       activeSlots.push({
         ...t,
         startMins: timeToMinutes(t.startTime),
         endMins: timeToMinutes(t.endTime),
+        // Carry the ids so consumers can resolve back to the real objects
+        // instead of matching on display names, which are not unique.
+        sectionId: sec.id,
+        courseId: course ? course.id : null,
         courseCode: course ? course.code : "Course",
         courseColor: course ? course.color : "#6366f1",
         sectionName: sec.name,
@@ -129,10 +155,16 @@ export function calculateScheduleMetrics(selectedSections, courses) {
   let totalCampusMinutes = 0;
   let activeDaysCount = 0;
 
+  // Bucket slots by day in a single pass rather than re-scanning activeSlots
+  // once per day.
+  const slotsByDay = {};
+  DAYS.forEach(day => { slotsByDay[day] = []; });
+  activeSlots.forEach(slot => {
+    if (slotsByDay[slot.day]) slotsByDay[slot.day].push(slot);
+  });
+
   DAYS.forEach(day => {
-    const daySlots = activeSlots
-      .filter(s => s.day === day)
-      .sort((a, b) => a.startMins - b.startMins);
+    const daySlots = slotsByDay[day].sort((a, b) => a.startMins - b.startMins);
 
     if (daySlots.length === 0) {
       dailyBreakdown[day] = {
@@ -157,7 +189,9 @@ export function calculateScheduleMetrics(selectedSections, courses) {
     const gapIntervals = [];
 
     const firstStartMins = daySlots[0].startMins;
-    const lastEndMins = Math.max(...daySlots.map(s => s.endMins));
+    // reduce() rather than Math.max(...spread): no intermediate array, and no
+    // argument-count limit on large inputs.
+    const lastEndMins = daySlots.reduce((max, s) => (s.endMins > max ? s.endMins : max), daySlots[0].endMins);
 
     // Calculate class minutes & gaps between non-overlapping class periods
     let currentEnd = daySlots[0].endMins;
@@ -242,66 +276,99 @@ export function calculateScheduleMetrics(selectedSections, courses) {
 }
 
 /**
- * Generate all valid non-conflicting combinations (1 section per course)
+ * Hard ceiling on how many valid schedules are collected. A student cannot
+ * meaningfully compare more than this, and without a cap a large course list
+ * produces a combinatorial explosion that freezes the tab (and, because the
+ * course list is persisted, freezes it again on every subsequent load).
  */
-export function generateAllCombinations(courses) {
+export const MAX_COMBINATIONS = 2000;
+
+/**
+ * Generate valid non-conflicting combinations (1 section per course).
+ *
+ * Implemented as depth-first backtracking that prunes a branch as soon as the
+ * section being added conflicts with one already chosen. The previous
+ * implementation materialised the entire cartesian product (O(sections^courses)
+ * arrays) before filtering, which cost ~1.1s and ~350MB at 8 courses x 4
+ * sections and ran out of memory beyond that.
+ *
+ * @param {Array<object>} courses
+ * @param {Map<string, object>} [courseIndex] - optional prebuilt sectionId -> course map
+ * @returns {{sections: Array, selectionMap: object, metrics: object}[]}
+ */
+export function generateAllCombinations(courses, courseIndex) {
   // Only include courses that have at least 1 section
   const validCourses = courses.filter(c => c.sections && c.sections.length > 0);
   if (validCourses.length === 0) return [];
 
-  const cartesian = (args) => {
-    const r = [];
-    const max = args.length - 1;
-    function helper(arr, i) {
-      for (let j = 0, l = args[i].length; j < l; j++) {
-        const a = arr.slice(0); // clone arr
-        a.push(args[i][j]);
-        if (i === max) r.push(a);
-        else helper(a, i + 1);
+  const index = courseIndex || buildCourseIndex(validCourses);
+
+  // Precompute a conflict matrix between sections of different courses, so the
+  // inner test during search is an O(1) set lookup instead of re-parsing time
+  // strings for every pair on every branch.
+  const conflictsWith = new Map();
+  for (let i = 0; i < validCourses.length; i++) {
+    for (let j = i + 1; j < validCourses.length; j++) {
+      for (const secA of validCourses[i].sections) {
+        for (const secB of validCourses[j].sections) {
+          if (doSectionsConflict(secA, secB)) {
+            if (!conflictsWith.has(secA.id)) conflictsWith.set(secA.id, new Set());
+            if (!conflictsWith.has(secB.id)) conflictsWith.set(secB.id, new Set());
+            conflictsWith.get(secA.id).add(secB.id);
+            conflictsWith.get(secB.id).add(secA.id);
+          }
+        }
       }
     }
-    helper([], 0);
-    return r;
-  };
-
-  const sectionSets = validCourses.map(c => c.sections);
-  const rawCombinations = cartesian(sectionSets);
+  }
 
   const validSchedules = [];
+  const chosen = []; // working stack, pushed/popped rather than cloned per level
 
-  rawCombinations.forEach(combo => {
-    // Check for internal conflicts
-    let hasConflict = false;
-    for (let i = 0; i < combo.length; i++) {
-      for (let j = i + 1; j < combo.length; j++) {
-        if (doSectionsConflict(combo[i], combo[j])) {
-          hasConflict = true;
-          break;
-        }
-      }
-      if (hasConflict) break;
-    }
+  const search = (courseIdx) => {
+    if (validSchedules.length >= MAX_COMBINATIONS) return;
 
-    if (!hasConflict) {
-      const metrics = calculateScheduleMetrics(combo, validCourses);
-      
-      // Build selectedSectionsMap for easy application
+    if (courseIdx === validCourses.length) {
+      const combo = chosen.slice();
       const selectionMap = {};
       combo.forEach((sec) => {
-        const parentCourse = validCourses.find(c => c.sections.some(s => s.id === sec.id));
-        if (parentCourse) {
-          selectionMap[parentCourse.id] = sec.id;
-        }
+        const parentCourse = index.get(sec.id);
+        if (parentCourse) selectionMap[parentCourse.id] = sec.id;
       });
 
       validSchedules.push({
         sections: combo,
         selectionMap,
-        metrics
+        metrics: calculateScheduleMetrics(combo, validCourses, index)
       });
+      return;
     }
-  });
 
+    for (const candidate of validCourses[courseIdx].sections) {
+      const candidateConflicts = conflictsWith.get(candidate.id);
+
+      // Prune: reject immediately if this section clashes with anything already
+      // chosen, instead of building the full combo and discarding it later.
+      let blocked = false;
+      if (candidateConflicts) {
+        for (const picked of chosen) {
+          if (candidateConflicts.has(picked.id)) {
+            blocked = true;
+            break;
+          }
+        }
+      }
+      if (blocked) continue;
+
+      chosen.push(candidate);
+      search(courseIdx + 1);
+      chosen.pop();
+
+      if (validSchedules.length >= MAX_COMBINATIONS) return;
+    }
+  };
+
+  search(0);
   return validSchedules;
 }
 
@@ -334,8 +401,10 @@ export function generateICS(selectedSections, courses) {
 
   const dayOffsets = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
 
+  const icsIndex = buildCourseIndex(courses);
+
   selectedSections.forEach(sec => {
-    const course = courses.find(c => c.sections.some(s => s.id === sec.id));
+    const course = icsIndex.get(sec.id);
     const title = course ? `${course.code} - ${sec.name}` : sec.name;
 
     sec.times.forEach(t => {
@@ -355,9 +424,12 @@ export function generateICS(selectedSections, courses) {
       const formatICSDate = (d) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
       icsLines.push("BEGIN:VEVENT");
-      icsLines.push(`SUMMARY:${title}`);
-      icsLines.push(`LOCATION:${sec.location || "Campus"}`);
-      icsLines.push(`DESCRIPTION:Instructor: ${sec.instructor || "N/A"}`);
+      // RFC 5545 treats \ ; , and newlines as structural inside property
+      // values; unescaped they corrupt the file (a room named "Hall 3, Wing B"
+      // was enough) and could forge extra calendar entries.
+      icsLines.push(`SUMMARY:${escapeICS(title)}`);
+      icsLines.push(`LOCATION:${escapeICS(sec.location || "Campus")}`);
+      icsLines.push(`DESCRIPTION:Instructor: ${escapeICS(sec.instructor || "N/A")}`);
       icsLines.push(`DTSTART:${formatICSDate(dtStart)}`);
       icsLines.push(`DTEND:${formatICSDate(dtEnd)}`);
       icsLines.push(`RRULE:FREQ=WEEKLY;BYDAY=${dayToRule[t.day]};COUNT=15`);

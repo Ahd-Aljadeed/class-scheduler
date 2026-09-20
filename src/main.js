@@ -3,6 +3,7 @@ import { INITIAL_COURSES, PALETTE_COLORS } from './data/sampleCourses.js';
 import {
   DAYS,
   FULL_DAYS,
+  MAX_COMBINATIONS,
   timeToMinutes,
   format12h,
   getSectionConflicts,
@@ -13,6 +14,8 @@ import {
 import { parseRawTextToCourses } from './utils/parser.js';
 import { arcadeAudio } from './utils/arcadeAudio.js';
 import { showAlert, showConfirm, installGlobalAlertOverrides } from './utils/customModal.js';
+import { escapeHtml, safeColor } from './utils/sanitize.js';
+import { sanitizeCourses, sanitizeSelections, LIMITS } from './utils/validate.js';
 
 export function getIconSvg(name, size = 14, className = "") {
   const classAttr = className ? ` class="${className}"` : '';
@@ -57,11 +60,24 @@ const STORAGE_KEY_MODE = "unischedule_mode_v1";
 const STORAGE_KEY_THEME = "unischedule_theme_v1";
 const STORAGE_KEY_WELCOME_SEEN = "unischedule_welcome_seen_v1";
 
+/** How many combination cards are actually built in the DOM at once. */
+const RENDERED_COMBO_LIMIT = 100;
+/** Delay before a search keystroke triggers a re-render of the course list. */
+const SEARCH_DEBOUNCE_MS = 130;
+
 class UniScheduleApp {
   constructor() {
     this.courses = this.loadCourses();
     this.selectedSectionsMap = this.loadSelections();
     this.hoveredSection = null;
+
+    // Lookup indexes + memoized combination results. Rebuilt only when the
+    // course list itself changes, via invalidateCourseIndex().
+    this.courseBySectionId = new Map();
+    this.sectionById = new Map();
+    this.courseById = new Map();
+    this._combinationsCache = null;
+    this.invalidateCourseIndex();
     this.showWeekends = true; // Default to showing weekends (Sun) as user has Sun classes
     this.sortPreference = 'gaps'; // 'gaps' | 'daysoff' | 'mornings' | 'spread'
     this.currentMode = this.loadMode();
@@ -116,15 +132,15 @@ class UniScheduleApp {
         <div class="form-grid">
           <div class="form-group">
             <label>Section Name <span class="required-asterisk">*</span></label>
-            <input type="text" class="input-sec-name" data-sec-idx="${secIdx}" value="${sec.name}" placeholder="e.g. Sec 01" required />
+            <input type="text" class="input-sec-name" data-sec-idx="${secIdx}" value="${escapeHtml(sec.name)}" placeholder="e.g. Sec 01" required />
           </div>
           <div class="form-group">
             <label>Instructor <span class="optional-tag">(optional)</span></label>
-            <input type="text" class="input-sec-instructor" data-sec-idx="${secIdx}" value="${sec.instructor}" placeholder="e.g. Dr. Turing" />
+            <input type="text" class="input-sec-instructor" data-sec-idx="${secIdx}" value="${escapeHtml(sec.instructor)}" placeholder="e.g. Dr. Turing" />
           </div>
           <div class="form-group full-width">
             <label>Location / Room <span class="optional-tag">(optional)</span></label>
-            <input type="text" class="input-sec-location" data-sec-idx="${secIdx}" value="${sec.location}" placeholder="e.g. Science Bldg 101" />
+            <input type="text" class="input-sec-location" data-sec-idx="${secIdx}" value="${escapeHtml(sec.location)}" placeholder="e.g. Science Bldg 101" />
           </div>
         </div>
 
@@ -236,6 +252,41 @@ class UniScheduleApp {
     });
   }
 
+  /**
+   * Rebuilds the id -> object lookup tables and drops the memoized combination
+   * results. Must be called after any mutation of `this.courses`.
+   *
+   * These indexes replace repeated `courses.find(c => c.sections.some(...))`
+   * scans, which were O(courses x sections) per lookup and ran inside loops.
+   */
+  invalidateCourseIndex() {
+    this.courseBySectionId = new Map();
+    this.sectionById = new Map();
+    this.courseById = new Map();
+
+    this.courses.forEach((course) => {
+      this.courseById.set(course.id, course);
+      course.sections.forEach((section) => {
+        this.courseBySectionId.set(section.id, course);
+        this.sectionById.set(section.id, section);
+      });
+    });
+
+    this._combinationsCache = null;
+  }
+
+  /**
+   * Memoized combination search. The valid-combination set depends only on the
+   * courses, never on the current selection, so clicking a section must not
+   * trigger a recompute.
+   */
+  getCombinations() {
+    if (!this._combinationsCache) {
+      this._combinationsCache = generateAllCombinations(this.courses, this.courseBySectionId);
+    }
+    return this._combinationsCache;
+  }
+
   // LOAD / SAVE PERSISTENCE
   loadMode() {
     return localStorage.getItem(STORAGE_KEY_MODE) || 'arcade';
@@ -285,8 +336,10 @@ class UniScheduleApp {
     try {
       const saved = localStorage.getItem(STORAGE_KEY_COURSES);
       if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) return parsed;
+        // Persisted data is untrusted: validate its shape before it can reach
+        // the render pipeline or the metrics maths.
+        const clean = sanitizeCourses(JSON.parse(saved));
+        if (clean.length > 0) return clean;
       }
     } catch (e) {
       console.error("Failed to parse saved courses", e);
@@ -295,6 +348,9 @@ class UniScheduleApp {
   }
 
   saveCourses() {
+    // Every course mutation funnels through here, so this is the one place the
+    // lookup indexes and the combination cache need refreshing.
+    this.invalidateCourseIndex();
     try {
       localStorage.setItem(STORAGE_KEY_COURSES, JSON.stringify(this.courses));
     } catch (e) {
@@ -306,8 +362,8 @@ class UniScheduleApp {
     try {
       const saved = localStorage.getItem(STORAGE_KEY_SELECTIONS);
       if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed && typeof parsed === 'object') return parsed;
+        // Drops any pair that does not resolve to a real course + section.
+        return sanitizeSelections(JSON.parse(saved), this.courses);
       }
     } catch (e) {
       console.error("Failed to parse saved selections", e);
@@ -404,9 +460,35 @@ class UniScheduleApp {
   }
 
   initEventListeners() {
-    // Search Filter
+    // Search Filter — debounced so a fast typist does not rebuild the whole
+    // course list on every keystroke.
     if (this.elSearchInput) {
-      this.elSearchInput.addEventListener("input", () => this.renderCourseList());
+      let searchTimer = null;
+      this.elSearchInput.addEventListener("input", () => {
+        if (searchTimer) clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => this.renderCourseList(), SEARCH_DEBOUNCE_MS);
+      });
+    }
+
+    // Combination cards use one delegated listener on the list container
+    // instead of one listener per rendered card.
+    if (this.elCombinationsList) {
+      this.elCombinationsList.addEventListener("click", (e) => {
+        const applyBtn = e.target.closest(".btn-apply-combo");
+        if (!applyBtn) return;
+        const card = applyBtn.closest(".combo-card");
+        if (!card) return;
+
+        const combo = this._visibleCombos && this._visibleCombos[Number(card.dataset.comboIdx)];
+        if (!combo) return;
+
+        arcadeAudio.playVictory();
+        this.selectedSectionsMap = { ...combo.selectionMap };
+        this.saveSelections();
+        this.render();
+        this.renderCombinationsDrawer();
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 } });
+      });
     }
 
     // Mode toggle (Arcade vs Regular)
@@ -534,8 +616,15 @@ class UniScheduleApp {
           await showAlert("Could not parse valid course details. Please ensure day and time formats (e.g. Mon 09:00-10:30) are included.", "Import Error");
           return;
         }
-        this.courses = [...this.courses, ...parsed];
-        parsed.forEach(c => {
+        const room = LIMITS.MAX_COURSES - this.courses.length;
+        if (room <= 0) {
+          await showAlert(`You already have the maximum of ${LIMITS.MAX_COURSES} courses. Remove some before importing more.`, "Course Limit Reached");
+          return;
+        }
+
+        const accepted = parsed.slice(0, room);
+        this.courses = [...this.courses, ...accepted];
+        accepted.forEach(c => {
           if (c.sections[0]) this.selectedSectionsMap[c.id] = c.sections[0].id;
         });
         this.saveCourses();
@@ -817,9 +906,11 @@ class UniScheduleApp {
 
   // EVENT DETAILS BOTTOM SHEET
   openEventDetailsSheet(slot) {
-    const course = this.courses.find(c => c.code === slot.courseCode || c.sections.some(s => s.name === slot.sectionName));
+    // Resolve by id. Matching on course code or section name picked the wrong
+    // record whenever two courses shared a section name such as "Sec 01".
+    const course = this.courseBySectionId.get(slot.sectionId);
     if (!course) return;
-    const section = course.sections.find(s => s.name === slot.sectionName);
+    const section = this.sectionById.get(slot.sectionId);
 
     this.activeSheetCourseId = course.id;
     this.activeSheetSectionId = section ? section.id : null;
@@ -871,20 +962,24 @@ class UniScheduleApp {
     const list = [];
     for (const [courseId, secId] of Object.entries(this.selectedSectionsMap)) {
       if (!secId) continue;
-      const course = this.courses.find(c => c.id === courseId);
-      if (course) {
-        const sec = course.sections.find(s => s.id === secId);
-        if (sec) list.push(sec);
-      }
+      const sec = this.sectionById.get(secId);
+      // Confirm the section still belongs to the course it is mapped under.
+      const owner = this.courseBySectionId.get(secId);
+      if (sec && owner && owner.id === courseId) list.push(sec);
     }
     return list;
   }
 
   // MAIN RENDER LOOP
   render() {
+    // Compute the metrics once and share them: renderTimetable and
+    // renderAnalytics previously each recomputed the same result.
+    const selectedSections = this.getSelectedSections();
+    const metrics = calculateScheduleMetrics(selectedSections, this.courses, this.courseBySectionId);
+
     this.renderCourseList();
-    this.renderTimetable();
-    this.renderAnalytics();
+    this.renderTimetable(metrics);
+    this.renderAnalytics(metrics);
     this.updateCombinationsBadge();
   }
 
@@ -921,7 +1016,7 @@ class UniScheduleApp {
       } else {
         this.elCourseList.innerHTML = `
           <div class="empty-search-state">
-            No courses match "${query}"
+            No courses match "${escapeHtml(query)}"
           </div>
         `;
       }
@@ -941,8 +1036,8 @@ class UniScheduleApp {
 
       card.innerHTML = `
         <div class="course-header">
-          <span class="course-badge" style="background-color: ${course.color}">${displayBadge}</span>
-          <button class="btn btn-ghost icon-only btn-sm btn-delete-course" data-course-id="${course.id}" title="Remove course">&times;</button>
+          <span class="course-badge" style="background-color: ${safeColor(course.color)}">${escapeHtml(displayBadge)}</span>
+          <button class="btn btn-ghost icon-only btn-sm btn-delete-course" data-course-id="${escapeHtml(course.id)}" title="Remove course">&times;</button>
         </div>
         <div class="sections-group">
           ${course.sections.map(sec => {
@@ -951,25 +1046,25 @@ class UniScheduleApp {
         const hasConflict = conflicts.length > 0;
 
         const timeBadges = sec.times.map(t =>
-          `<span class="time-tag">${t.day} ${t.startTime}-${t.endTime}</span>`
+          `<span class="time-tag">${escapeHtml(t.day)} ${escapeHtml(t.startTime)}-${escapeHtml(t.endTime)}</span>`
         ).join("");
 
         return `
-              <div class="section-item ${isSelected ? 'selected' : ''} ${hasConflict && !isSelected ? 'has-conflict' : ''}" 
-                   data-course-id="${course.id}" 
-                   data-section-id="${sec.id}">
+              <div class="section-item ${isSelected ? 'selected' : ''} ${hasConflict && !isSelected ? 'has-conflict' : ''}"
+                   data-course-id="${escapeHtml(course.id)}"
+                   data-section-id="${escapeHtml(sec.id)}">
                 <div class="section-top">
                   <label class="section-radio">
-                    <input type="radio" name="radio-${course.id}" ${isSelected ? 'checked' : ''}>
-                    <span>${sec.name}</span>
+                    <input type="radio" name="radio-${escapeHtml(course.id)}" ${isSelected ? 'checked' : ''}>
+                    <span>${escapeHtml(sec.name)}</span>
                   </label>
-                  <span class="section-instructor">${sec.instructor}</span>
+                  <span class="section-instructor">${escapeHtml(sec.instructor)}</span>
                 </div>
-                <div class="section-location">${getIconSvg('map-pin', 12)} <span>${sec.location}</span></div>
+                <div class="section-location">${getIconSvg('map-pin', 12)} <span>${escapeHtml(sec.location)}</span></div>
                 <div class="section-time-tags">${timeBadges}</div>
                 ${hasConflict && !isSelected ? `
                   <div class="conflict-tag">
-                    ${getIconSvg('alert-triangle', 12)} <span>Overlaps ${conflicts[0].conflictingCourseCode} ${conflicts[0].conflictingSecName}</span>
+                    ${getIconSvg('alert-triangle', 12)} <span>Overlaps ${escapeHtml(conflicts[0].conflictingCourseCode)} ${escapeHtml(conflicts[0].conflictingSecName)}</span>
                   </div>
                 ` : ''}
               </div>
@@ -996,12 +1091,17 @@ class UniScheduleApp {
           this.render();
         });
 
-        // Hover to preview
+        // Hover to preview. The guard matters: without it, moving the mouse
+        // across the list rebuilt the entire timetable grid on every enter and
+        // every leave, including for sections already selected (which draw no
+        // preview at all).
         item.addEventListener("mouseenter", () => {
+          if (this.hoveredSection === sectionObj) return;
           this.hoveredSection = sectionObj;
           this.renderTimetable();
         });
         item.addEventListener("mouseleave", () => {
+          if (this.hoveredSection === null) return;
           this.hoveredSection = null;
           this.renderTimetable();
         });
@@ -1033,7 +1133,7 @@ class UniScheduleApp {
 
 
   // RENDER VISUAL TIMETABLE MATRIX
-  renderTimetable() {
+  renderTimetable(precomputedMetrics) {
     this.elTimetableGrid = document.getElementById("timetable-grid");
     if (!this.elTimetableGrid) return;
 
@@ -1052,13 +1152,17 @@ class UniScheduleApp {
     const endHour = 20; // 13 hours total (08:00 to 20:00)
     const hourHeight = 70; // 1 hour = 70px (matching style.css 70px grid rows)
 
+    // The grid is ~120 elements. Building them off-document and attaching once
+    // avoids touching the live tree on every node.
+    const gridFragment = document.createDocumentFragment();
+
     // 1. Row 1: Header Cells
     const cornerCell = document.createElement("div");
     cornerCell.className = "time-header-cell";
     cornerCell.style.gridColumn = "1";
     cornerCell.style.gridRow = "1";
     cornerCell.textContent = "Time";
-    this.elTimetableGrid.appendChild(cornerCell);
+    gridFragment.appendChild(cornerCell);
 
     daysToDisplay.forEach((day, dayIdx) => {
       const dayCell = document.createElement("div");
@@ -1069,7 +1173,7 @@ class UniScheduleApp {
         <div class="day-name">${FULL_DAYS[day]}</div>
         <div class="day-sub">${day}</div>
       `;
-      this.elTimetableGrid.appendChild(dayCell);
+      gridFragment.appendChild(dayCell);
     });
 
     // 2. Rows 2 to 14: Time Labels & Background Cells
@@ -1081,7 +1185,7 @@ class UniScheduleApp {
       timeLabelCell.style.gridColumn = "1";
       timeLabelCell.style.gridRow = `${rowIdx}`;
       timeLabelCell.textContent = format12h(`${String(h).padStart(2, '0')}:00`);
-      this.elTimetableGrid.appendChild(timeLabelCell);
+      gridFragment.appendChild(timeLabelCell);
 
       daysToDisplay.forEach((day, dayIdx) => {
         const bgCell = document.createElement("div");
@@ -1090,13 +1194,14 @@ class UniScheduleApp {
         bgCell.style.gridRow = `${rowIdx}`;
         bgCell.style.borderBottom = "1px solid var(--border-color)";
         bgCell.style.borderRight = "1px solid var(--border-color)";
-        this.elTimetableGrid.appendChild(bgCell);
+        gridFragment.appendChild(bgCell);
       });
     }
 
     // 3. Day Column Overlays (Positioned Event Cards)
     const selectedSections = this.getSelectedSections();
-    const metrics = calculateScheduleMetrics(selectedSections, this.courses);
+    const metrics = precomputedMetrics
+      || calculateScheduleMetrics(selectedSections, this.courses, this.courseBySectionId);
 
     // Check conflicts
     const hasConflicts = this.checkGlobalConflicts(selectedSections);
@@ -1159,12 +1264,12 @@ class UniScheduleApp {
 
         card.innerHTML = `
           <div>
-            <div class="event-code">${slot.courseCode}</div>
-            <div class="event-sec">${slot.sectionName}</div>
+            <div class="event-code">${escapeHtml(slot.courseCode)}</div>
+            <div class="event-sec">${escapeHtml(slot.sectionName)}</div>
           </div>
           <div>
-            <div class="event-location">${getIconSvg('map-pin', 11)} <span>${slot.location}</span></div>
-            <div class="event-time">${slot.startTime} - ${slot.endTime}</div>
+            <div class="event-location">${getIconSvg('map-pin', 11)} <span>${escapeHtml(slot.location)}</span></div>
+            <div class="event-time">${escapeHtml(slot.startTime)} - ${escapeHtml(slot.endTime)}</div>
           </div>
         `;
 
@@ -1184,28 +1289,30 @@ class UniScheduleApp {
           const topPx = ((sMins - (startHour * 60)) / 60) * hourHeight;
           const heightPx = ((eMins - sMins) / 60) * hourHeight;
 
-          const course = this.courses.find(c => c.sections.some(s => s.id === this.hoveredSection.id));
+          const course = this.courseBySectionId.get(this.hoveredSection.id);
 
           const prevCard = document.createElement("div");
           prevCard.className = "calendar-event preview-block";
           prevCard.style.top = `${topPx}px`;
           prevCard.style.height = `${heightPx}px`;
-          prevCard.style.backgroundColor = course ? course.color : "#6366f1";
+          prevCard.style.backgroundColor = safeColor(course && course.color);
 
           prevCard.innerHTML = `
             <div>
-              <div class="event-code">${course ? course.code : 'Preview'}</div>
-              <div class="event-sec">${this.hoveredSection.name} (Hover)</div>
+              <div class="event-code">${course ? escapeHtml(course.code) : 'Preview'}</div>
+              <div class="event-sec">${escapeHtml(this.hoveredSection.name)} (Hover)</div>
             </div>
-            <div class="event-time">${t.startTime} - ${t.endTime}</div>
+            <div class="event-time">${escapeHtml(t.startTime)} - ${escapeHtml(t.endTime)}</div>
           `;
 
           colDiv.appendChild(prevCard);
         });
       }
 
-      this.elTimetableGrid.appendChild(colDiv);
+      gridFragment.appendChild(colDiv);
     });
+
+    this.elTimetableGrid.appendChild(gridFragment);
   }
 
   // CHECK GLOBAL CONFLICTS
@@ -1233,9 +1340,9 @@ class UniScheduleApp {
   }
 
   // RENDER RIGHT ANALYTICS PANEL
-  renderAnalytics() {
-    const selectedSecs = this.getSelectedSections();
-    const metrics = calculateScheduleMetrics(selectedSecs, this.courses);
+  renderAnalytics(precomputedMetrics) {
+    const metrics = precomputedMetrics
+      || calculateScheduleMetrics(this.getSelectedSections(), this.courses, this.courseBySectionId);
 
     // Stat Values
     this.elStatGapHours.textContent = metrics.totalGapHours.toFixed(1);
@@ -1261,7 +1368,7 @@ class UniScheduleApp {
       const tag = document.createElement("span");
       tag.className = `badge-tag ${b.type}`;
       const iconSvg = b.icon ? getIconSvg(b.icon, 13) : '';
-      tag.innerHTML = `${iconSvg}<span>${b.text}</span>`;
+      tag.innerHTML = `${iconSvg}<span>${escapeHtml(b.text)}</span>`;
       this.elBadgesContainer.appendChild(tag);
     });
 
@@ -1301,8 +1408,11 @@ class UniScheduleApp {
 
   // UPDATE COMBINATIONS BADGE
   updateCombinationsBadge() {
-    const validCombos = generateAllCombinations(this.courses);
-    this.badgeCombosCount.textContent = validCombos.length;
+    // Served from the memoized cache: selecting a section does not change the
+    // set of valid combinations, so this is free on the click path.
+    const validCombos = this.getCombinations();
+    this.badgeCombosCount.textContent =
+      validCombos.length >= MAX_COMBINATIONS ? `${MAX_COMBINATIONS}+` : validCombos.length;
   }
 
   // OPEN & RENDER AUTO-COMBINATIONS DRAWER
@@ -1311,41 +1421,57 @@ class UniScheduleApp {
     this.renderCombinationsDrawer();
   }
 
-  renderCombinationsDrawer() {
-    const validCombos = generateAllCombinations(this.courses);
-    this.elComboSummaryText.textContent = `Found ${validCombos.length} valid non-conflicting schedules`;
+  /**
+   * Counts pairs of classes on the same day separated by 10 minutes or less.
+   * Computed once per combination and cached on the combo object, rather than
+   * from inside a sort comparator (which re-ran it O(n log n) times).
+   */
+  countBackToBack(combo) {
+    if (combo._b2bCount !== undefined) return combo._b2bCount;
 
-    // Sort Combinations
+    let count = 0;
+    const slotsByDay = {};
+    combo.metrics.activeSlots.forEach(s => {
+      if (!slotsByDay[s.day]) slotsByDay[s.day] = [];
+      slotsByDay[s.day].push(s);
+    });
+    Object.values(slotsByDay).forEach(daySlots => {
+      daySlots.sort((a, b) => a.startMins - b.startMins);
+      for (let i = 1; i < daySlots.length; i++) {
+        if (daySlots[i].startMins - daySlots[i - 1].endMins <= 10) count++;
+      }
+    });
+
+    combo._b2bCount = count;
+    return count;
+  }
+
+  renderCombinationsDrawer() {
+    const allCombos = this.getCombinations();
+    const cappedAtLimit = allCombos.length >= MAX_COMBINATIONS;
+
+    this.elComboSummaryText.textContent = cappedAtLimit
+      ? `Showing the first ${MAX_COMBINATIONS} valid schedules — narrow your course list for a complete search`
+      : `Found ${allCombos.length} valid non-conflicting schedules`;
+
+    // Sort a shallow copy so the memoized cache keeps a stable order.
+    const validCombos = allCombos.slice();
+
     if (this.sortPreference === 'gaps') {
       validCombos.sort((a, b) => a.metrics.totalGapHours - b.metrics.totalGapHours);
     } else if (this.sortPreference === 'daysoff') {
       validCombos.sort((a, b) => b.metrics.daysOffCount - a.metrics.daysOffCount);
     } else if (this.sortPreference === 'mornings') {
-      validCombos.sort((a, b) => {
-        const earlyA = a.metrics.activeSlots.filter(s => s.startMins < 540).length;
-        const earlyB = b.metrics.activeSlots.filter(s => s.startMins < 540).length;
-        return earlyA - earlyB;
+      // Decorate once instead of filtering inside every comparison.
+      validCombos.forEach(c => {
+        if (c._earlyCount === undefined) {
+          c._earlyCount = c.metrics.activeSlots.filter(s => s.startMins < 540).length;
+        }
       });
+      validCombos.sort((a, b) => a._earlyCount - b._earlyCount);
     } else if (this.sortPreference === 'spread') {
-      // Count back-to-back classes: pairs on the same day where the gap is <= 10 min
-      const countBackToBack = (combo) => {
-        let count = 0;
-        const slotsByDay = {};
-        combo.metrics.activeSlots.forEach(s => {
-          if (!slotsByDay[s.day]) slotsByDay[s.day] = [];
-          slotsByDay[s.day].push(s);
-        });
-        Object.values(slotsByDay).forEach(daySlots => {
-          daySlots.sort((a, b) => a.startMins - b.startMins);
-          for (let i = 1; i < daySlots.length; i++) {
-            const prevEnd = daySlots[i - 1].endMins;
-            const currStart = daySlots[i].startMins;
-            if (currStart - prevEnd <= 10) count++;
-          }
-        });
-        return count;
-      };
-      validCombos.sort((a, b) => countBackToBack(a) - countBackToBack(b));
+      validCombos.forEach(c => this.countBackToBack(c));
+      validCombos.sort((a, b) => a._b2bCount - b._b2bCount);
     }
 
     this.elCombinationsList.innerHTML = "";
@@ -1360,30 +1486,25 @@ class UniScheduleApp {
       return;
     }
 
-    validCombos.forEach((combo, idx) => {
+    // Only the best N are worth rendering — nobody compares thousands of cards,
+    // and building one DOM card each is what actually froze the tab.
+    const visibleCombos = validCombos.slice(0, RENDERED_COMBO_LIMIT);
+    this._visibleCombos = visibleCombos;
+
+    // Build off-document, then attach in a single append.
+    const fragment = document.createDocumentFragment();
+
+    visibleCombos.forEach((combo, idx) => {
       const card = document.createElement("div");
       card.className = "combo-card";
+      card.dataset.comboIdx = String(idx);
 
-      // Check if this combo matches current active selection
       const isActive = Object.entries(combo.selectionMap).every(
         ([cId, sId]) => this.selectedSectionsMap[cId] === sId
       );
-
       if (isActive) card.classList.add("active-combo");
 
-      // Count back-to-back classes for this combo
-      let b2bCount = 0;
-      const slotsByDay = {};
-      combo.metrics.activeSlots.forEach(s => {
-        if (!slotsByDay[s.day]) slotsByDay[s.day] = [];
-        slotsByDay[s.day].push(s);
-      });
-      Object.values(slotsByDay).forEach(daySlots => {
-        daySlots.sort((a, b) => a.startMins - b.startMins);
-        for (let i = 1; i < daySlots.length; i++) {
-          if (daySlots[i].startMins - daySlots[i - 1].endMins <= 10) b2bCount++;
-        }
-      });
+      const b2bCount = this.countBackToBack(combo);
 
       card.innerHTML = `
         <div class="combo-card-header">
@@ -1397,8 +1518,8 @@ class UniScheduleApp {
         </div>
         <div class="combo-sections-list">
           ${combo.sections.map(sec => {
-        const course = this.courses.find(c => c.sections.some(s => s.id === sec.id));
-        return `<span class="combo-section-chip" style="background-color: ${course ? course.color : '#6366f1'}">${course ? course.code : ''} ${sec.name}</span>`;
+        const course = this.courseBySectionId.get(sec.id);
+        return `<span class="combo-section-chip" style="background-color: ${safeColor(course && course.color)}">${course ? escapeHtml(course.code) : ''} ${escapeHtml(sec.name)}</span>`;
       }).join("")}
         </div>
         <button class="btn btn-sm ${isActive ? 'btn-outline' : 'btn-primary'} btn-apply-combo" style="margin-top: 6px;">
@@ -1406,17 +1527,17 @@ class UniScheduleApp {
         </button>
       `;
 
-      card.querySelector(".btn-apply-combo").addEventListener("click", () => {
-        arcadeAudio.playVictory();
-        this.selectedSectionsMap = { ...combo.selectionMap };
-        this.saveSelections();
-        this.render();
-        this.renderCombinationsDrawer();
-        confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 } });
-      });
-
-      this.elCombinationsList.appendChild(card);
+      fragment.appendChild(card);
     });
+
+    this.elCombinationsList.appendChild(fragment);
+
+    if (validCombos.length > visibleCombos.length) {
+      const note = document.createElement("p");
+      note.className = "combo-truncation-note";
+      note.textContent = `Showing the top ${visibleCombos.length} of ${validCombos.length} schedules for this sort order.`;
+      this.elCombinationsList.appendChild(note);
+    }
   }
 }
 
