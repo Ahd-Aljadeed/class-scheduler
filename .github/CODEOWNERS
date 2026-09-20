@@ -1,0 +1,18 @@
+# Code owners are requested for review automatically on every pull request.
+# When branch protection has "Require review from Code Owners" enabled, these
+# reviews are also required before a PR can merge.
+#
+# Docs: https://docs.github.com/articles/about-code-owners
+
+# Default owner for everything in the repository.
+*       @Ahd-Aljadeed
+
+# Build, CI and deployment configuration — changes here affect what gets
+# published, so they are worth a deliberate second look.
+/.github/       @Ahd-Aljadeed
+/vite.config.js @Ahd-Aljadeed
+/package.json   @Ahd-Aljadeed
+
+# Security-relevant helpers: escaping and untrusted-input validation.
+/src/utils/sanitize.js  @Ahd-Aljadeed
+/src/utils/validate.js  @Ahd-Aljadeed
