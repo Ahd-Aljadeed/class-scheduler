@@ -1,18 +1,30 @@
 # Code owners are requested for review automatically on every pull request.
-# When branch protection has "Require review from Code Owners" enabled, these
-# reviews are also required before a PR can merge.
+#
+# Combined with the branch ruleset option "Require review from Code Owners",
+# this is what makes an approval from anyone else insufficient to merge: an
+# outside contributor may leave an approving review, but it does not satisfy
+# the requirement, so the merge button stays disabled until an owner approves.
+#
+# To add another approver, append their username to these lines, e.g.
+#   *    @Ahd-Aljadeed @some-trusted-admin
 #
 # Docs: https://docs.github.com/articles/about-code-owners
 
 # Default owner for everything in the repository.
 *       @Ahd-Aljadeed
 
-# Build, CI and deployment configuration — changes here affect what gets
-# published, so they are worth a deliberate second look.
-/.github/       @Ahd-Aljadeed
-/vite.config.js @Ahd-Aljadeed
-/package.json   @Ahd-Aljadeed
+# Build, CI and deployment configuration — changes here decide what gets
+# published and what is allowed to skip the checks.
+/.github/           @Ahd-Aljadeed
+/vite.config.js     @Ahd-Aljadeed
+/playwright.config.js @Ahd-Aljadeed
+/package.json       @Ahd-Aljadeed
+/package-lock.json  @Ahd-Aljadeed
 
 # Security-relevant helpers: escaping and untrusted-input validation.
 /src/utils/sanitize.js  @Ahd-Aljadeed
 /src/utils/validate.js  @Ahd-Aljadeed
+
+# The test suites themselves — weakening a test is how a regression sneaks in.
+/test/  @Ahd-Aljadeed
+/e2e/   @Ahd-Aljadeed

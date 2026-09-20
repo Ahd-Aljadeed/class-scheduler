@@ -33,18 +33,29 @@ npm run dev
 
 3. **Check it passes and still works:**
    ```bash
-   npm test
+   npm run test:all     # unit + browser tests
    npm run build
-   npm run preview
    ```
-   `npm test` covers the domain logic — time maths, conflict detection, metrics, the
-   combination search, escaping, storage validation and the text parser. It uses Node's
-   built-in test runner, so there is no extra dependency to install. CI runs the same
-   commands on every pull request.
+   First time only, install the browser Playwright needs:
+   ```bash
+   npx playwright install chromium
+   ```
 
-   The rendering layer is not covered, so exercise what you touched in the browser too.
-   New logic should come with a test; bug fixes should come with one that fails before the
-   fix.
+   There are two suites, and CI runs both on every pull request:
+
+   - `npm test` — domain logic on Node's built-in runner: time maths, conflict detection,
+     metrics, the combination search, escaping, storage validation, the text parser.
+   - `npm run test:e2e` — the real production build in a real browser: core flows,
+     persistence, XSS containment, recovery from corrupt stored data, and a responsive
+     sweep asserting that every modal fits inside the viewport at eight screen sizes.
+
+   New logic should come with a test. Bug fixes should come with one that fails before the
+   fix — if you cannot make it fail first, you have not pinned the bug down.
+
+   **A note on the responsive tests.** Use `expectFitsViewport` from `e2e/helpers.js`
+   rather than measuring geometry once. Modals slide and fade in, and a single measurement
+   taken on the frame an element becomes visible will catch it mid-animation and report a
+   phantom overflow.
 
 4. **Commit** with a clear message explaining *why*, not just what.
 

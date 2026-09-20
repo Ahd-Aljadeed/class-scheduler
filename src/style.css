@@ -1123,7 +1123,7 @@ body {
 
 .drawer-content {
   width: 520px;
-  max-width: 90vw;
+  max-width: 100%;
   background: var(--bg-panel);
   height: 100%;
   display: flex;
@@ -1283,12 +1283,23 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  /* The overlay scrolls as a last resort, so a card taller than the viewport
+     can still be reached on very short screens. */
+  overflow-y: auto;
   animation: fadeIn 0.2s ease;
 }
 
 .modal-card {
   width: 600px;
-  max-width: 95vw;
+  /* 100% of the overlay's content box already accounts for its padding, so
+     the card never reaches the viewport edge. vw units do not — they include
+     the scrollbar gutter and caused a sliver of horizontal overflow. */
+  max-width: 100%;
+  /* Without a height cap the card grew past the viewport as sections were
+     added to the builder, and `overflow: hidden` then clipped the Save button
+     out of reach. dvh tracks mobile browser chrome; vh is the fallback. */
+  max-height: 90vh;
+  max-height: min(90dvh, 900px);
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
@@ -1305,6 +1316,8 @@ body {
   align-items: center;
   justify-content: space-between;
   background: var(--bg-card);
+  /* Stay put while the body scrolls. */
+  flex-shrink: 0;
 }
 
 .modal-tabs {
@@ -1330,6 +1343,14 @@ body {
 
 .modal-body {
   padding: 20px;
+  /* Take the leftover height and scroll within it. `min-height: 0` is what
+     actually lets a flex child shrink below its content size — without it the
+     body refuses to scroll and pushes the card past the viewport instead. */
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tab-pane {
@@ -1348,7 +1369,9 @@ body {
 
 .textarea-wrapper textarea {
   width: 100%;
-  height: 220px;
+  /* A fixed 220px ate most of the modal on a short screen. Scale with the
+     viewport but keep it usable at both extremes. */
+  height: clamp(120px, 26vh, 220px);
   background: var(--bg-input);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
@@ -1372,6 +1395,36 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+/*
+  Grid and flex items default to `min-width: auto`, meaning they refuse to
+  shrink below their content's intrinsic width. A long placeholder such as
+  "e.g. Intro to Computer Science" therefore set the column's minimum size and
+  pushed the whole modal wider than the screen. Allowing these to shrink is
+  what keeps the dialog inside the viewport.
+*/
+.form-group,
+.time-input-group,
+.section-builder-card,
+.sections-builder-container {
+  min-width: 0;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+.time-slot-row select,
+.time-slot-row input[type="time"] {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* The label and the "+ Add Day & Time" button sat on one non-wrapping line. */
+.schedule-slots-header,
+.section-card-header {
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .form-group {
@@ -1775,8 +1828,26 @@ body {
 
 .custom-alert-card {
   width: 440px;
-  max-width: 90vw;
+  max-width: 100%;
   animation: modalPopIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* A long message (a parser error quoting the user's input, for example) must
+   scroll rather than push the OK button off-screen. */
+.custom-alert-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.custom-alert-message {
+  /* Force-break an unbroken string so it cannot widen the dialog. */
+  overflow-wrap: anywhere;
+}
+
+.custom-alert-footer {
+  flex-shrink: 0;
 }
 
 .custom-alert-header {
@@ -2021,8 +2092,9 @@ body {
 /* WELCOME & HOW-TO-USE MODAL STYLES */
 .welcome-modal-card {
   width: 640px;
-  max-width: 92vw;
+  max-width: 100%;
   max-height: 88vh;
+  max-height: min(88dvh, 900px);
   display: flex;
   flex-direction: column;
   border-radius: var(--radius-xl);
@@ -2062,7 +2134,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .welcome-hero-banner {
@@ -2730,6 +2805,9 @@ body {
   .drawer-content,
   .bottom-sheet-card {
     max-height: 82vh;
+    /* dvh excludes the mobile browser's collapsing toolbars, which vh does
+       not — with vh alone the sheet's lower edge sat under the URL bar. */
+    max-height: 82dvh;
     width: 100%;
     max-width: 100%;
     border-radius: 20px 20px 0 0;
@@ -2747,8 +2825,10 @@ body {
   .modal-body,
   .welcome-modal-body,
   .combinations-list {
-    flex: 1;
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
     padding: 16px;
   }
