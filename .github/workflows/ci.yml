@@ -1,8 +1,7 @@
 name: CI
 
-# Runs on every pull request and on pushes to main. This is the check to
-# require in the branch protection ruleset (see .github/BRANCH_PROTECTION.md):
-# the job is named "build", so the check appears as "build".
+# Runs on every pull request and on pushes to main. The job is named "build",
+# so this is the status check to require before a pull request can merge.
 on:
   pull_request:
   push:
