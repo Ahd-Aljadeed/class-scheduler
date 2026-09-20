@@ -26,23 +26,38 @@ export function parseRawTextToCourses(rawText) {
   let currentCourse = null;
   let colorIdx = 0;
 
-  const dayRegex = /(Mon|Tue|Wed|Thu|Fri|Sat|Sun|M|T|W|Th|F|Sa|Su|MW|TTH|TTh|MWF)/gi;
-  const timeRangeRegex = /(\d{1,2}:\d{2}\s*(?:AM|PM)?)\s*[-–to]+\s*(\d{1,2}:\d{2}\s*(?:AM|PM)?)/i;
+  /**
+   * Day tokens mapped to the days they denote.
+   *
+   * Order matters: the regex is built from these keys longest-first, so "TTh"
+   * is matched before "T" and "Th" before "T". Every token is matched with
+   * word boundaries — without them the single-letter forms matched inside
+   * ordinary words, so "Dr. Turing" added a Tuesday class and "Room 102"
+   * added a Monday one.
+   */
+  const DAY_TOKENS = {
+    SUNDAY: ["Sun"], MONDAY: ["Mon"], TUESDAY: ["Tue"], WEDNESDAY: ["Wed"],
+    THURSDAY: ["Thu"], FRIDAY: ["Fri"], SATURDAY: ["Sat"],
 
-  const normalizeDays = (dayStr) => {
-    const uppercase = dayStr.toUpperCase();
-    const days = [];
-    if (uppercase.includes("SUN") || uppercase.includes("SU")) days.push("Sun");
-    if (uppercase.includes("MON") || uppercase === "M" || uppercase.includes("MW")) days.push("Mon");
-    if (uppercase.includes("TUE") || uppercase === "T" || uppercase.includes("TTH")) days.push("Tue");
-    if (uppercase.includes("WED") || uppercase === "W" || uppercase.includes("MW")) days.push("Wed");
-    if (uppercase.includes("THU") || uppercase === "TH" || uppercase.includes("TTH")) days.push("Thu");
-    if (uppercase.includes("FRI") || uppercase === "F") days.push("Fri");
-    if (uppercase.includes("SAT") || uppercase.includes("SA")) days.push("Sat");
-    
-    // Deduplicate
-    return Array.from(new Set(days));
+    MWF: ["Mon", "Wed", "Fri"],
+    TTH: ["Tue", "Thu"],
+    MW: ["Mon", "Wed"],
+
+    SUN: ["Sun"], MON: ["Mon"], TUE: ["Tue"], TUES: ["Tue"], WED: ["Wed"],
+    THU: ["Thu"], THUR: ["Thu"], THURS: ["Thu"], FRI: ["Fri"], SAT: ["Sat"],
+
+    SU: ["Sun"], TH: ["Thu"], SA: ["Sat"],
+    M: ["Mon"], T: ["Tue"], W: ["Wed"], R: ["Thu"], F: ["Fri"], U: ["Sun"]
   };
+
+  const dayPattern = Object.keys(DAY_TOKENS)
+    .sort((a, b) => b.length - a.length)
+    .join("|");
+  const dayRegex = new RegExp(`\\b(${dayPattern})\\b`, "gi");
+
+  const timeRangeRegex = /(\d{1,2}:\d{2}\s*(?:AM|PM)?)\s*(?:-|–|—|to)+\s*(\d{1,2}:\d{2}\s*(?:AM|PM)?)/i;
+
+  const normalizeDays = (dayStr) => DAY_TOKENS[dayStr.toUpperCase()] || [];
 
   const convert24h = (timeStr) => {
     let [h, m] = timeStr.replace(/(AM|PM)/i, '').trim().split(':').map(Number);

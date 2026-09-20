@@ -195,6 +195,7 @@ Vite serves the app at `http://localhost:5173` with hot reloading.
 | Script | What it does |
 |---|---|
 | `npm run dev` | Development server with hot reload |
+| `npm test` | Run the test suite (Node's built-in runner — no extra dependency) |
 | `npm run build` | Production build into `dist/` |
 | `npm run preview` | Serve the built `dist/` locally to check it before deploying |
 | `npm run deploy` | Manually publish `dist/` to the `gh-pages` branch (not normally needed — see [Deployment](#deployment)) |
@@ -230,7 +231,13 @@ class-scheduler/
 │       │                       the native blocking ones.
 │       └── arcadeAudio.js      8-bit sound effects synthesized with the Web Audio
 │                               API. No audio assets.
-└── .github/workflows/deploy.yml   Builds and publishes to GitHub Pages on push to main.
+├── test/
+│   ├── scheduler.test.js       Time maths, conflict detection, metrics, the
+│   │                           combination search and .ics generation.
+│   └── sanitize.test.js        Escaping, storage validation, and the text parser.
+└── .github/workflows/
+    ├── ci.yml                  Tests, build and audit on every pull request.
+    └── deploy.yml              Publishes to GitHub Pages on push to main.
 ```
 
 `dist/` and `node_modules/` are build/install output and are deliberately not committed —

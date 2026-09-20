@@ -31,13 +31,20 @@ npm run dev
    no framework, no TypeScript and no build-time magic beyond Vite. Please do not introduce a
    framework or a state library to solve a problem that a function would solve.
 
-3. **Check it builds and still works:**
+3. **Check it passes and still works:**
    ```bash
+   npm test
    npm run build
    npm run preview
    ```
-   Then exercise what you touched in the browser. There is no automated test suite yet, so
-   manual verification is the bar. If you add one, that is a very welcome contribution.
+   `npm test` covers the domain logic — time maths, conflict detection, metrics, the
+   combination search, escaping, storage validation and the text parser. It uses Node's
+   built-in test runner, so there is no extra dependency to install. CI runs the same
+   commands on every pull request.
+
+   The rendering layer is not covered, so exercise what you touched in the browser too.
+   New logic should come with a test; bug fixes should come with one that fails before the
+   fix.
 
 4. **Commit** with a clear message explaining *why*, not just what.
 

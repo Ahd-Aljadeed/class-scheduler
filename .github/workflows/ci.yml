@@ -1,0 +1,49 @@
+name: CI
+
+# Runs on every pull request and on pushes to main. This is the check to
+# require in the branch protection ruleset (see .github/BRANCH_PROTECTION.md):
+# the job is named "build", so the check appears as "build".
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+# Read-only: this workflow never publishes anything.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        # actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        # actions/setup-node@v7.0.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # No `|| npm install` fallback: a lockfile mismatch must fail the build
+      # rather than silently resolving unreviewed dependency versions.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build site
+        run: npm run build
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
