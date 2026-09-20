@@ -1,12 +1,27 @@
 import { PALETTE_COLORS } from '../data/sampleCourses.js';
+import { LIMITS } from './validate.js';
+
+/** Ceiling on lines read from a single paste. */
+const MAX_IMPORT_LINES = 500;
 
 /**
- * Parses raw user-entered text into Course & Section objects
+ * Parses raw user-entered text into Course & Section objects.
+ *
+ * Input is capped: an oversized paste would otherwise produce a course list
+ * whose combination search cannot complete, and because the list is persisted
+ * before the next render, the app would then fail to load on every visit.
+ *
+ * @param {string} rawText
+ * @returns {Array<object>}
  */
 export function parseRawTextToCourses(rawText) {
   if (!rawText || !rawText.trim()) return [];
 
-  const lines = rawText.split("\n").map(l => l.trim()).filter(Boolean);
+  const lines = rawText
+    .split("\n")
+    .slice(0, MAX_IMPORT_LINES)
+    .map(l => l.trim())
+    .filter(Boolean);
   const courses = [];
   let currentCourse = null;
   let colorIdx = 0;
@@ -111,16 +126,18 @@ export function parseRawTextToCourses(rawText) {
       const instMatch = line.match(/(?:Dr\.|Prof\.)\s*[A-Z][a-z]+/i);
       if (instMatch) instructor = instMatch[0];
 
-      currentCourse.sections.push({
-        id: `sec-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
-        name: secName,
-        instructor,
-        location: room,
-        times
-      });
+      if (currentCourse.sections.length < LIMITS.MAX_SECTIONS_PER_COURSE) {
+        currentCourse.sections.push({
+          id: `sec-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+          name: secName,
+          instructor,
+          location: room,
+          times
+        });
+      }
     }
   });
 
-  // Remove empty courses
-  return courses.filter(c => c.sections.length > 0);
+  // Remove empty courses, and cap the total course count.
+  return courses.filter(c => c.sections.length > 0).slice(0, LIMITS.MAX_COURSES);
 }

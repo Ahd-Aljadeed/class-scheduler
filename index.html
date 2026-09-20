@@ -7,6 +7,26 @@
   <title>UniSchedule — University Class & Gap Hours Planner</title>
   <meta name="description"
     content="Plan your university course schedule, try section combinations with single clicks, calculate gap hours, detect time conflicts, and find your ideal timetable.">
+
+  <!--
+    GitHub Pages cannot set response headers, so the policy is declared here.
+    This is defence in depth behind the escaping in src/utils/sanitize.js:
+    even if a sink were missed, injected script has no way to execute.
+    'unsafe-inline' is required for style-src because the app positions
+    timetable cards with inline style attributes.
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self';
+    script-src 'self';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data:;
+    connect-src 'none';
+    object-src 'none';
+    base-uri 'none';
+    form-action 'none';
+    frame-ancestors 'none'">
+  <meta name="referrer" content="no-referrer">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -424,8 +444,8 @@
                 <div class="github-subtitle">You can check out the source code on GitHub:</div>
               </div>
             </div>
-            <a href="https://github.com/SahandMBaba/class-scheduler" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline github-link-btn">
-              github.com/SahandMBaba/class scheduler ↗
+            <a href="https://github.com/Ahd-Aljadeed/class-scheduler" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline github-link-btn">
+              github.com/Ahd-Aljadeed/class-scheduler ↗
             </a>
           </div>
         </div>

@@ -9,14 +9,26 @@ class ArcadeAudioEngine {
   }
 
   loadState() {
-    if (typeof localStorage === "undefined") return;
-    const saved = localStorage.getItem("unischedule_sound_muted");
-    this.isMuted = saved ? JSON.parse(saved) : false;
+    // This runs at module-evaluation time, so an exception here stops the whole
+    // app from booting. A non-JSON value in that key (hand-edited, or left by
+    // another page on the same origin) used to be enough to do exactly that.
+    try {
+      if (typeof localStorage === "undefined") return;
+      const saved = localStorage.getItem("unischedule_sound_muted");
+      this.isMuted = saved ? JSON.parse(saved) === true : false;
+    } catch (e) {
+      this.isMuted = false;
+    }
   }
 
   saveState() {
-    if (typeof localStorage === "undefined") return;
-    localStorage.setItem("unischedule_sound_muted", JSON.stringify(this.isMuted));
+    try {
+      if (typeof localStorage === "undefined") return;
+      localStorage.setItem("unischedule_sound_muted", JSON.stringify(this.isMuted));
+    } catch (e) {
+      // Storage can be unavailable (private mode, blocked cookies) — muting
+      // simply does not persist, which must not break playback.
+    }
   }
 
   initContext() {
