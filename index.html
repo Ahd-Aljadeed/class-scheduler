@@ -24,16 +24,19 @@
       Framing cannot be restricted without response headers on Pages.
   -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self';
-    script-src 'self';
+    script-src 'self' https://cloud.umami.is;
     worker-src 'self' blob:;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data:;
-    connect-src 'none';
+    connect-src 'self' https://cloud.umami.is;
     object-src 'none';
     base-uri 'none';
     form-action 'none'">
   <meta name="referrer" content="no-referrer">
+
+  <!-- Umami Analytics -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="c7ff164c-25b4-4614-9722-6d553200e32d"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
