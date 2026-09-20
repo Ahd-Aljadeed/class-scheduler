@@ -12,19 +12,27 @@
     GitHub Pages cannot set response headers, so the policy is declared here.
     This is defence in depth behind the escaping in src/utils/sanitize.js:
     even if a sink were missed, injected script has no way to execute.
-    'unsafe-inline' is required for style-src because the app positions
-    timetable cards with inline style attributes.
+
+    Notes on specific directives:
+    - style-src needs 'unsafe-inline' because timetable cards are positioned
+      with inline style attributes.
+    - worker-src must allow blob:, because canvas-confetti renders in a Web
+      Worker created from a blob URL. Without it the worker is blocked and the
+      library silently falls back to the main thread.
+    - frame-ancestors is deliberately absent: it is ignored when delivered in
+      a meta element, and including it only produces a console warning.
+      Framing cannot be restricted without response headers on Pages.
   -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self';
     script-src 'self';
+    worker-src 'self' blob:;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data:;
     connect-src 'none';
     object-src 'none';
     base-uri 'none';
-    form-action 'none';
-    frame-ancestors 'none'">
+    form-action 'none'">
   <meta name="referrer" content="no-referrer">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
