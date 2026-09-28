@@ -35,6 +35,15 @@
     form-action 'none'">
   <meta name="referrer" content="no-referrer">
 
+  <!-- Installable app (PWA) -->
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#0b0f19">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="UniSchedule">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+
   <!-- Umami Analytics -->
   <script defer src="https://cloud.umami.is/script.js" data-website-id="c7ff164c-25b4-4614-9722-6d553200e32d"></script>
 
@@ -77,6 +86,15 @@
               <path d="M3 6h18" />
               <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
               <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+            </svg>
+          </button>
+
+          <!-- TERM & EXPORT SETTINGS -->
+          <button id="btn-settings" class="btn btn-ghost icon-only" title="Term & export settings">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+              <circle cx="12" cy="12" r="3" />
             </svg>
           </button>
 
@@ -124,13 +142,32 @@
           <span class="btn-text">+ Class</span>
         </button>
 
-        <button id="btn-export-ical" class="btn btn-secondary btn-mobile-action">
+        <button id="btn-plans" class="btn btn-secondary btn-mobile-action" title="Saved plans: save, load and compare schedules">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+          </svg>
+          <span class="btn-text btn-text-optional">Plans</span>
+          <span id="plans-count-badge" class="badge-pill hidden">0</span>
+        </button>
+
+        <button id="btn-export-ical" class="btn btn-secondary btn-mobile-action" title="Export as a calendar file (.ics)">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          <span class="btn-text">Export</span>
+          <span class="btn-text btn-text-optional">Export</span>
+        </button>
+
+        <button id="btn-poster" class="btn btn-secondary btn-mobile-action" title="Share your timetable as an image">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+            <circle cx="9" cy="9" r="2" />
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+          </svg>
+          <span class="btn-text btn-text-optional">Poster</span>
         </button>
       </div>
     </header>
@@ -147,6 +184,19 @@
             overlap.</span></span>
       </div>
       <button id="btn-resolve-conflict" class="btn btn-sm btn-outline-danger">Auto-Fix Schedule</button>
+    </div>
+
+    <!-- PEOPLE BAR: ME + FRIENDS -->
+    <div id="people-bar" class="people-bar">
+      <div id="people-tabs" class="people-tabs" role="tablist" aria-label="Whose schedule"></div>
+      <div class="people-bar-actions">
+        <label id="friend-overlay-wrapper" class="friend-overlay-toggle hidden">
+          <input type="checkbox" id="toggle-friend-overlay">
+          <span class="long">Show friends on my timetable</span>
+          <span class="short">Friends overlay</span>
+        </label>
+        <button id="btn-add-person" class="btn btn-sm btn-outline">+ Add friend</button>
+      </div>
     </div>
 
     <!-- MAIN APP GRID LAYOUT -->
@@ -271,6 +321,25 @@
           <!-- Dynamically populated schedule highlight badges -->
         </div>
 
+        <!-- PREFERENCE MATCH SCORE -->
+        <div id="score-card" class="score-card hidden">
+          <div class="score-card-header">
+            <span class="stat-label">Preference match</span>
+            <span id="score-rank" class="score-rank" title="Rank: S is best, D is worst">A</span>
+          </div>
+          <div class="score-bar"><div id="score-bar-fill" class="score-bar-fill"></div></div>
+          <div class="score-card-footer">
+            <span id="score-value">0 / 100</span>
+            <span id="score-hint">Relative to every valid schedule and your weights</span>
+          </div>
+        </div>
+
+        <!-- TOGETHER WITH FRIENDS -->
+        <div id="together-section" class="together-section hidden">
+          <h3 class="section-title">Together with friends</h3>
+          <div id="together-list"></div>
+        </div>
+
         <!-- DAILY BREAKDOWN -->
         <div class="daily-breakdown-section">
           <h3 class="section-title">Daily Campus Breakdown</h3>
@@ -278,28 +347,97 @@
             <!-- Dynamically populated day cards -->
           </div>
         </div>
+
+        <!-- FREE-TIME HEATMAP -->
+        <div id="heatmap-section" class="heatmap-section hidden">
+          <button type="button" id="btn-toggle-heatmap" class="heatmap-toggle" aria-expanded="false" aria-controls="heatmap-body">
+            <span>Free-time heatmap</span>
+            <span class="caret" aria-hidden="true">▸</span>
+          </button>
+          <div id="heatmap-body" class="heatmap-body hidden"></div>
+        </div>
       </aside>
     </main>
 
     <!-- DRAWER: AUTO-COMBINATIONS OPTIMIZER -->
     <div id="combinations-drawer-overlay" class="drawer-overlay hidden">
-      <div class="drawer-content">
+      <div class="drawer-content" tabindex="-1" role="dialog" aria-modal="true" aria-label="Auto Schedule Optimizer">
         <div class="drawer-header">
           <div>
             <h2 class="drawer-title">Auto Schedule Optimizer</h2>
-            <p class="drawer-subtitle">Generates valid non-conflicting section combinations (1 section per course)</p>
+            <p class="drawer-subtitle">Valid non-conflicting section combinations (1 section per course). Hover a card to preview it, use ↑ ↓ and Enter to browse.</p>
           </div>
           <button id="btn-close-drawer" class="btn btn-ghost icon-only">&times;</button>
         </div>
 
         <div class="drawer-controls">
-          <div class="filter-tabs">
-            <button class="filter-tab active" data-sort="gaps">Least Gap Hours</button>
-            <button class="filter-tab" data-sort="daysoff">Most Days Off</button>
-            <button class="filter-tab" data-sort="mornings">No Early Mornings</button>
-            <button class="filter-tab" data-sort="spread">No Back-to-Back</button>
+          <div class="filter-tabs" id="filter-tabs">
+            <button class="filter-tab active" data-sort="gaps">Fewest gaps</button>
+            <button class="filter-tab" data-sort="daysoff">Most days off</button>
+            <button class="filter-tab" data-sort="mornings">No early mornings</button>
+            <button class="filter-tab" data-sort="spread">No back-to-back</button>
+            <button class="filter-tab" data-sort="score">Best match</button>
+            <button class="filter-tab" data-sort="backup">Backups</button>
+            <button class="filter-tab hidden" data-sort="friends" id="filter-tab-friends">With friends</button>
           </div>
-          <span id="combo-summary-text" class="combo-summary">Found 0 valid schedules</span>
+
+          <div class="drawer-toolbar">
+            <button type="button" id="btn-toggle-prefs" class="btn btn-sm btn-outline" aria-expanded="false" aria-controls="prefs-panel">⚙ Preferences</button>
+            <button type="button" id="btn-surprise" class="btn btn-sm btn-secondary" title="Spin the reel and apply a random valid schedule">🎲 Surprise me</button>
+            <span id="combo-summary-text" class="combo-summary">Found 0 valid schedules</span>
+          </div>
+
+          <div id="prefs-panel" class="prefs-panel hidden">
+            <div class="prefs-grid">
+              <label class="prefs-field">
+                <span>No classes before</span>
+                <input type="time" id="pref-earliest">
+              </label>
+              <label class="prefs-field">
+                <span>No classes after</span>
+                <input type="time" id="pref-latest">
+              </label>
+              <div class="prefs-field full">
+                <span>Days I want off</span>
+                <div class="pref-days" id="pref-days"></div>
+              </div>
+              <div class="prefs-field full">
+                <span>Lunch break</span>
+                <div class="prefs-inline">
+                  <select id="pref-lunch-minutes" aria-label="Minimum lunch break">
+                    <option value="0">Off</option>
+                    <option value="30">At least 30 min</option>
+                    <option value="45">At least 45 min</option>
+                    <option value="60">At least 60 min</option>
+                  </select>
+                  <span>between</span>
+                  <input type="time" id="pref-lunch-start" aria-label="Lunch window start">
+                  <span>and</span>
+                  <input type="time" id="pref-lunch-end" aria-label="Lunch window end">
+                </div>
+              </div>
+              <label class="prefs-field full">
+                <span>Max hours on campus per day (0 = no limit)</span>
+                <input type="number" id="pref-max-campus" min="0" max="16" step="0.5" placeholder="0">
+              </label>
+            </div>
+
+            <div class="prefs-weights">
+              <div class="prefs-weights-title">What matters most? (0 = ignore, 3 = a lot)</div>
+              <div id="pref-weights"></div>
+            </div>
+
+            <div class="prefs-footer">
+              <label class="prefs-check">
+                <input type="checkbox" id="pref-hide-violations" checked>
+                Hide schedules that break my limits
+              </label>
+              <button type="button" id="btn-reset-prefs" class="btn btn-xs btn-outline">Reset preferences</button>
+            </div>
+          </div>
+
+          <div id="combo-notes" class="combo-notes hidden"></div>
+          <div id="surprise-ticker" class="surprise-ticker hidden" aria-live="polite"></div>
         </div>
 
         <div id="combinations-list" class="combinations-list custom-scrollbar">
@@ -315,6 +453,7 @@
           <div class="modal-tabs">
             <button class="modal-tab active" data-tab="manual-entry">Add Class Manually</button>
             <button class="modal-tab" data-tab="text-import">Smart Text Parser</button>
+            <button class="modal-tab" data-tab="busy-time">Busy Time</button>
           </div>
           <button id="btn-close-modal" class="btn btn-ghost icon-only">&times;</button>
         </div>
@@ -369,6 +508,163 @@
               <button id="btn-load-sample-text" class="btn btn-outline">Load Example Snippet</button>
               <button id="btn-parse-import" class="btn btn-primary">Parse & Load Courses</button>
             </div>
+          </div>
+
+          <!-- TAB 3: BUSY TIME -->
+          <div id="tab-busy-time" class="tab-pane">
+            <p class="modal-hint">
+              Work shifts, gym, prayer times, commute: anything that must stay free of classes. Busy time shows on the
+              timetable, flags clashes, and the optimizer plans around it.
+            </p>
+            <form id="busy-form" class="custom-course-form">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="busy-label">Label <span class="required-asterisk">*</span></label>
+                  <input type="text" id="busy-label" placeholder="e.g. Work, Gym, Prayer" maxlength="40" required />
+                </div>
+                <div class="form-group">
+                  <label for="busy-color">Colour <span class="optional-tag">(optional)</span></label>
+                  <input type="color" id="busy-color" value="#64748b" />
+                </div>
+              </div>
+
+              <div class="schedule-slots-header">
+                <label class="slots-label">Days & Times <span class="required-asterisk">*</span></label>
+                <button type="button" id="btn-add-busy-slot" class="btn btn-xs btn-outline">+ Add Day & Time</button>
+              </div>
+              <div id="busy-slots-container" class="time-slots-container"></div>
+
+              <div class="modal-footer full-width">
+                <button type="submit" class="btn btn-primary">Save Busy Time</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: ADD / EDIT A PERSON -->
+    <div id="person-modal-overlay" class="modal-overlay hidden">
+      <div class="modal-card person-modal-card">
+        <div class="modal-header">
+          <h3 id="person-modal-title" class="modal-title">Add a friend</h3>
+          <button id="btn-close-person-modal" class="btn btn-ghost icon-only" title="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="person-form" class="custom-course-form">
+            <p class="modal-hint">
+              Each person gets their own tab with their own courses and picks, all saved in this browser. Switch tabs
+              to plan side by side, and turn on the friends overlay to see shared classes and breaks.
+            </p>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="person-name">Name <span class="required-asterisk">*</span></label>
+                <input type="text" id="person-name" placeholder="e.g. Sara" maxlength="24" required />
+              </div>
+              <div class="form-group">
+                <label for="person-color">Colour</label>
+                <input type="color" id="person-color" value="#ec4899" />
+              </div>
+            </div>
+            <label id="person-copy-wrapper" class="prefs-check person-copy">
+              <input type="checkbox" id="person-copy-courses" checked>
+              <span id="person-copy-label">Start with a copy of my courses and picks</span>
+            </label>
+            <div class="modal-footer full-width person-modal-footer">
+              <button type="button" id="btn-delete-person" class="btn btn-outline-danger hidden">Remove</button>
+              <span class="spacer"></span>
+              <button type="button" id="btn-cancel-person" class="btn btn-ghost">Cancel</button>
+              <button type="submit" id="btn-submit-person" class="btn btn-primary">Add friend</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: SAVED PLANS & COMPARE -->
+    <div id="plans-modal-overlay" class="modal-overlay hidden">
+      <div class="modal-card plans-modal-card">
+        <div class="modal-header">
+          <div>
+            <h3 class="modal-title">Saved plans</h3>
+            <p class="modal-subtitle">Keep a few candidate schedules and compare them side by side.</p>
+          </div>
+          <button id="btn-close-plans-modal" class="btn btn-ghost icon-only" title="Close">&times;</button>
+        </div>
+        <div class="modal-body custom-scrollbar">
+          <div class="plans-save-row">
+            <input type="text" id="plan-name-input" placeholder="Name this schedule, e.g. Plan A" maxlength="40" />
+            <button type="button" id="btn-save-plan" class="btn btn-primary btn-sm">Save current</button>
+          </div>
+          <div id="plans-list" class="plans-list"></div>
+
+          <div class="compare-section">
+            <div class="compare-controls">
+              <span>Compare</span>
+              <select id="compare-a" aria-label="First schedule to compare"></select>
+              <span>with</span>
+              <select id="compare-b" aria-label="Second schedule to compare"></select>
+            </div>
+            <div id="compare-output"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: TERM & EXPORT SETTINGS -->
+    <div id="settings-modal-overlay" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <h3 class="modal-title">Term & export settings</h3>
+            <p class="modal-subtitle">Used by the calendar export. Shared by everyone in this browser.</p>
+          </div>
+          <button id="btn-close-settings-modal" class="btn btn-ghost icon-only" title="Close">&times;</button>
+        </div>
+        <div class="modal-body custom-scrollbar">
+          <form id="settings-form" class="custom-course-form">
+            <div class="settings-grid">
+              <div class="form-group">
+                <label for="term-start-date">Term starts on</label>
+                <input type="date" id="term-start-date" />
+                <span class="stat-footnote">Leave empty to start on the coming Sunday.</span>
+              </div>
+              <div class="form-group">
+                <label for="term-weeks">Length in weeks</label>
+                <input type="number" id="term-weeks" min="1" max="30" step="1" value="15" required />
+              </div>
+            </div>
+
+            <div class="form-section-header flex-header">
+              <span class="form-section-divider-text">Holidays & breaks</span>
+              <button type="button" id="btn-add-holiday" class="btn btn-sm btn-outline">+ Add holiday</button>
+            </div>
+            <div id="holidays-list" class="holidays-list"></div>
+
+            <div class="modal-footer full-width">
+              <button type="button" id="btn-cancel-settings" class="btn btn-ghost">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save settings</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: POSTER PREVIEW -->
+    <div id="poster-modal-overlay" class="modal-overlay hidden">
+      <div class="modal-card poster-modal-card">
+        <div class="modal-header">
+          <div>
+            <h3 class="modal-title">Share your timetable</h3>
+            <p class="modal-subtitle">A poster-sized PNG for stories, group chats, or the fridge.</p>
+          </div>
+          <button id="btn-close-poster-modal" class="btn btn-ghost icon-only" title="Close">&times;</button>
+        </div>
+        <div class="modal-body custom-scrollbar">
+          <div id="poster-canvas-wrapper" class="poster-canvas-wrapper"></div>
+          <div class="modal-footer">
+            <button type="button" id="btn-share-poster" class="btn btn-outline hidden">Share…</button>
+            <button type="button" id="btn-download-poster" class="btn btn-primary">Download PNG</button>
           </div>
         </div>
       </div>
@@ -437,6 +733,9 @@
               </li>
               <li>
                 <strong>Let the math work:</strong> Once your options are in, the website will crunch the numbers and calculate the absolute best schedule combination for you.
+              </li>
+              <li>
+                <strong>Plan with friends:</strong> Add a friend from the people bar to give them their own tab, then turn on the friends overlay to find shared classes and breaks.
               </li>
             </ol>
             
