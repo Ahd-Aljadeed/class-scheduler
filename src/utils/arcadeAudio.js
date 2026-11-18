@@ -86,6 +86,33 @@ class ArcadeAudioEngine {
     }
   }
 
+  // 1b. A softer, shorter tick for rapid sequences (the Surprise Me reel)
+  playTick() {
+    if (!this.isSoundEnabled()) return;
+    this.initContext();
+    if (!this.ctx) return;
+
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const now = this.ctx.currentTime;
+
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(660, now);
+
+      gain.gain.setValueAtTime(0.035, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.025);
+    } catch (e) {
+      // Audio context policy fallback
+    }
+  }
+
   // 2. Section select / toggle retro chime
   playSelect() {
     if (!this.isSoundEnabled()) return;
