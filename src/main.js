@@ -44,6 +44,7 @@ import { initSettings } from './features/settings.js';
 import { initHeatmap, renderHeatmapPanel } from './features/heatmap.js';
 import { initPoster } from './features/poster.js';
 import { initSurprise } from './features/surprise.js';
+import { initKomarCatalog } from './features/komarCatalog.js';
 
 export function getIconSvg(name, size = 14, className = "") {
   const classAttr = className ? ` class="${className}"` : '';
@@ -230,6 +231,7 @@ class UniScheduleApp {
     initHeatmap(this);
     initPoster(this);
     initSurprise(this);
+    initKomarCatalog(this);
 
     this.render();
 
@@ -1581,14 +1583,25 @@ class UniScheduleApp {
       if (this.courses.length === 0) {
         this.elCourseList.innerHTML = `
           <div class="empty-course-state">
-            <div class="empty-icon">📚</div>
+            <div class="empty-icon">🎓</div>
             <p class="empty-title">No Classes Added Yet</p>
-            <p class="empty-sub">Add ${escapeHtml(this.activePerson.name)}'s classes manually or import them from text to build a schedule.</p>
-            <button id="btn-empty-add-course" class="btn btn-primary btn-sm">
-              + Add Class Manually
-            </button>
+            <p class="empty-sub">Choose ready-made courses from the Komar catalog or add your own classes.</p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 8px;">
+              <button id="btn-empty-browse-komar" class="btn btn-primary btn-sm">
+                🎓 Browse Komar Classes
+              </button>
+              <button id="btn-empty-add-course" class="btn btn-secondary btn-sm">
+                + Add Custom Class
+              </button>
+            </div>
           </div>
         `;
+        const btnEmptyBrowse = this.elCourseList.querySelector("#btn-empty-browse-komar");
+        if (btnEmptyBrowse && this.komarCatalog) {
+          btnEmptyBrowse.addEventListener("click", () => {
+            this.komarCatalog.open();
+          });
+        }
         const btnEmptyAdd = this.elCourseList.querySelector("#btn-empty-add-course");
         if (btnEmptyAdd) {
           btnEmptyAdd.addEventListener("click", () => {

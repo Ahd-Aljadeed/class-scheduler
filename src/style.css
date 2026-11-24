@@ -4223,3 +4223,554 @@ body {
     justify-content: space-between;
   }
 }
+
+/* ==========================================================================
+   KOMAR UNIVERSITY COURSE CATALOG STYLES
+   ========================================================================== */
+
+.panel-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.komar-badge-count {
+  background: rgba(99, 102, 241, 0.25);
+  color: #a5b4fc;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 99px;
+  margin-left: 4px;
+}
+
+.komar-modal-card {
+  width: min(840px, 96vw);
+  max-height: min(92dvh, 880px);
+  display: flex;
+  flex-direction: column;
+}
+
+.komar-modal-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.komar-title-icon-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.komar-modal-body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+}
+
+.komar-toolbar {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.komar-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.komar-search-wrapper svg {
+  position: absolute;
+  left: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.komar-search-input {
+  width: 100%;
+  padding: 10px 36px 10px 36px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.komar-search-input:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-primary-glow);
+}
+
+#komar-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.komar-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.komar-filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.komar-filter-pill {
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-panel);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.komar-filter-pill:hover {
+  color: var(--text-primary);
+  border-color: var(--border-color-strong);
+  background: var(--bg-card-hover);
+}
+
+.komar-filter-pill.active {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
+  box-shadow: 0 2px 6px var(--accent-primary-glow);
+}
+
+.komar-quick-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.komar-courses-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 260px;
+}
+
+.komar-course-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  padding: 12px 16px;
+  transition: all 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.komar-course-card:hover {
+  border-color: var(--border-color-strong);
+  background: var(--bg-card-hover);
+}
+
+.komar-course-card.selected {
+  border-color: var(--accent-primary);
+  background: rgba(99, 102, 241, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.komar-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.komar-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+.komar-checkbox-label input[type="checkbox"] {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.komar-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.komar-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.komar-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.komar-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.komar-type-badge {
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.komar-type-badge.type-theory {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.komar-type-badge.type-lab {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.komar-type-badge.type-clinical {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.komar-pill-tag.tag-in-planner {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.komar-types-selector {
+  margin-left: 30px;
+  padding: 8px 12px;
+  background: var(--bg-panel);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+}
+
+.komar-types-label {
+  color: var(--text-muted);
+  font-size: 0.775rem;
+  font-weight: 600;
+}
+
+.komar-types-checkboxes {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.komar-type-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.komar-type-checkbox-label:hover {
+  color: var(--text-primary);
+}
+
+.komar-type-checkbox-label input[type="checkbox"] {
+  accent-color: var(--accent-primary);
+  width: 15px;
+  height: 15px;
+}
+
+.btn-toggle-preview {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  flex-shrink: 0;
+}
+
+.komar-sections-accordion {
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn 0.2s ease;
+}
+
+.komar-type-subheading {
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 0 0 6px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.komar-sections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px;
+}
+
+.komar-section-item {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.775rem;
+}
+
+.komar-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.komar-sec-name {
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.komar-sec-loc {
+  color: var(--text-muted);
+  font-size: 0.725rem;
+  font-family: var(--font-mono);
+}
+
+.komar-sec-times {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.komar-time-chip {
+  color: var(--text-secondary);
+  font-size: 0.725rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.komar-time-chip .room-hint {
+  color: var(--text-muted);
+  font-size: 0.675rem;
+}
+
+.komar-empty-state {
+  padding: 40px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.komar-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 4px;
+}
+
+.komar-empty-state h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.komar-empty-state p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  max-width: 360px;
+}
+
+.komar-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-card);
+  flex-wrap: wrap;
+}
+
+.komar-footer-options {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.komar-checkbox-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.komar-checkbox-inline input[type="checkbox"] {
+  accent-color: var(--accent-primary);
+  width: 15px;
+  height: 15px;
+}
+
+.komar-selection-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.komar-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.komar-tab-banner {
+  padding: 36px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.komar-tab-banner-icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.komar-tab-banner h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.komar-tab-banner p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ARCADE THEME OVERRIDES FOR KOMAR CATALOG */
+[data-mode="arcade"] .komar-modal-card {
+  border: 2px solid rgba(0, 240, 255, 0.45);
+  box-shadow: 6px 6px 0px #000000;
+}
+
+[data-mode="arcade"] .komar-title-icon-badge {
+  border: 1.5px solid #00f0ff;
+  box-shadow: 2px 2px 0px #000;
+  background: rgba(0, 240, 255, 0.15);
+  color: #00f0ff;
+}
+
+[data-mode="arcade"] .komar-course-card {
+  border: 1.5px solid var(--border-color);
+  box-shadow: 3px 3px 0px #000;
+}
+
+[data-mode="arcade"] .komar-course-card:hover {
+  border-color: #00f0ff;
+}
+
+[data-mode="arcade"] .komar-course-card.selected {
+  border-color: #ff007f;
+  box-shadow: 4px 4px 0px #000, 0 0 12px rgba(255, 0, 127, 0.2);
+}
+
+[data-mode="arcade"] .komar-badge-count {
+  font-family: var(--font-mono);
+  background: rgba(255, 0, 127, 0.25);
+  color: #ff007f;
+  border: 1px solid rgba(255, 0, 127, 0.4);
+}
+
+@media (max-width: 600px) {
+  .komar-card-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-toggle-preview {
+    align-self: flex-end;
+  }
+
+  .komar-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .komar-footer-actions {
+    justify-content: flex-end;
+  }
+}

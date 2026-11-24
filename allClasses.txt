@@ -1,0 +1,1261 @@
+Search
+Search
+Search
+Search
+Search
+Search
+Search
+Academic Debate	T	1	E-G10	WED	08:00:00	09:30:00
+Academic Debate	T	1	M-G05	THU	09:30:00	11:00:00
+Academic Debate	T	2	M-G02	WED	09:30:00	11:00:00
+Academic Debate	T	2	M-G08	THU	11:00:00	12:30:00
+Academic Debate	T	3	P-108	MON	09:30:00	11:00:00
+Academic Debate	T	3	P-107	WED	09:30:00	11:00:00
+Academic Debate	T	4	P-101	MON	11:00:00	12:30:00
+Academic Debate	T	4	P-102	WED	11:00:00	12:30:00
+Academic English I	T	1	M-104	THU	12:30:00	14:00:00
+Academic English I	T	1	M-G08	SUN	14:00:00	15:30:00
+Academic English II	T	1	M-G09	TUE	14:00:00	15:30:00
+Academic English II	T	1	M-G04	SUN	14:00:00	15:30:00
+Academic English II	T	2	M-G02	THU	08:00:00	09:30:00
+Academic English II	T	2	M-G02	TUE	12:30:00	14:00:00
+Academic English II	T	3	M-G02	SUN	12:30:00	14:00:00
+Academic English II	T	3	M-G04	THU	12:30:00	14:00:00
+Academic English II	T	4	M-G08	WED	14:00:00	15:30:00
+Academic English II	T	4	M-G04	MON	14:00:00	15:30:00
+Academic English II	T	5	P-106	THU	11:00:00	12:30:00
+Academic English II	T	5	E-G07	SUN	08:00:00	09:30:00
+Adult Nursing I	L	1	Y-000	THU	08:00:00	10:30:00
+Adult Nursing I	L	1	Y-000	MON	08:00:00	10:30:00
+Adult Nursing I	L	2	Y-000	MON	10:00:00	12:30:00
+Adult Nursing I	L	2	Y-000	THU	10:00:00	12:30:00
+Adult Nursing I	T	1	M-111	SUN	12:00:00	14:00:00
+Adult Nursing II	L	1	Y-000	MON	08:00:00	10:30:00
+Adult Nursing II	L	1	Y-000	SUN	08:00:00	10:30:00
+Adult Nursing II	L	2	Y-000	SUN	10:00:00	12:30:00
+Adult Nursing II	L	2	H-Shar	MON	10:00:00	12:30:00
+Adult Nursing II	T	1	M-G05	SUN	15:00:00	17:00:00
+Advanced Calculus	T	1	E-G11	MON	08:00:00	10:00:00
+Advanced Calculus	T	1	E-G11	WED	08:00:00	10:00:00
+Advanced Database	T	1	B-B06	MON	14:00:00	16:00:00
+Advanced Database	T	1	B-B06	WED	14:00:00	16:00:00
+Advanced Drug Delivery Systems	T	1	M-G02	TUE	10:00:00	11:00:00
+Advanced Esthetic Dentistry	T	1	P-G12	WED	08:00:00	10:00:00
+Advanced Pharmaceutical Analysis	L	1	P-G03	SAT	08:00:00	10:00:00
+Advanced Pharmaceutical Analysis	L	2	P-G03	SAT	10:00:00	12:00:00
+Advanced Pharmaceutical Analysis	L	3	P-G03	SAT	12:00:00	14:00:00
+Advanced Pharmaceutical Analysis	T	1	P-108	SUN	10:00:00	12:00:00
+Advanced Pharmaceutical Analysis	T	2	P-107	SUN	12:00:00	14:00:00
+Advertising and Promotion Management	T	1	B-G08	SUN	14:00:00	15:30:00
+Advertising and Promotion Management	T	1	B-G08	TUE	14:00:00	15:30:00
+Analytical Chemistry & Lab	L	1	M-B04	WED	08:00:00	11:00:00
+Analytical Chemistry & Lab	L	2	M-B04	WED	11:00:00	14:00:00
+Analytical Chemistry & Lab	L	3	M-B04	THU	08:00:00	11:00:00
+Analytical Chemistry & Lab	L	4	M-B04	THU	11:00:00	14:00:00
+Analytical Chemistry & Lab	T	1	M-103	SUN	08:00:00	09:30:00
+Analytical Chemistry & Lab	T	1	M-103	TUE	08:00:00	09:30:00
+Analytical Chemistry & Lab	T	2	M-103	SUN	09:30:00	11:00:00
+Analytical Chemistry & Lab	T	2	M-103	TUE	09:30:00	11:00:00
+Analytical Chemistry & Lab	T	3	M-103	SUN	11:00:00	12:30:00
+Analytical Chemistry & Lab	T	3	M-103	TUE	11:00:00	12:30:00
+Application Programming	T	1	P-G03	TUE	14:00:00	16:00:00
+Application Programming	T	1	P-G03	THU	14:00:00	16:00:00
+Applied Forensic Analysis in Clinical Labs	T	1	M-105	MON	14:00:00	16:00:00
+Artificial Intelligence	T	1	B-B06	THU	12:30:00	14:00:00
+Artificial Intelligence	T	1	B-B06	SUN	08:00:00	09:30:00
+Artificial Intelligence	T	2	B-B06	WED	08:00:00	09:30:00
+Artificial Intelligence	T	2	B-B06	MON	08:00:00	09:30:00
+Audiovisual Translation	T	1	P-103	SUN	11:30:00	13:30:00
+Audiovisual Translation	T	2	Y-000	WED	17:30:00	18:00:00
+Auditing	T	1	M-111	WED	08:00:00	09:30:00
+Auditing	T	1	M-111	MON	08:00:00	09:30:00
+Basic Head and Neck Anatomy	L	1	M-G12	WED	08:00:00	10:00:00
+Basic Head and Neck Anatomy	L	2	M-G12	SUN	08:00:00	10:00:00
+Basic Head and Neck Anatomy	T	1	P-107	WED	11:00:00	12:00:00
+Basic Immunology	T	1	M-G07	THU	08:00:00	10:00:00
+Basic Mathematics for Biologists	T	1	M-G05	TUE	12:00:00	14:00:00
+Basic Oral Histology and Embryology	L	1	D-G34	TUE	16:00:00	18:00:00
+Basic Oral Histology and Embryology	L	1	D-G34	MON	16:00:00	18:00:00
+Basic Oral Histology and Embryology	T	1	M-104	MON	15:00:00	16:00:00
+Basic Psychology	T	1	M-103	THU	12:00:00	14:00:00
+Basics of Architecture I	L	1	B-G05	TUE	12:00:00	15:00:00
+Basics of Architecture I	L	1	B-G05	SAT	09:30:00	12:30:00
+Basics of Architecture I	T	1	B-G05	SAT	08:30:00	09:30:00
+Basics of Architecture II	L	1	B-G05	SAT	13:30:00	16:30:00
+Basics of Architecture II	L	1	B-G05	TUE	08:00:00	11:00:00
+Basics of Architecture II	L	2	B-G05	MON	13:00:00	16:00:00
+Basics of Architecture II	L	2	B-G05	THU	10:00:00	13:00:00
+Basics of Architecture II	T	1	B-G05	SAT	12:30:00	13:30:00
+Biochemistry & Lab	L	1	M-B10	SUN	08:00:00	10:00:00
+Biochemistry & Lab	L	2	M-B10	SUN	10:00:00	12:00:00
+Biochemistry & Lab	L	3	M-B10	SUN	12:00:00	14:00:00
+Biochemistry & Lab	L	4	M-B10	MON	08:00:00	10:00:00
+Biochemistry & Lab	L	5	M-B04	SUN	10:00:00	12:00:00
+Biochemistry & Lab	L	6	M-B10	MON	12:00:00	14:00:00
+Biochemistry & Lab	L	7	M-B10	MON	14:00:00	16:00:00
+Biochemistry & Lab	T	1	M-107	WED	11:00:00	12:30:00
+Biochemistry & Lab	T	1	M-107	MON	15:30:00	17:00:00
+Biochemistry & Lab	T	2	M-104	WED	12:30:00	14:00:00
+Biochemistry & Lab	T	2	M-104	MON	12:30:00	14:00:00
+Biochemistry & Lab	T	3	M-107	MON	08:00:00	09:30:00
+Biochemistry & Lab	T	3	M-107	WED	14:00:00	15:30:00
+Biochemistry I	L	1	M-B10	WED	10:00:00	12:00:00
+Biochemistry I	L	2	M-B10	WED	12:00:00	14:00:00
+Biochemistry I	T	1	P-108	SUN	08:00:00	10:00:00
+Biochemistry II	L	1	M-B14	THU	08:00:00	10:00:00
+Biochemistry II	L	2	M-B14	THU	10:00:00	12:00:00
+Biochemistry II	L	3	M-B14	SUN	08:00:00	10:00:00
+Biochemistry II	L	4	M-B14	SUN	10:00:00	12:00:00
+Biochemistry II	T	1	M-G02	TUE	08:00:00	10:00:00
+Biochemistry II	T	2	M-G09	TUE	10:00:00	12:00:00
+Bioinformatics & Lab	L	1	D-G22	THU	10:00:00	12:00:00
+Bioinformatics & Lab	T	1	P-111	SUN	08:00:00	10:00:00
+Bioorganic Chemistry	L	1	P-B04	MON	12:00:00	15:00:00
+Bioorganic Chemistry	T	1	P-G12	WED	10:00:00	12:00:00
+Biopharmaceutics	L	1	P-B05	SUN	08:00:00	10:00:00
+Biopharmaceutics	L	2	P-B05	SUN	10:00:00	12:00:00
+Biopharmaceutics	L	4	P-B05	MON	12:00:00	14:00:00
+Biopharmaceutics	T	1	M-G08	TUE	12:00:00	14:00:00
+Biopharmaceutics	T	2	P-104	TUE	14:00:00	16:00:00
+Biostatistics	T	1	P-G03	WED	08:00:00	09:30:00
+Biostatistics	T	1	M-107	MON	14:00:00	15:30:00
+Biostatistics	T	2	P-G03	TUE	11:00:00	12:30:00
+Biostatistics	T	2	M-107	SUN	11:00:00	12:30:00
+Biostatistics	T	3	P-G03	THU	08:00:00	09:30:00
+Biostatistics	T	3	M-107	SUN	14:00:00	15:30:00
+Biostatistics	T	4	M-107	MON	12:30:00	14:00:00
+Biostatistics	T	4	P-G03	WED	12:30:00	14:00:00
+Body Fluid Analysis & Lab	L	1	P-B01	MON	14:00:00	16:00:00
+Body Fluid Analysis & Lab	L	1	P-B11	WED	10:00:00	12:00:00
+Body Fluid Analysis & Lab	L	2	P-B11	WED	12:00:00	14:00:00
+Body Fluid Analysis & Lab	T	1	P-102	MON	10:00:00	12:00:00
+Body Fluid Analysis & Lab	T	1	P-G02	THU	09:30:00	11:00:00
+Body Fluid Analysis & Lab	T	1	P-102	TUE	14:00:00	15:30:00
+British Literature I	T	1	B-G12	TUE	09:30:00	11:00:00
+British Literature I	T	1	B-G12	SUN	08:00:00	09:30:00
+British Literature II	T	1	B-G12	WED	12:00:00	13:30:00
+British Literature II	T	1	B-G12	SUN	12:00:00	13:30:00
+Business Analytics	T	1	B-B05	SAT	09:30:00	11:00:00
+Business Analytics	T	1	B-B05	THU	14:00:00	15:30:00
+Business Law & Legal Environment	T	1	M-103	SAT	11:00:00	14:00:00
+Business Mathematics	T	1	P-102	TUE	08:00:00	10:00:00
+Business Mathematics	T	1	B-G09	SUN	08:00:00	10:00:00
+Business Strategy	T	1	M-105	THU	12:30:00	14:00:00
+Business Strategy	T	1	B-B06	SAT	08:00:00	09:30:00
+Calculus I	T	1	P-107	SUN	10:00:00	12:00:00
+Calculus I	T	1	P-107	MON	08:00:00	10:00:00
+Calculus I	T	2	M-G09	SUN	12:00:00	14:00:00
+Calculus I	T	2	M-G09	MON	12:00:00	14:00:00
+Calculus I	T	3	M-108	WED	14:00:00	16:00:00
+Calculus I	T	3	M-108	MON	14:00:00	16:00:00
+Calculus II	T	1	P-G05	MON	12:00:00	14:00:00
+Calculus II	T	1	P-103	WED	12:00:00	14:00:00
+Calculus II	T	2	P-G08	WED	14:00:00	16:00:00
+Calculus II	T	2	P-102	MON	14:00:00	16:00:00
+Calculus II	T	3	P-107	THU	08:00:00	10:00:00
+Calculus II	T	3	P-103	TUE	16:00:00	18:00:00
+Calculus II	T	4	P-101	THU	14:00:00	16:00:00
+Calculus II	T	4	M-G04	TUE	14:00:00	16:00:00
+Cancer Genetics & Personalized Medicine	T	1	M-103	MON	15:00:00	16:00:00
+Cell Biology & Lab	L	1	P-B11	TUE	10:00:00	12:00:00
+Cell Biology & Lab	T	1	M-G07	TUE	08:00:00	10:00:00
+Cell Biology and Genetics	T	1	M-105	TUE	11:00:00	12:30:00
+Cell Biology and Genetics	T	1	P-105	THU	15:30:00	17:00:00
+Ceramics I	L	1	P-B10	SAT	15:00:00	17:00:00
+Ceramics I	L	2	P-B10	SUN	15:00:00	17:00:00
+Ceramics I	T	1	P-B10	SAT	14:00:00	15:00:00
+Ceramics I	T	2	P-B10	SUN	14:00:00	15:00:00
+Ceramics II	L	1	P-B10	SAT	09:00:00	11:00:00
+Ceramics II	T	1	P-B10	SAT	08:00:00	09:00:00
+Circuit Analysis	T	1	L-127	TUE	14:00:00	15:30:00
+Circuit Analysis	T	1	L-127	MON	12:30:00	14:00:00
+Clinical Biochemistry	L	1	M-B14	TUE	08:00:00	10:00:00
+Clinical Biochemistry	L	2	M-B14	TUE	10:00:00	12:00:00
+Clinical Biochemistry	T	1	M-107	THU	12:00:00	14:00:00
+Clinical Chemistry & Lab	L	1	M-B14	SAT	14:00:00	16:00:00
+Clinical Chemistry & Lab	L	2	M-B14	SAT	10:00:00	12:00:00
+Clinical Chemistry & Lab	L	3	M-B14	SAT	12:00:00	14:00:00
+Clinical Chemistry & Lab	T	1	M-105	THU	09:30:00	11:00:00
+Clinical Chemistry & Lab	T	1	M-105	WED	09:30:00	11:00:00
+Clinical Chemistry & Lab	T	2	M-103	WED	11:00:00	12:30:00
+Clinical Chemistry & Lab	T	2	M-103	THU	08:00:00	09:30:00
+Clinical Haematology	T	1	M-G05	SUN	09:30:00	11:00:00
+Clinical Haematology	T	1	P-101	TUE	09:30:00	11:00:00
+Clinical Laboratory Management and Quality Control	T	1	Y-000	TUE	10:00:00	11:00:00
+Clinical Laboratory Management and Quality Control	T	1	Y-000	TUE	08:00:00	10:00:00
+Clinical Laboratory Management and Quality Control	T	1	E-G10	TUE	08:00:00	10:00:00
+Clinical Oncology	L	1	Y-000	MON	08:00:00	10:30:00
+Clinical Oncology	L	2	Y-000	MON	10:00:00	12:30:00
+Clinical Oncology	T	1	M-107	SUN	13:00:00	14:00:00
+Clinical Parasitology	L	1	P-B01	SAT	08:00:00	10:00:00
+Clinical Parasitology	L	2	P-B01	SAT	10:00:00	12:00:00
+Clinical Parasitology	T	1	M-105	SUN	12:00:00	14:00:00
+Clinical Pharmacokinetics	T	1	E-G08	TUE	08:00:00	10:00:00
+Clinical Pharmacokinetics	T	2	P-G02	TUE	12:00:00	14:00:00
+Clinical Pharmacology	L	1	H-Harem	MON	14:00:00	16:00:00
+Clinical Pharmacology	L	2	H-Harem	MON	12:00:00	14:30:00
+Clinical Pharmacology	T	1	P-102	THU	14:00:00	15:00:00
+College Algebra	T	1	P-102	WED	09:30:00	11:00:00
+College Algebra	T	1	M-111	TUE	09:30:00	11:00:00
+College Algebra	T	2	P-101	SAT	14:00:00	17:00:00
+College Physics	T	1	M-105	MON	08:00:00	09:30:00
+College Physics	T	1	M-103	WED	08:00:00	09:30:00
+College Physics	T	2	M-104	MON	09:30:00	11:00:00
+College Physics	T	2	M-103	WED	09:30:00	11:00:00
+College Reading I	T	1	P-106	SUN	09:30:00	11:00:00
+College Reading I	T	1	P-104	TUE	08:00:00	09:30:00
+College Reading II	T	1	P-105	SUN	09:30:00	11:00:00
+College Reading II	T	1	P-105	THU	13:00:00	14:30:00
+College Writing I	T	1	B-G10	SUN	08:30:00	10:00:00
+College Writing I	T	1	B-G08	TUE	09:30:00	11:00:00
+College Writing II	T	1	B-G10	THU	12:30:00	14:00:00
+College Writing II	T	1	B-G10	SUN	10:00:00	11:30:00
+Community Dentistry	T	1	P-105	MON	08:00:00	10:00:00
+Compiler Construction	T	1	B-B05	MON	08:00:00	09:30:00
+Compiler Construction	T	1	B-B05	WED	08:00:00	09:30:00
+Complete Denture I	L	1	L-G04	SAT	08:00:00	11:00:00
+Complete Denture I	L	2	L-G04	SUN	14:00:00	17:00:00
+Complete Denture I	L	3	L-G04	SAT	15:00:00	18:00:00
+Complete Denture I	T	1	M-108	SAT	12:00:00	13:00:00
+Complete Denture II	L	1	D-G24	MON	09:00:00	12:00:00
+Complete Denture II	T	1	D-G24	MON	08:00:00	09:00:00
+Complete Denture III	L	1	D-G24	THU	14:00:00	17:00:00
+Complete Denture III	T	1	D-G24	THU	13:00:00	14:00:00
+Complete Denture IV	L	1	Y-000	WED	12:00:00	14:00:00
+Complete Denture IV	T	1	Y-000	WED	11:00:00	12:00:00
+Computer Application in Architecture I	T	1	D-G22	SUN	08:00:00	10:00:00
+Computer Applications for Business	T	1	B-B05	TUE	15:30:00	17:00:00
+Computer Applications for Business	T	1	B-B01	WED	14:00:00	15:30:00
+Computer Communication and Networks & Lab	T	1	B-G08	SUN	08:00:00	10:00:00
+Computer Communication and Networks & Lab	T	1	L-127	TUE	08:00:00	10:00:00
+Computer Communication and Networks & Lab	T	2	E-G12	SUN	10:00:00	12:00:00
+Computer Communication and Networks & Lab	T	2	L-127	TUE	10:00:00	12:00:00
+Computer Graphics	T	1	P-G03	THU	11:00:00	12:30:00
+Computer Graphics	T	1	P-G03	MON	11:00:00	12:30:00
+Computer Logic Design	T	1	L-127	THU	08:00:00	10:00:00
+Computer Logic Design	T	1	L-127	WED	08:00:00	10:00:00
+Computer Logic Design	T	2	L-127	THU	10:00:00	12:00:00
+Computer Logic Design	T	2	L-127	WED	10:00:00	12:00:00
+Computer Logic Design	T	3	L-127	WED	12:00:00	14:00:00
+Computer Logic Design	T	3	L-127	MON	08:00:00	10:00:00
+Computer Logic Design	T	4	L-127	MON	10:00:00	12:00:00
+Computer Logic Design	T	4	L-127	THU	12:00:00	14:00:00
+Computer Network	T	1	P-G03	WED	09:30:00	11:00:00
+Computer Network	T	1	P-G03	MON	08:00:00	09:30:00
+Computer Networks Design and Analysis	T	1	B-B05	TUE	09:30:00	11:00:00
+Computer Networks Design and Analysis	T	1	B-B05	SUN	09:30:00	11:00:00
+Computer Organization and Architecture	T	1	B-B06	SUN	09:30:00	11:00:00
+Computer Organization and Architecture	T	1	B-B06	THU	08:00:00	09:30:00
+Computer Organization and Architecture	T	2	B-B01	THU	12:30:00	14:00:00
+Computer Organization and Architecture	T	2	B-B05	SUN	15:30:00	17:00:00
+Computer Security	T	1	B-B06	MON	09:30:00	11:00:00
+Computer Security	T	1	B-B06	WED	09:30:00	11:00:00
+Computer Skills	T	2	B-B05	THU	11:00:00	12:30:00
+Computer Skills	T	2	B-B05	THU	12:30:00	14:00:00
+Computer Skills	T	3	B-B01	THU	08:00:00	09:30:00
+Computer Skills	T	3	B-B01	WED	15:30:00	17:00:00
+Conflict Management	T	1	M-G07	SUN	08:00:00	09:30:00
+Conflict Management	T	1	P-106	THU	08:00:00	09:30:00
+Conservative Dentistry I	C	1	D-G06	MON	10:00:00	13:00:00
+Conservative Dentistry I	C	2	D-G06	MON	13:00:00	16:00:00
+Conservative Dentistry I	C	3	D-G06	TUE	10:00:00	13:00:00
+Conservative Dentistry I	C	4	D-G06	TUE	13:00:00	16:00:00
+Conservative Dentistry I	T	1	P-108	TUE	08:00:00	09:00:00
+Conservative Dentistry I	T	2	M-G05	SAT	13:00:00	14:00:00
+Conservative Dentistry II	C	1	D-G06	SAT	10:00:00	13:00:00
+Conservative Dentistry II	C	2	D-G06	SAT	13:00:00	16:00:00
+Conservative Dentistry II	C	3	D-G06	SUN	10:00:00	13:00:00
+Conservative Dentistry II	C	4	D-G06	WED	10:00:00	13:00:00
+Conservative Dentistry II	C	5	D-G06	SUN	13:00:00	16:00:00
+Conservative Dentistry II	C	6	D-G06	WED	13:00:00	16:00:00
+Conservative Dentistry II	T	1	P-107	SAT	08:00:00	09:00:00
+Conservative Dentistry II	T	2	P-101	SAT	09:00:00	10:00:00
+Conservative Dentistry II	T	3	E-G11	SUN	09:00:00	10:00:00
+Conservative Dentistry III	C	1	D-112B	SUN	10:00:00	13:00:00
+Conservative Dentistry III	C	2	D-112B	SUN	13:00:00	16:00:00
+Conservative Dentistry III	C	3	D-112B	MON	10:00:00	13:00:00
+Conservative Dentistry III	C	4	D-112B	MON	13:00:00	16:00:00
+Conservative Dentistry III	C	5	D-112B	TUE	10:00:00	13:00:00
+Conservative Dentistry III	T	1	P-G09	SUN	08:00:00	10:00:00
+Conservative Dentistry III	T	2	B-G09	MON	08:00:00	10:00:00
+Conservative Dentistry III	T	3	P-107	TUE	08:00:00	10:00:00
+Conservative Dentistry IV	C	1	D-112B	SAT	10:00:00	13:00:00
+Conservative Dentistry IV	C	2	D-112B	SAT	13:00:00	16:00:00
+Conservative Dentistry IV	C	3	D-112B	WED	10:00:00	13:00:00
+Conservative Dentistry IV	C	4	D-112B	WED	13:00:00	16:00:00
+Conservative Dentistry IV	C	5	D-112B	THU	10:00:00	13:00:00
+Conservative Dentistry IV	C	6	D-112B	THU	13:00:00	16:00:00
+Conservative Dentistry IV	T	1	P-102	SAT	08:00:00	10:00:00
+Conservative Dentistry IV	T	2	M-G02	SUN	08:00:00	10:00:00
+Conservative Dentistry IV	T	3	P-103	THU	08:00:00	10:00:00
+Construction Engineering	T	1	P-G09	THU	09:30:00	11:00:00
+Construction Engineering	T	1	P-104	TUE	09:30:00	11:00:00
+Consumer Behavior	T	1	Y-000	TUE	08:00:00	09:30:00
+Consumer Behavior	T	1	Y-000	SUN	08:00:00	09:30:00
+Conversation	T	1	B-G09	WED	09:00:00	11:00:00
+Cosmetics	T	1	P-103	SAT	12:00:00	14:00:00
+Cost Accounting	T	1	E-G07	SUN	14:00:00	15:30:00
+Cost Accounting	T	1	M-G05	WED	14:00:00	15:30:00
+Creative Writing	T	1	P-104	WED	14:00:00	15:30:00
+Creative Writing	T	1	B-G12	MON	14:00:00	15:30:00
+Critical Approaches to Literature	T	1	P-102	WED	08:00:00	09:30:00
+Critical Approaches to Literature	T	1	P-102	SUN	09:30:00	11:00:00
+Critical Care Nursing	L	1	Y-000	THU	08:00:00	12:30:00
+Critical Care Nursing	L	1	H-Shar	THU	08:00:00	12:30:00
+Critical Care Nursing	T	1	P-111	SUN	14:00:00	16:00:00
+Critical Care Nursing	T	1	P-102	SUN	14:00:00	16:00:00
+Curriculum Design	T	1	Y-000	THU	17:30:00	18:00:00
+Data Mining	T	1	B-B05	MON	09:30:00	11:00:00
+Data Mining	T	1	B-B01	WED	09:30:00	11:00:00
+Data Structure	T	1	B-B05	SUN	11:00:00	12:30:00
+Data Structure	T	1	B-B05	TUE	11:00:00	12:30:00
+Data Structure	T	2	B-B05	SUN	13:00:00	14:30:00
+Data Structure	T	2	B-B05	TUE	12:30:00	14:00:00
+Dental Anatomy	C	1	D-G28	MON	10:00:00	13:00:00
+Dental Anatomy	C	1	D-G28	WED	10:00:00	13:00:00
+Dental Anatomy	C	2	D-G28	MON	13:00:00	16:00:00
+Dental Anatomy	C	2	D-G28	THU	10:00:00	13:00:00
+Dental Anatomy	C	3	D-G28	THU	13:00:00	16:00:00
+Dental Anatomy	C	3	D-G28	SAT	10:00:00	13:00:00
+Dental Anatomy	T	1	P-G12	MON	08:00:00	10:00:00
+Dental Anatomy	T	2	P-108	THU	08:00:00	10:00:00
+Dental Anatomy and Morphology I	L	1	L-G08	SUN	12:00:00	15:00:00
+Dental Anatomy and Morphology I	L	2	L-G08	SUN	08:00:00	11:00:00
+Dental Anatomy and Morphology I	L	3	L-G04	MON	11:00:00	14:00:00
+Dental Anatomy and Morphology I	T	1	M-G09	SUN	11:00:00	12:00:00
+Dental Anatomy and Morphology II	L	1	L-G08	SAT	12:00:00	15:00:00
+Dental Anatomy and Morphology II	L	2	L-G08	SAT	08:00:00	11:00:00
+Dental Anatomy and Morphology II	T	1	M-105	SAT	11:00:00	12:00:00
+Dental Device Technology	T	1	B-G08	MON	09:00:00	11:00:00
+Dental Device Technology	T	2	P-B10	MON	11:00:00	13:00:00
+Dental Materials I	C	1	D-G30	TUE	10:00:00	12:00:00
+Dental Materials I	C	2	D-G30	TUE	13:00:00	15:00:00
+Dental Materials I	C	3	D-G30	WED	10:00:00	12:00:00
+Dental Materials I	T	1	M-104	SUN	08:00:00	09:00:00
+Dental Materials I	T	2	E-G09	WED	09:00:00	10:00:00
+Dental Materials II	C	1	D-G30	MON	16:00:00	18:00:00
+Dental Materials II	C	2	D-G30	THU	10:00:00	12:00:00
+Dental Materials II	T	1	P-105	SUN	16:00:00	17:00:00
+Dental Materials II	T	2	E-G07	THU	09:00:00	10:00:00
+Dental Public Health and Professional Ethics	T	1	P-G12	TUE	09:00:00	11:00:00
+Diagnostic Techniques & Lab	L	1	P-B11	SAT	14:00:00	16:00:00
+Diagnostic Techniques & Lab	L	2	P-B11	SAT	12:00:00	14:00:00
+Diagnostic Techniques & Lab	T	1	M-G04	SUN	11:00:00	12:00:00
+Diagnostic Techniques & Lab	T	2	P-111	SUN	13:00:00	14:00:00
+Diagnostic and Therapeutic Instrumentation & Lab	L	1	E-G13	WED	10:00:00	12:00:00
+Diagnostic and Therapeutic Instrumentation & Lab	L	2	E-G13	WED	08:00:00	10:00:00
+Diagnostic and Therapeutic Instrumentation & Lab	T	1	M-103	SAT	08:00:00	10:00:00
+Differential Equations	T	1	P-105	SUN	08:00:00	09:30:00
+Differential Equations	T	1	P-105	TUE	08:00:00	09:30:00
+Digital Dentistry	T	1	P-111	SUN	10:00:00	11:00:00
+Digital Dentistry and CAD/CAM I	T	1	D-G22	WED	12:00:00	14:00:00
+Digital Dentistry and CAD/CAM I	T	2	D-G22	WED	16:00:00	18:00:00
+Digital Dentistry and CAD/CAM II	T	1	D-G22	WED	14:00:00	16:00:00
+Discourse Analysis	T	1	P-104	WED	10:30:00	12:00:00
+Discourse Analysis	T	1	B-G12	MON	10:30:00	12:00:00
+Discrete Structures	T	1	M-104	SAT	12:30:00	15:30:00
+Drilling and Completions Engineering I	T	1	P-105	TUE	12:30:00	14:00:00
+Drilling and Completions Engineering I	T	1	P-105	SUN	12:30:00	14:00:00
+Drug Discovery and Development	T	1	M-103	MON	13:00:00	15:00:00
+Drug Informatics	T	1	M-G04	SUN	10:00:00	11:00:00
+Drug Informatics	T	2	M-103	THU	11:00:00	12:00:00
+Drug literature Review	T	1	P-G04	TUE	14:00:00	16:00:00
+Effective Communication	T	1	P-G12	MON	10:30:00	12:30:00
+Electronic Materials	T	1	L-127	TUE	15:30:00	17:00:00
+Electronic Materials	T	1	L-127	MON	14:00:00	15:30:00
+Emergency & Disaster Nursing	L	1	Y-000	SUN	08:00:00	10:00:00
+Emergency & Disaster Nursing	L	2	H-Shar	SUN	10:00:00	12:30:00
+Emergency & Disaster Nursing	T	1	M-G07	SUN	14:00:00	16:00:00
+Engineering Economy	T	1	P-111	WED	10:00:00	11:30:00
+Engineering Economy	T	1	P-111	MON	10:00:00	11:30:00
+Engineering Graphics	T	1	D-G22	SUN	14:00:00	16:00:00
+Engineering Materials	T	1	P-101	WED	11:00:00	12:30:00
+Engineering Materials	T	1	P-105	MON	11:00:00	12:30:00
+Engineering Mechanics	T	1	P-106	WED	10:00:00	12:00:00
+Engineering Mechanics	T	1	P-106	MON	10:00:00	12:00:00
+Engineering Surveying	T	1	P-G05	MON	10:00:00	11:30:00
+Engineering Surveying	T	1	P-103	WED	10:00:00	11:30:00
+Engineering Surveying	T	2	P-G08	MON	12:00:00	13:30:00
+Engineering Surveying	T	2	P-107	WED	12:00:00	13:30:00
+Engineering Thermodynamics	T	1	P-111	WED	13:00:00	14:30:00
+Engineering Thermodynamics	T	1	P-111	MON	13:00:00	14:30:00
+English Studies	T	1	P-103	SUN	09:30:00	11:00:00
+English Studies	T	1	P-103	WED	08:00:00	09:30:00
+Environmental Engineering Fundamentals & Lab	T	1	M-G05	SUN	12:30:00	14:00:00
+Environmental Engineering Fundamentals & Lab	T	1	M-G07	TUE	12:30:00	14:00:00
+Environmental Health	T	1	M-105	MON	12:00:00	14:00:00
+Environmental Science	T	1	P-105	MON	14:00:00	15:30:00
+Environmental Science	T	1	P-105	WED	14:00:00	15:30:00
+Epidemiology	T	1	P-G12	WED	14:00:00	16:00:00
+Evidence Based Dentistry	T	1	P-G05	MON	08:00:00	09:00:00
+Evidence Based Dentistry	T	2	P-G05	MON	09:00:00	10:00:00
+Evidence Based Practice	T	1	P-G05	WED	09:30:00	11:00:00
+Evidence Based Practice	T	1	P-G12	MON	12:30:00	14:00:00
+Exploring Drama I	T	1	B-G10	SUN	11:30:00	14:30:00
+Exploring Drama II	T	1	P-104	SUN	08:00:00	09:30:00
+Exploring Drama II	T	1	P-104	WED	12:00:00	13:30:00
+Exploring Fiction I	T	1	P-G12	TUE	14:00:00	15:30:00
+Exploring Fiction I	T	1	P-102	MON	12:30:00	14:00:00
+Exploring Fiction II	T	1	B-G12	THU	12:30:00	14:00:00
+Exploring Fiction II	T	1	B-G12	TUE	12:30:00	14:00:00
+Exploring Poetry I	T	1	P-104	TUE	12:00:00	13:30:00
+Exploring Poetry I	T	1	P-104	THU	14:30:00	16:00:00
+Exploring Poetry II	T	1	P-104	THU	08:30:00	10:00:00
+Exploring Poetry II	T	1	P-104	MON	08:30:00	10:00:00
+Family and Community Health Nursing	T	1	P-G02	WED	12:00:00	14:00:00
+Family and Community Health Nursing	T	1	P-111	SAT	12:30:00	14:30:00
+Film Studies	T	1	P-104	SUN	09:30:00	11:00:00
+Film Studies	T	1	P-104	WED	09:00:00	10:30:00
+Financial Accounting	T	1	M-G02	TUE	11:00:00	12:30:00
+Financial Accounting	T	1	M-G02	SUN	11:00:00	12:30:00
+Financial Accounting	T	2	B-G08	TUE	12:30:00	14:00:00
+Financial Accounting	T	2	M-G04	SUN	12:30:00	14:00:00
+Financial Management	T	1	M-107	MON	09:30:00	11:00:00
+Financial Management	T	1	M-108	WED	11:00:00	12:30:00
+Financial Reporting	T	1	B-G08	MON	11:00:00	12:30:00
+Financial Reporting	T	1	E-G10	WED	09:30:00	11:00:00
+Financial Statements Analysis	T	1	E-G07	THU	17:00:00	18:00:00
+Fixed Prosthodontics I	L	1	L-G08	TUE	12:00:00	15:00:00
+Fixed Prosthodontics I	L	2	L-G08	TUE	08:00:00	11:00:00
+Fixed Prosthodontics I	T	1	M-107	TUE	11:00:00	12:00:00
+Fixed Prosthodontics II	L	1	P-B10	WED	08:00:00	11:00:00
+Fixed Prosthodontics II	L	2	P-B10	WED	12:00:00	14:00:00
+Fixed Prosthodontics II	T	1	M-G04	WED	11:00:00	12:00:00
+Fixed Prosthodontics III	L	1	P-B10	MON	13:00:00	15:00:00
+Fixed Prosthodontics III	T	1	M-103	MON	12:00:00	13:00:00
+Fixed Prosthodontics IV	L	1	P-B10	SUN	12:00:00	14:00:00
+Fixed Prosthodontics IV	L	2	P-B10	MON	09:00:00	11:00:00
+Fixed Prosthodontics IV	T	1	P-B10	SUN	11:00:00	12:00:00
+Fixed Prosthodontics IV	T	2	P-B10	MON	08:00:00	09:00:00
+Fluid Mechanics	T	1	P-106	SAT	11:00:00	14:00:00
+Foreign Language I	T	1	M-105	THU	14:00:00	16:00:00
+Foreign Language II	T	1	M-G07	MON	10:00:00	12:00:00
+Foreign Language III	T	1	B-G12	TUE	14:00:00	16:00:00
+Foreign Language IV	T	1	M-G05	MON	14:00:00	16:00:00
+Foundation in Neuroscience	T	1	M-G05	MON	12:00:00	14:00:00
+Free Hand Drawing I	L	1	B-G06	TUE	09:00:00	11:00:00
+Free Hand Drawing I	T	1	B-G06	TUE	08:00:00	09:00:00
+Free Hand Drawing II	L	1	B-G06	TUE	12:00:00	14:00:00
+Free Hand Drawing II	T	1	B-G06	TUE	11:00:00	12:00:00
+Fundamentals of Database Systems	T	1	B-B01	SAT	09:00:00	12:00:00
+Fundamentals of Database Systems	T	2	B-B01	SAT	12:00:00	15:00:00
+Fundamentals of Medical Chemistry	L	1	M-B04	SUN	12:00:00	14:00:00
+Fundamentals of Medical Chemistry	L	2	M-B04	MON	14:00:00	16:00:00
+Fundamentals of Medical Chemistry	L	3	M-B04	SUN	14:00:00	16:00:00
+Fundamentals of Medical Chemistry	T	1	M-105	SAT	09:00:00	11:00:00
+Fundamentals of Medical Chemistry	T	2	M-107	SAT	12:00:00	14:00:00
+Fundamentals of Nursing I	L	1	E-G14	SUN	08:00:00	10:00:00
+Fundamentals of Nursing I	L	1	E-G14	WED	08:00:00	10:00:00
+Fundamentals of Nursing I	L	2	E-G14	SUN	10:00:00	12:00:00
+Fundamentals of Nursing I	L	2	E-G14	WED	12:00:00	14:00:00
+Fundamentals of Nursing I	T	1	M-G05	TUE	08:00:00	10:00:00
+Fundamentals of Nursing II	L	1	E-G13	THU	10:00:00	12:00:00
+Fundamentals of Nursing II	L	1	Y-000	MON	09:30:00	11:30:00
+Fundamentals of Nursing II	T	1	E-G09	SUN	08:00:00	10:00:00
+Fundamentals of Nutrition	T	1	M-107	THU	15:00:00	16:00:00
+Fundamentals of Nutrition	T	1	M-105	TUE	14:00:00	16:00:00
+General Chemistry & Lab	L	1	M-B10	SAT	08:00:00	10:00:00
+General Chemistry & Lab	L	2	M-B10	SAT	10:00:00	12:00:00
+General Chemistry & Lab	L	3	M-B10	SAT	12:00:00	14:00:00
+General Chemistry & Lab	L	4	M-B10	SAT	14:00:00	16:00:00
+General Chemistry & Lab	L	5	M-B10	SUN	14:00:00	16:00:00
+General Chemistry & Lab	T	1	P-G04	THU	14:00:00	15:30:00
+General Chemistry & Lab	T	1	P-G04	SUN	08:30:00	10:00:00
+General Chemistry & Lab	T	2	P-G04	WED	10:00:00	11:30:00
+General Chemistry & Lab	T	2	P-G04	SUN	12:30:00	14:00:00
+General Chemistry & Lab	T	3	P-G04	WED	12:00:00	13:30:00
+General Chemistry & Lab	T	3	P-G04	THU	09:30:00	11:00:00
+General Histology	L	1	M-B07	SUN	14:00:00	16:00:00
+General Histology	L	2	M-B07	SUN	10:00:00	12:00:00
+General Histology	L	3	M-B07	SUN	12:00:00	14:00:00
+General Histology	L	4	M-B07	SAT	14:00:00	16:00:00
+General Histology	L	5	M-B07	WED	10:00:00	12:00:00
+General Histology	L	6	M-B07	WED	12:00:00	14:00:00
+General Histology	L	7	M-B07	WED	14:00:00	16:00:00
+General Histology	T	1	P-G02	SUN	08:00:00	10:00:00
+General Histology	T	2	P-G05	SUN	10:00:00	12:00:00
+General Histology	T	3	P-G05	SUN	12:00:00	14:00:00
+General Histology	T	4	P-G04	WED	08:00:00	10:00:00
+General Human Anatomy	L	1	M-G12	WED	13:00:00	15:00:00
+General Human Anatomy	L	2	M-G12	WED	10:00:00	12:00:00
+General Human Anatomy	T	1	M-G04	WED	12:00:00	13:00:00
+General Medical Biology	L	1	P-B14	MON	08:00:00	10:00:00
+General Medical Biology	L	2	P-B14	MON	10:00:00	12:00:00
+General Medical Biology	L	3	P-B14	MON	12:00:00	14:00:00
+General Medical Biology	L	4	P-B14	WED	08:00:00	10:00:00
+General Medical Biology	L	5	P-B14	WED	10:00:00	12:00:00
+General Medical Biology	L	6	P-B14	WED	12:00:00	14:00:00
+General Medical Biology	T	1	P-G02	WED	08:00:00	10:00:00
+General Medical Biology	T	2	P-108	WED	10:00:00	12:00:00
+General Medical Biology	T	3	P-108	MON	12:00:00	14:00:00
+General Medicine	T	1	Y-000	SAT	08:00:00	14:00:00
+General Medicine	T	2	Y-000	WED	08:00:00	14:00:00
+General Microbiology	L	1	P-B01	SUN	10:00:00	12:00:00
+General Microbiology	L	2	P-B01	MON	12:00:00	14:00:00
+General Microbiology	T	1	P-102	WED	14:00:00	16:00:00
+General Pathology	L	1	M-B07	MON	08:00:00	10:00:00
+General Pathology	L	2	M-B07	MON	10:00:00	12:00:00
+General Pathology	L	3	M-B07	MON	12:00:00	14:00:00
+General Pathology	L	4	M-B07	MON	14:00:00	16:00:00
+General Pathology	L	5	M-B07	TUE	08:00:00	10:00:00
+General Pathology	L	6	M-B07	TUE	10:00:00	12:00:00
+General Pathology	L	7	M-B07	TUE	12:00:00	14:00:00
+General Pathology	L	8	M-B07	TUE	14:00:00	16:00:00
+General Pathology	L	9	M-B07	THU	08:00:00	10:00:00
+General Pathology	L	10	M-B07	THU	10:00:00	12:00:00
+General Pathology	L	11	M-B07	THU	12:00:00	14:00:00
+General Pathology	L	12	M-B07	THU	14:00:00	16:00:00
+General Pathology	T	1	M-108	MON	08:00:00	10:00:00
+General Pathology	T	2	M-108	MON	10:00:00	12:00:00
+General Pathology	T	3	M-108	MON	12:00:00	14:00:00
+General Pathology	T	4	M-108	TUE	08:00:00	10:00:00
+General Pathology	T	5	M-108	TUE	10:00:00	12:00:00
+General Pathology	T	6	M-108	TUE	12:00:00	14:00:00
+General Pathology	T	7	M-108	THU	08:00:00	10:00:00
+General Pharmacology	T	1	M-G07	WED	08:00:00	10:00:00
+General Pharmacology I	T	1	P-104	WED	16:00:00	18:00:00
+General Pharmacology II	T	1	M-G08	SUN	10:00:00	12:00:00
+General Pharmacology II	T	2	E-G12	MON	08:00:00	10:00:00
+General Pharmacology II	T	3	P-101	SUN	08:00:00	10:00:00
+General Physics I & Lab	L	1	L-G23	MON	12:00:00	14:00:00
+General Physics I & Lab	L	2	L-G23	MON	15:00:00	17:00:00
+General Physics I & Lab	L	3	L-G23	TUE	14:00:00	16:00:00
+General Physics I & Lab	L	4	L-G23	THU	14:00:00	16:00:00
+General Physics I & Lab	T	1	M-104	SAT	08:00:00	11:00:00
+General Physics I & Lab	T	2	P-101	SAT	11:00:00	14:00:00
+General Physics II & Lab	L	1	L-G23	WED	15:30:00	17:30:00
+General Physics II & Lab	L	2	L-G23	SAT	15:30:00	17:30:00
+General Physics II & Lab	T	1	P-G08	TUE	14:00:00	15:30:00
+General Physics II & Lab	T	1	P-G08	THU	14:00:00	15:30:00
+General Psychology	T	1	P-G09	THU	08:00:00	09:30:00
+General Psychology	T	1	M-G09	MON	15:30:00	17:00:00
+Genetics	T	1	M-G02	SAT	08:00:00	10:00:00
+Geotechnical Engineering	T	1	P-111	MON	08:30:00	10:00:00
+Geotechnical Engineering	T	1	P-111	WED	08:30:00	10:00:00
+Geriatric Nursing	T	1	P-G12	TUE	12:30:00	14:00:00
+Geriatric Nursing	T	1	Y-000	TUE	12:30:00	14:00:00
+Geriatric Nursing	T	1	P-102	MON	08:00:00	09:30:00
+Geriatric Nursing	T	1	Y-000	MON	08:00:00	09:30:00
+Governmental Accounting	T	1	M-105	WED	11:00:00	12:30:00
+Governmental Accounting	T	1	B-G09	MON	12:30:00	14:00:00
+Grammar I	T	1	B-G09	WED	11:00:00	12:30:00
+Grammar I	T	1	P-105	SUN	11:00:00	12:30:00
+Grammar II	T	1	M-G07	SUN	12:30:00	14:00:00
+Grammar II	T	1	P-103	TUE	11:30:00	13:00:00
+Grammar III	T	1	B-G10	MON	12:00:00	14:00:00
+Head and Neck Anatomy I	C	1	M-G12	SUN	13:00:00	15:00:00
+Head and Neck Anatomy I	C	2	M-G12	TUE	15:00:00	17:00:00
+Head and Neck Anatomy I	C	3	M-G12	TUE	13:00:00	15:00:00
+Head and Neck Anatomy I	T	1	P-G04	MON	09:00:00	10:00:00
+Head and Neck Anatomy I	T	2	P-G04	MON	10:00:00	11:00:00
+Head and Neck Anatomy II	C	1	M-G12	SAT	08:00:00	10:00:00
+Head and Neck Anatomy II	C	2	M-G12	SAT	10:00:00	12:00:00
+Head and Neck Anatomy II	C	3	M-G12	SAT	13:00:00	15:00:00
+Head and Neck Anatomy II	C	4	M-G12	SAT	15:00:00	17:00:00
+Head and Neck Anatomy II	C	5	M-G12	SUN	15:00:00	17:00:00
+Head and Neck Anatomy II	C	6	M-G12	WED	15:00:00	17:00:00
+Head and Neck Anatomy II	T	1	P-107	SUN	09:00:00	10:00:00
+Head and Neck Anatomy II	T	2	M-104	SUN	10:00:00	11:00:00
+Head and Neck Anatomy II	T	3	E-110	TUE	09:00:00	10:00:00
+Health Information System	T	1	E-G11	TUE	10:00:00	12:00:00
+Health Promotion	T	1	M-G05	WED	10:00:00	12:00:00
+Health, Safety and Environment	T	1	P-105	SUN	14:00:00	15:30:00
+Health, Safety and Environment	T	1	P-111	TUE	14:00:00	15:30:00
+Histopathological Techniques	L	1	M-B07	SAT	08:00:00	10:00:00
+Histopathological Techniques	L	2	M-B07	SAT	10:00:00	12:00:00
+Histopathological Techniques	T	1	M-G05	SUN	08:00:00	09:00:00
+Histopathology & Lab	L	1	M-B07	SAT	12:00:00	14:00:00
+Histopathology & Lab	T	1	P-104	SUN	14:00:00	17:00:00
+Home Care Nursing	T	1	Y-000	MON	12:00:00	14:00:00
+Hospital Information System	T	1	Y-000	TUE	10:00:00	12:00:00
+Hospital Training (Clinical Lab)	T	1	H-Harem	WED	12:00:00	14:00:00
+Hospital Training (Clinical Lab)	T	2	H-Harem	SUN	08:00:00	10:00:00
+Hospital Training (Wards)	T	1	H-Asia	WED	14:00:00	16:00:00
+Hospitality and Tourism Marketing	T	1	P-G12	SUN	14:00:00	15:30:00
+Hospitality and Tourism Marketing	T	1	M-111	WED	15:30:00	17:00:00
+Human Anatomy	L	1	M-G12	MON	08:00:00	10:00:00
+Human Anatomy	L	2	M-G12	MON	10:00:00	12:00:00
+Human Anatomy	L	3	M-G12	MON	13:00:00	15:00:00
+Human Anatomy	L	4	M-G12	MON	15:00:00	17:00:00
+Human Anatomy	L	5	M-G12	THU	08:00:00	10:00:00
+Human Anatomy	L	6	M-G12	THU	10:00:00	12:00:00
+Human Anatomy	L	7	M-G12	THU	13:00:00	15:00:00
+Human Anatomy	L	8	M-G12	THU	15:00:00	17:00:00
+Human Anatomy	T	1	P-G02	WED	14:00:00	16:00:00
+Human Anatomy	T	2	P-G04	SUN	14:00:00	16:00:00
+Human Anatomy	T	3	P-G02	TUE	08:00:00	10:00:00
+Human Anatomy	T	4	P-G04	SUN	10:00:00	12:00:00
+Human Computer Interaction	T	1	E-G06	TUE	11:00:00	12:30:00
+Human Computer Interaction	T	1	E-G06	SUN	11:00:00	12:30:00
+Human Genetics & Lab	L	1	B-B04	SUN	12:00:00	14:00:00
+Human Genetics & Lab	L	2	B-B01	SUN	14:00:00	16:00:00
+Human Genetics & Lab	T	1	M-G05	MON	10:00:00	12:00:00
+Human Growth and Development	T	1	P-G05	TUE	14:00:00	16:00:00
+Human Physiology	L	1	M-B16	MON	08:00:00	10:00:00
+Human Physiology	L	2	M-B16	MON	10:00:00	12:00:00
+Human Physiology	L	3	M-B16	MON	12:00:00	14:00:00
+Human Physiology	L	4	M-B16	TUE	08:00:00	10:00:00
+Human Physiology	L	5	M-B16	TUE	10:00:00	12:00:00
+Human Physiology	L	6	M-B16	TUE	12:00:00	14:00:00
+Human Physiology	T	1	P-G05	SAT	14:00:00	15:30:00
+Human Physiology	T	1	P-G05	WED	08:00:00	09:30:00
+Human Physiology	T	2	P-G04	WED	15:30:00	17:00:00
+Human Physiology	T	2	P-G04	SAT	12:30:00	14:00:00
+Human Physiology	T	3	P-G04	THU	15:30:00	17:00:00
+Human Physiology	T	3	P-G04	SAT	08:00:00	09:30:00
+Human Physiology & Lab	L	1	M-B16	SAT	08:00:00	10:00:00
+Human Physiology & Lab	L	2	M-B16	SAT	10:00:00	12:00:00
+Human Physiology & Lab	L	3	M-B16	SAT	12:00:00	14:00:00
+Human Physiology & Lab	T	1	P-G04	THU	08:00:00	09:30:00
+Human Physiology & Lab	T	1	P-G04	WED	14:00:00	15:30:00
+Human Physiology & Lab	T	2	P-G04	TUE	11:00:00	12:30:00
+Human Physiology & Lab	T	2	P-G02	MON	14:00:00	15:30:00
+Image Processing and Computer Vision	T	1	P-G03	WED	11:00:00	12:30:00
+Image Processing and Computer Vision	T	1	P-G03	MON	14:00:00	15:30:00
+Immunohaematology and Blood Bank	L	1	P-B11	MON	14:00:00	16:00:00
+Immunohaematology and Blood Bank	L	2	P-B11	SAT	08:00:00	10:00:00
+Immunohaematology and Blood Bank	L	3	P-B11	SAT	10:00:00	12:00:00
+Immunohaematology and Blood Bank	T	1	M-103	SUN	14:00:00	16:00:00
+Immunohaematology and Blood Bank	T	2	M-103	TUE	14:00:00	16:00:00
+Immunology & Lab	L	1	M-B16	THU	12:00:00	14:00:00
+Immunology & Lab	L	2	M-B16	THU	10:00:00	12:00:00
+Immunology & Lab	T	1	P-101	WED	12:30:00	14:00:00
+Immunology & Lab	T	1	P-107	MON	12:00:00	13:30:00
+Immunology & Lab	T	2	P-101	TUE	14:00:00	15:30:00
+Immunology & Lab	T	2	P-101	SUN	14:00:00	15:30:00
+Implant I	L	1	P-B10	SAT	11:00:00	14:00:00
+Implant I	T	1	E-G11	SAT	14:00:00	15:00:00
+Implant II	L	1	P-B10	SUN	09:00:00	11:00:00
+Implant II	T	1	P-B10	SUN	08:00:00	09:00:00
+Implantology	C	1	D-G30	MON	10:00:00	12:00:00
+Implantology	C	2	D-G32	MON	13:00:00	15:00:00
+Implantology	C	3	D-G32	TUE	10:00:00	12:00:00
+Implantology	C	4	D-G32	TUE	13:00:00	15:00:00
+Implantology	C	5	D-G32	WED	10:00:00	12:00:00
+Implantology	C	6	D-G32	WED	13:00:00	15:00:00
+Implantology	T	1	P-G08	MON	08:00:00	09:00:00
+Implantology	T	2	P-G08	MON	09:00:00	10:00:00
+Implantology	T	3	P-G04	TUE	08:00:00	09:00:00
+Implantology	T	4	E-G11	TUE	09:00:00	10:00:00
+Implantology	T	5	P-G09	MON	16:00:00	17:00:00
+Implantology	T	6	P-102	TUE	16:00:00	17:00:00
+Industrial Pharmacy I	L	1	P-B08	SAT	12:00:00	14:00:00
+Industrial Pharmacy I	L	2	P-B08	SAT	14:00:00	16:00:00
+Industrial Pharmacy I	T	1	P-G02	WED	10:00:00	12:00:00
+Industrial Pharmacy II	L	1	P-B05	MON	08:00:00	10:00:00
+Industrial Pharmacy II	L	2	P-B05	MON	10:00:00	12:00:00
+Industrial Pharmacy II	L	3	P-B05	TUE	08:00:00	10:00:00
+Industrial Pharmacy II	T	1	P-G04	THU	11:00:00	12:00:00
+Industrial Pharmacy II	T	2	P-G08	THU	12:00:00	13:00:00
+Infection Control	T	1	B-G08	TUE	16:00:00	17:00:00
+Information System	T	1	B-B01	TUE	08:30:00	10:00:00
+Information System	T	1	E-106	THU	09:30:00	11:00:00
+Information and Communication Technology	T	1	P-G03	SUN	08:00:00	10:00:00
+Information and Communication Technology	T	1	P-G03	TUE	08:00:00	10:00:00
+Information and Communication Technology	T	2	B-B01	TUE	10:00:00	12:00:00
+Information and Communication Technology	T	2	P-G03	SUN	10:00:00	12:00:00
+Intermediate Accounting I	T	1	B-G08	WED	11:00:00	12:30:00
+Intermediate Accounting I	T	1	B-G09	MON	11:00:00	12:30:00
+Intermediate Accounting II	T	1	B-G10	MON	08:00:00	09:30:00
+Intermediate Accounting II	T	1	M-105	WED	08:00:00	09:30:00
+International Business Environment	T	1	P-106	MON	14:00:00	15:30:00
+International Business Environment	T	1	P-104	THU	12:30:00	14:00:00
+International Finance	T	1	P-111	THU	09:30:00	11:00:00
+International Finance	T	1	M-111	WED	14:00:00	15:30:00
+International Marketing	T	1	P-106	SUN	11:00:00	12:30:00
+International Marketing	T	1	P-106	THU	15:30:00	17:00:00
+Introduction to AI and Cybersecurity	T	1	B-B06	MON	12:00:00	14:00:00
+Introduction to Applied Linguistics	T	1	B-G12	THU	14:00:00	16:00:00
+Introduction to Business	T	1	M-111	MON	14:00:00	16:00:00
+Introduction to Dental Materials	T	1	D-G32	SAT	15:30:00	17:30:00
+Introduction to Embedded Systems	T	1	E-G06	WED	14:00:00	15:30:00
+Introduction to Embedded Systems	T	1	B-B06	WED	12:30:00	14:00:00
+Introduction to Engineering	T	1	P-101	MON	14:00:00	16:00:00
+Introduction to Finance	T	1	M-G04	MON	09:30:00	11:00:00
+Introduction to Finance	T	1	M-104	WED	09:30:00	11:00:00
+Introduction to Interpreting	T	1	P-105	TUE	10:00:00	12:00:00
+Introduction to Lab Techniques & Lab	L	1	P-B11	SUN	12:00:00	14:00:00
+Introduction to Lab Techniques & Lab	L	2	P-B11	SUN	10:00:00	12:00:00
+Introduction to Lab Techniques & Lab	T	1	M-108	SAT	08:00:00	10:00:00
+Introduction to Language	T	1	P-106	MON	08:00:00	10:00:00
+Introduction to Linguistics	T	1	B-G10	WED	13:30:00	15:30:00
+Introduction to Literature	T	1	B-G12	SUN	10:00:00	11:30:00
+Introduction to Literature	T	1	B-G12	TUE	08:00:00	09:30:00
+Introduction to MLS	T	1	M-108	SUN	10:00:00	12:00:00
+Introduction to Microbiology	L	1	M-B01	SAT	08:00:00	11:00:00
+Introduction to Microbiology	L	2	M-B01	SAT	11:00:00	14:00:00
+Introduction to Microbiology	T	1	M-103	SUN	12:30:00	14:00:00
+Introduction to Microbiology	T	1	M-103	TUE	12:30:00	14:00:00
+Introduction to Microbiology	T	2	P-106	SUN	08:00:00	09:30:00
+Introduction to Microbiology	T	2	P-101	TUE	08:00:00	09:30:00
+IoT and Cloud Computing	T	1	B-B06	SUN	11:00:00	12:30:00
+IoT and Cloud Computing	T	1	B-B06	TUE	11:00:00	12:30:00
+Kurdology	T	1	M-111	SUN	14:00:00	16:00:00
+Kurdology	T	2	M-G09	MON	10:00:00	12:00:00
+Kurdology	T	3	M-G07	THU	10:00:00	12:00:00
+Lab Rotation	T	1	Y-000	SAT	17:00:00	18:00:00
+Lab Safety	T	1	P-G04	MON	08:00:00	09:00:00
+Linux Programming	T	1	B-B06	THU	09:30:00	11:00:00
+Linux Programming	T	1	B-B06	WED	11:00:00	12:30:00
+Management Information Systems	T	1	E-G11	MON	12:30:00	14:00:00
+Management Information Systems	T	1	E-G11	SUN	15:30:00	17:00:00
+Managerial Accounting	T	1	P-101	SUN	11:00:00	12:30:00
+Managerial Accounting	T	1	P-106	TUE	11:00:00	12:30:00
+Managing People and Organizations	T	1	M-107	WED	12:30:00	14:00:00
+Managing People and Organizations	T	1	M-104	THU	14:00:00	15:30:00
+Marketing Analysis and Strategy	T	1	M-G07	WED	11:00:00	12:30:00
+Marketing Analysis and Strategy	T	1	M-111	SUN	09:30:00	11:00:00
+Marketing Management	T	1	M-G04	MON	08:00:00	09:30:00
+Marketing Management	T	1	M-G09	WED	08:00:00	09:30:00
+Maternal and Neonatal Nursing	L	1	Y-000	TUE	08:00:00	10:30:00
+Maternal and Neonatal Nursing	L	1	E-G13	TUE	14:00:00	16:00:00
+Maternal and Neonatal Nursing	L	2	Y-000	TUE	10:00:00	12:30:00
+Maternal and Neonatal Nursing	L	2	E-G13	WED	13:00:00	15:00:00
+Maternal and Neonatal Nursing	T	1	P-106	SUN	12:30:00	14:30:00
+Maxillofacial Prosthesis	L	1	L-G04	TUE	10:00:00	12:00:00
+Maxillofacial Prosthesis	L	1	L-G04	SUN	12:00:00	14:00:00
+Maxillofacial Prosthesis	T	1	E-G09	TUE	08:00:00	10:00:00
+Medical Bacteriology & Lab	L	1	P-B01	WED	11:00:00	14:00:00
+Medical Bacteriology & Lab	L	2	P-B01	WED	08:00:00	11:00:00
+Medical Bacteriology & Lab	T	1	P-101	MON	09:30:00	11:00:00
+Medical Bacteriology & Lab	T	1	P-101	TUE	12:30:00	14:00:00
+Medical Biology	L	1	P-B14	WED	14:00:00	16:00:00
+Medical Biology	L	2	P-B14	MON	14:00:00	16:00:00
+Medical Biology	T	1	M-108	SUN	08:00:00	10:00:00
+Medical Biophysics	L	1	L-G23	SAT	08:00:00	10:00:00
+Medical Biophysics	L	2	L-G23	SAT	10:00:00	12:00:00
+Medical Biophysics	L	3	L-G23	SAT	12:00:00	14:00:00
+Medical Biophysics	L	4	L-G23	THU	10:00:00	12:00:00
+Medical Biophysics	L	5	L-G23	THU	08:00:00	10:00:00
+Medical Biophysics	L	6	L-G23	WED	08:00:00	10:00:00
+Medical Biophysics	T	1	P-G02	MON	08:00:00	10:00:00
+Medical Biophysics	T	2	P-G02	SUN	10:00:00	12:00:00
+Medical Biophysics	T	3	P-G02	SUN	13:00:00	15:00:00
+Medical Chemistry	C	1	M-B10	TUE	08:00:00	10:00:00
+Medical Chemistry	C	2	M-B10	TUE	10:00:00	12:00:00
+Medical Chemistry	C	3	M-B10	TUE	12:00:00	14:00:00
+Medical Chemistry	T	1	M-108	THU	12:00:00	14:00:00
+Medical Chemistry	T	2	M-108	TUE	14:00:00	16:00:00
+Medical Mycology & Lab	L	1	P-B01	TUE	14:00:00	16:00:00
+Medical Mycology & Lab	T	1	M-G02	WED	14:00:00	16:00:00
+Medical Psychology	T	1	P-G08	TUE	08:00:00	10:00:00
+Medical Psychology	T	2	P-G09	TUE	10:00:00	12:00:00
+Medical Psychology	T	3	P-G05	TUE	12:00:00	14:00:00
+Medical Psychology	T	4	M-G08	WED	08:00:00	10:00:00
+Medical Terminology	T	1	P-G02	THU	14:00:00	15:00:00
+Medical Terminology	T	2	P-103	TUE	14:00:00	15:00:00
+Medical Virology	T	1	M-105	TUE	12:30:00	14:00:00
+Medical Virology	T	1	M-103	THU	14:00:00	15:30:00
+Medical Virology & Lab	L	1	P-B11	TUE	15:30:00	17:30:00
+Medical Virology & Lab	T	1	Y-000	THU	14:00:00	15:30:00
+Medical Virology & Lab	T	1	Y-000	TUE	12:30:00	14:00:00
+Medicinal Chemistry I	L	1	P-B08	MON	10:00:00	13:00:00
+Medicinal Chemistry I	L	2	P-B08	TUE	10:00:00	13:00:00
+Medicinal Chemistry I	T	1	M-107	TUE	14:00:00	16:00:00
+Medicinal Chemistry II	L	1	P-B08	THU	08:00:00	11:00:00
+Medicinal Chemistry II	L	2	P-B08	THU	11:00:00	14:00:00
+Medicinal Chemistry II	L	3	P-B08	SAT	08:00:00	11:00:00
+Medicinal Chemistry II	L	4	P-B08	THU	14:00:00	17:00:00
+Medicinal Chemistry II	T	1	M-G08	WED	12:00:00	14:00:00
+Medicinal Chemistry II	T	2	P-G08	MON	10:00:00	12:00:00
+Microbiology I	L	1	M-B01	SUN	08:00:00	11:00:00
+Microbiology I	L	2	M-B01	SUN	11:00:00	14:00:00
+Microbiology I	L	3	M-B01	SUN	14:00:00	17:00:00
+Microbiology I	L	4	M-B01	THU	08:00:00	11:00:00
+Microbiology I	L	5	M-B01	THU	11:00:00	14:00:00
+Microbiology I	L	6	M-B01	TUE	14:00:00	17:00:00
+Microbiology I	L	7	M-B01	TUE	08:00:00	11:00:00
+Microbiology I	L	8	M-B01	MON	08:00:00	11:00:00
+Microbiology I	L	9	M-B01	MON	11:00:00	14:00:00
+Microbiology I	L	10	M-B01	MON	14:00:00	17:00:00
+Microbiology I	L	11	M-B01	TUE	11:00:00	14:00:00
+Microbiology I	T	1	P-G05	SUN	08:00:00	10:00:00
+Microbiology I	T	2	P-G08	SUN	10:00:00	12:00:00
+Microbiology I	T	3	P-G08	SUN	12:00:00	14:00:00
+Microbiology I	T	4	P-G08	WED	08:00:00	10:00:00
+Microbiology I	T	5	P-G08	SAT	10:00:00	12:00:00
+Microbiology I	T	6	P-G08	TUE	12:00:00	14:00:00
+Microbiology II	L	1	P-B11	MON	08:00:00	10:00:00
+Microbiology II	L	2	P-B11	MON	10:00:00	12:00:00
+Microbiology II	L	3	P-B11	MON	12:00:00	14:00:00
+Microbiology II	T	1	P-G04	THU	12:00:00	14:00:00
+Microbiology II	T	2	P-G04	MON	14:00:00	16:00:00
+Microprocessors & Lab	T	1	E-106	SAT	10:30:00	12:30:00
+Microprocessors & Lab	T	1	E-106	SAT	08:00:00	10:00:00
+Molecular Biology & Lab	L	1	P-B14	THU	08:00:00	11:00:00
+Molecular Biology & Lab	L	2	P-B14	THU	11:00:00	14:00:00
+Molecular Biology & Lab	L	3	P-B14	THU	14:00:00	17:00:00
+Molecular Biology & Lab	T	1	M-105	TUE	08:00:00	09:30:00
+Molecular Biology & Lab	T	1	M-105	SUN	08:00:00	09:30:00
+Molecular Biology & Lab	T	2	M-104	SUN	11:00:00	12:30:00
+Molecular Biology & Lab	T	2	M-104	TUE	11:00:00	12:30:00
+Morphology	T	1	B-G10	THU	10:30:00	12:30:00
+Multimedia Systems	T	1	E-106	WED	12:30:00	15:30:00
+Natural Gas Engineering	T	1	E-G07	MON	14:00:00	15:30:00
+Natural Gas Engineering	T	1	E-G07	SUN	09:30:00	11:00:00
+Nursing Education	T	1	Y-000	TUE	16:00:00	18:00:00
+Nursing Management	L	1	H-Harem	SUN	13:00:00	16:00:00
+Nursing Management	T	1	M-G05	THU	12:00:00	14:00:00
+Nursing Rotation	T	1	Y-000	SAT	17:00:00	18:00:00
+Object Oriented Programming	T	1	B-B01	WED	11:00:00	12:30:00
+Object Oriented Programming	T	1	P-G03	MON	09:30:00	11:00:00
+Object Oriented Programming	T	2	P-G03	SUN	14:00:00	15:30:00
+Object Oriented Programming	T	2	B-B06	THU	11:00:00	12:30:00
+Operating Systems	T	1	B-B01	MON	12:30:00	14:00:00
+Operating Systems	T	1	E-G06	WED	12:30:00	14:00:00
+Operations Management	T	1	M-103	WED	12:30:00	14:00:00
+Operations Management	T	1	M-104	THU	11:00:00	12:30:00
+Oral Health Community and Dental Ethics	T	1	P-104	MON	10:00:00	12:00:00
+Oral Health Community and Dental Ethics	T	2	B-G08	MON	13:00:00	15:00:00
+Oral Histology and Embryology	C	1	D-G34	SUN	08:00:00	10:00:00
+Oral Histology and Embryology	C	2	D-G34	SUN	10:00:00	12:00:00
+Oral Histology and Embryology	C	3	D-G34	SUN	13:00:00	15:00:00
+Oral Histology and Embryology	C	4	D-G34	TUE	08:00:00	10:00:00
+Oral Histology and Embryology	C	5	D-G34	THU	08:00:00	10:00:00
+Oral Histology and Embryology	C	6	D-G34	THU	10:00:00	12:00:00
+Oral Histology and Embryology	C	7	D-G34	THU	13:00:00	15:00:00
+Oral Histology and Embryology	T	1	M-G08	TUE	10:00:00	12:00:00
+Oral Histology and Embryology	T	2	P-107	TUE	13:00:00	15:00:00
+Oral Histology and Embryology	T	3	M-G08	WED	10:00:00	12:00:00
+Oral Histology and Embryology	T	4	M-G09	WED	13:00:00	15:00:00
+Oral Medicine I	C	1	D-118B	SAT	10:00:00	13:00:00
+Oral Medicine I	C	2	D-118B	MON	10:00:00	13:00:00
+Oral Medicine I	C	3	D-118B	MON	13:00:00	16:00:00
+Oral Medicine I	C	4	D-118B	TUE	10:00:00	13:00:00
+Oral Medicine I	C	5	D-118B	TUE	13:00:00	16:00:00
+Oral Medicine I	C	6	D-118B	WED	10:00:00	13:00:00
+Oral Medicine I	C	7	D-118B	WED	13:00:00	16:00:00
+Oral Medicine I	C	8	D-118B	THU	10:00:00	13:00:00
+Oral Medicine I	C	9	D-118B	THU	13:00:00	16:00:00
+Oral Medicine I	T	1	P-G09	MON	08:00:00	09:00:00
+Oral Medicine I	T	2	P-G09	MON	09:00:00	10:00:00
+Oral Medicine I	T	3	M-107	WED	08:00:00	09:00:00
+Oral Medicine I	T	4	M-107	WED	09:00:00	10:00:00
+Oral Medicine I	T	5	P-106	WED	08:00:00	09:00:00
+Oral Medicine II	C	1	D-118B	SUN	10:00:00	13:00:00
+Oral Medicine II	C	2	D-118B	SUN	13:00:00	16:00:00
+Oral Medicine II	T	1	M-108	WED	13:00:00	14:00:00
+Oral Microbiology	L	1	P-B14	SUN	08:00:00	10:00:00
+Oral Microbiology	L	2	P-B14	SUN	12:00:00	14:00:00
+Oral Microbiology	T	1	M-105	WED	14:00:00	16:00:00
+Oral Physiology	T	1	B-G08	WED	08:00:00	10:00:00
+Oral Physiology & Oral Pathology	T	1	E-G08	SUN	08:00:00	10:00:00
+Oral Physiology & Oral Pathology	T	2	M-G07	SUN	10:00:00	12:00:00
+Oral Surgery I	C	1	D-G15	SUN	13:00:00	16:00:00
+Oral Surgery I	C	2	D-G15	MON	10:00:00	13:00:00
+Oral Surgery I	C	3	D-G15	MON	13:00:00	16:00:00
+Oral Surgery I	C	4	D-G15	WED	10:00:00	13:00:00
+Oral Surgery I	T	1	M-111	THU	08:00:00	10:00:00
+Oral Surgery I	T	2	P-102	THU	10:00:00	12:00:00
+Oral Surgery I	T	3	P-107	THU	13:00:00	15:00:00
+Oral Surgery II	C	1	D-112E	SAT	13:00:00	16:00:00
+Oral Surgery II	C	2	D-112E	MON	10:00:00	13:00:00
+Oral Surgery II	C	3	D-112E	MON	13:00:00	16:00:00
+Oral Surgery II	T	1	P-101	THU	08:00:00	10:00:00
+Oral Surgery II	T	2	E-G12	SUN	08:00:00	10:00:00
+Oral Surgery III	C	1	D-112E	SAT	10:00:00	13:00:00
+Oral Surgery III	C	2	D-112E	SUN	10:00:00	13:00:00
+Oral Surgery III	C	3	D-112E	SUN	13:00:00	16:00:00
+Oral Surgery III	C	4	D-112E	TUE	10:00:00	13:00:00
+Oral Surgery III	C	5	D-112E	TUE	13:00:00	16:00:00
+Oral Surgery III	C	6	D-112E	WED	10:00:00	13:00:00
+Oral Surgery III	C	7	D-112E	WED	13:00:00	16:00:00
+Oral Surgery III	T	1	P-G08	SUN	08:00:00	10:00:00
+Oral Surgery III	T	2	P-111	TUE	08:00:00	10:00:00
+Oral Surgery III	T	3	P-105	THU	08:00:00	10:00:00
+Oral Surgery III	T	4	P-103	THU	10:00:00	12:00:00
+Oral and Maxillofacial Pathology I	C	1	D-G34	MON	10:00:00	12:00:00
+Oral and Maxillofacial Pathology I	C	2	D-G34	MON	13:00:00	15:00:00
+Oral and Maxillofacial Pathology I	C	3	D-G34	TUE	10:00:00	12:00:00
+Oral and Maxillofacial Pathology I	C	4	D-G34	TUE	13:00:00	15:00:00
+Oral and Maxillofacial Pathology I	T	1	M-104	TUE	08:00:00	10:00:00
+Oral and Maxillofacial Pathology I	T	2	P-103	THU	13:00:00	15:00:00
+Oral and Maxillofacial Pathology II	C	1	D-G34	MON	08:00:00	10:00:00
+Oral and Maxillofacial Pathology II	C	2	D-G34	WED	08:00:00	10:00:00
+Oral and Maxillofacial Pathology II	C	3	D-G34	WED	10:00:00	12:00:00
+Oral and Maxillofacial Pathology II	C	4	D-G34	WED	13:00:00	15:00:00
+Oral and Maxillofacial Pathology II	T	1	P-102	THU	08:00:00	10:00:00
+Oral and Maxillofacial Pathology II	T	2	P-108	THU	10:00:00	12:00:00
+Oral and Maxillofacial Radiology I	C	1	D-113	MON	10:00:00	12:00:00
+Oral and Maxillofacial Radiology I	T	1	E-G07	MON	08:00:00	09:00:00
+Oral and Maxillofacial Radiology II	C	1	D-113	SUN	08:00:00	10:00:00
+Oral and Maxillofacial Radiology II	C	2	D-113	SUN	10:00:00	12:00:00
+Oral and Maxillofacial Radiology II	C	3	D-113	SUN	13:00:00	15:00:00
+Oral and Maxillofacial Radiology II	C	4	D-113	TUE	08:00:00	10:00:00
+Oral and Maxillofacial Radiology II	C	5	D-113	TUE	10:00:00	12:00:00
+Oral and Maxillofacial Radiology II	C	6	D-113	TUE	13:00:00	15:00:00
+Oral and Maxillofacial Radiology II	C	7	D-113	WED	10:00:00	12:00:00
+Oral and Maxillofacial Radiology II	C	8	D-113	WED	13:00:00	15:00:00
+Oral and Maxillofacial Radiology II	T	1	M-G09	MON	09:00:00	10:00:00
+Oral and Maxillofacial Radiology II	T	2	M-G04	WED	08:00:00	09:00:00
+Oral and Maxillofacial Radiology II	T	3	P-106	WED	09:00:00	10:00:00
+Organic Chemistry I	L	1	P-B04	THU	08:00:00	11:00:00
+Organic Chemistry I	L	2	P-B04	THU	11:00:00	14:00:00
+Organic Chemistry I	T	1	M-108	WED	08:00:00	10:00:00
+Organic Chemistry II	L	1	P-B04	TUE	11:00:00	14:00:00
+Organic Chemistry II	L	2	P-B04	TUE	14:00:00	17:00:00
+Organic Chemistry II	T	1	M-G04	SAT	12:00:00	14:00:00
+Organisational Behavior	T	1	E-G12	TUE	14:00:00	15:30:00
+Organisational Behavior	T	1	E-G12	MON	11:00:00	12:30:00
+Orthodontic Lab I	L	1	L-G04	WED	10:00:00	12:00:00
+Orthodontic Lab I	T	1	L-G04	WED	13:00:00	14:00:00
+Orthodontic Lab II	L	1	L-G08	THU	09:00:00	11:00:00
+Orthodontic Lab II	L	2	L-G08	THU	11:00:00	13:00:00
+Orthodontic Lab II	T	1	L-G08	THU	08:00:00	09:00:00
+Orthodontic Lab III	L	1	L-G08	MON	12:00:00	14:00:00
+Orthodontic Lab III	T	1	L-G08	MON	11:00:00	12:00:00
+Orthodontics I	C	1	D-G32	MON	11:00:00	13:00:00
+Orthodontics I	T	1	M-G02	MON	10:00:00	11:00:00
+Orthodontics II	C	1	D-118D	SAT	08:00:00	10:00:00
+Orthodontics II	C	2	D-118D	SAT	10:00:00	12:00:00
+Orthodontics II	C	3	D-118D	SAT	13:00:00	15:00:00
+Orthodontics II	C	4	D-118D	SUN	08:00:00	10:00:00
+Orthodontics II	C	5	D-118D	SUN	10:00:00	12:00:00
+Orthodontics II	C	6	D-118D	SUN	13:00:00	15:00:00
+Orthodontics II	C	7	D-118D	SUN	15:00:00	17:00:00
+Orthodontics II	C	8	D-118D	MON	08:00:00	10:00:00
+Orthodontics II	C	9	D-118D	MON	10:00:00	12:00:00
+Orthodontics II	C	10	D-118D	MON	13:00:00	15:00:00
+Orthodontics II	T	1	M-G05	MON	08:00:00	09:00:00
+Orthodontics II	T	2	M-103	MON	09:00:00	10:00:00
+Orthodontics II	T	3	M-G02	WED	08:00:00	09:00:00
+Orthodontics II	T	4	M-G04	WED	09:00:00	10:00:00
+Orthodontics II	T	5	P-G08	WED	12:00:00	13:00:00
+Partial Denture I	L	1	P-B10	THU	08:00:00	11:00:00
+Partial Denture I	L	2	P-B10	THU	12:00:00	15:00:00
+Partial Denture I	T	1	M-107	THU	11:00:00	12:00:00
+Partial Denture II	L	1	L-G04	THU	10:00:00	13:00:00
+Partial Denture II	L	2	L-G04	THU	14:00:00	17:00:00
+Partial Denture II	T	1	M-G08	THU	13:00:00	14:00:00
+Partial Denture III	L	1	D-G24	THU	09:00:00	12:00:00
+Partial Denture III	T	1	D-G24	THU	08:00:00	09:00:00
+Partial Denture IV	L	1	Y-000	WED	09:00:00	11:00:00
+Partial Denture IV	T	1	Y-000	WED	08:00:00	09:00:00
+Pathophysiology	T	1	P-G12	SUN	10:00:00	12:00:00
+Pediatric Nursing	L	1	Y-000	TUE	08:00:00	10:00:00
+Pediatric Nursing	L	1	E-G14	SAT	10:00:00	12:30:00
+Pediatric Nursing	L	2	Y-000	TUE	10:00:00	12:30:00
+Pediatric Nursing	L	2	E-G14	SAT	12:30:00	14:30:00
+Pediatric Nursing	T	1	P-G12	SAT	08:00:00	10:00:00
+Pedodentics I	C	1	D-118E	MON	10:00:00	13:00:00
+Pedodentics I	C	2	D-118E	MON	13:00:00	16:00:00
+Pedodentics I	C	3	D-118E	WED	10:00:00	13:00:00
+Pedodentics I	C	4	D-118E	THU	10:00:00	13:00:00
+Pedodentics I	C	5	D-118E	THU	13:00:00	16:00:00
+Pedodentics I	T	1	P-108	MON	08:00:00	09:00:00
+Pedodentics I	T	2	M-G09	THU	08:00:00	09:00:00
+Pedodentics I	T	3	M-G08	THU	09:00:00	10:00:00
+Pedodentics II	C	1	D-118E	SAT	10:00:00	13:00:00
+Pedodentics II	C	2	D-118E	SAT	13:00:00	16:00:00
+Pedodentics II	C	3	D-118E	SUN	10:00:00	13:00:00
+Pedodentics II	C	4	D-118E	SUN	13:00:00	16:00:00
+Pedodentics II	C	5	D-118E	TUE	10:00:00	13:00:00
+Pedodentics II	C	6	D-118E	TUE	13:00:00	16:00:00
+Pedodentics II	T	1	M-107	SAT	09:00:00	10:00:00
+Pedodentics II	T	2	M-G08	SUN	09:00:00	10:00:00
+Pedodentics II	T	3	P-G05	TUE	09:00:00	10:00:00
+Periodontics I	C	1	D-G07	SAT	10:00:00	13:00:00
+Periodontics I	C	2	D-G07	SAT	13:00:00	16:00:00
+Periodontics I	C	3	D-G07	TUE	10:00:00	13:00:00
+Periodontics I	C	4	D-G07	TUE	13:00:00	16:00:00
+Periodontics I	C	5	D-G07	WED	10:00:00	13:00:00
+Periodontics I	C	6	D-G07	WED	13:00:00	16:00:00
+Periodontics I	T	1	M-107	SAT	08:00:00	09:00:00
+Periodontics I	T	2	P-G09	WED	09:00:00	10:00:00
+Periodontics I	T	3	P-104	SAT	09:00:00	10:00:00
+Periodontics II	C	1	D-G07	SUN	10:00:00	13:00:00
+Periodontics II	T	1	P-103	SUN	08:00:00	09:00:00
+Periodontics III	C	1	D-112D	SAT	10:00:00	13:00:00
+Periodontics III	C	2	D-112D	SAT	13:00:00	16:00:00
+Periodontics III	C	3	D-112D	TUE	10:00:00	13:00:00
+Periodontics III	C	4	D-112D	TUE	13:00:00	16:00:00
+Periodontics III	C	5	D-112D	SUN	10:00:00	13:00:00
+Periodontics III	C	6	D-112D	SUN	13:00:00	16:00:00
+Periodontics III	C	7	D-112D	MON	10:00:00	13:00:00
+Periodontics III	C	8	D-112D	MON	13:00:00	16:00:00
+Periodontics III	C	9	D-112D	WED	10:00:00	13:00:00
+Periodontics III	C	10	D-112D	WED	13:00:00	16:00:00
+Periodontics III	T	1	M-G09	SAT	09:00:00	10:00:00
+Periodontics III	T	2	M-G09	SUN	09:00:00	10:00:00
+Periodontics III	T	3	P-G09	TUE	08:00:00	09:00:00
+Periodontics III	T	4	P-G09	TUE	09:00:00	10:00:00
+Periodontics III	T	5	M-G04	TUE	16:00:00	17:00:00
+Petroleum Production Engineering II	T	1	E-G10	SUN	08:00:00	09:30:00
+Petroleum Production Engineering II	T	1	B-G08	SUN	11:00:00	12:30:00
+Pharmaceutical Compounding I	L	1	P-B04	SUN	08:00:00	10:00:00
+Pharmaceutical Compounding I	L	2	P-B04	SUN	10:00:00	12:00:00
+Pharmaceutical Compounding I	L	3	P-B04	SUN	12:00:00	14:00:00
+Pharmaceutical Compounding I	T	1	E-G08	WED	08:00:00	10:00:00
+Pharmaceutical Compounding I	T	2	P-102	TUE	10:00:00	12:00:00
+Pharmaceutical Compounding II	L	1	P-B04	MON	08:00:00	10:00:00
+Pharmaceutical Compounding II	L	2	P-B04	TUE	08:00:00	10:00:00
+Pharmaceutical Compounding II	T	1	M-G08	SAT	10:00:00	12:00:00
+Pharmacognosy I	L	1	P-B05	THU	08:00:00	10:00:00
+Pharmacognosy I	L	2	P-B05	THU	10:00:00	12:00:00
+Pharmacognosy I	T	1	P-108	SUN	14:00:00	16:00:00
+Pharmacognosy II	L	1	P-B05	SAT	10:00:00	12:00:00
+Pharmacognosy II	L	2	P-B05	SAT	12:00:00	14:00:00
+Pharmacognosy II	L	3	P-B05	SAT	14:00:00	16:00:00
+Pharmacognosy II	T	1	P-G04	MON	12:00:00	14:00:00
+Pharmacognosy II	T	2	P-G08	MON	14:00:00	16:00:00
+Pharmacokinetics	T	1	E-G07	WED	08:00:00	10:00:00
+Pharmacokinetics	T	2	P-G05	THU	08:00:00	10:00:00
+Pharmacology II	T	1	M-104	WED	14:00:00	15:30:00
+Pharmacology II	T	1	M-104	SUN	12:30:00	14:00:00
+Pharmacology III	L	1	C-B-03	SUN	08:00:00	10:00:00
+Pharmacology III	L	2	C-B-03	SUN	10:00:00	12:00:00
+Pharmacology III	L	3	C-B-03	SUN	12:00:00	14:00:00
+Pharmacology III	L	4	C-B-03	WED	08:00:00	10:00:00
+Pharmacology III	L	5	C-B-03	TUE	08:00:00	10:00:00
+Pharmacology III	L	6	C-B-03	WED	12:00:00	14:00:00
+Pharmacology III	T	1	M-G07	SAT	08:00:00	10:00:00
+Pharmacology III	T	2	P-101	THU	12:00:00	14:00:00
+Pharmacology and Toxicology & Lab	L	1	C-B-03	MON	12:00:00	14:00:00
+Pharmacology and Toxicology & Lab	L	2	C-B-03	MON	14:00:00	16:00:00
+Pharmacology and Toxicology & Lab	T	1	E-G07	SAT	12:00:00	14:00:00
+Pharmacovigilance	T	1	M-G05	TUE	10:00:00	12:00:00
+Pharmacy Ethics and Law	T	1	P-101	MON	16:00:00	18:00:00
+Pharmacy Ethics and Law	T	2	P-G12	WED	16:00:00	18:00:00
+Pharmacy Management and Economics	T	1	M-G08	MON	08:00:00	10:00:00
+Pharmacy Orientation and Calculation	L	1	P-B08	MON	14:00:00	16:00:00
+Pharmacy Orientation and Calculation	L	2	P-B04	SAT	14:00:00	16:00:00
+Pharmacy Orientation and Calculation	T	1	M-G07	MON	08:00:00	10:00:00
+Pharmacy Orientation and Calculation	T	2	M-111	SAT	10:00:00	12:00:00
+Pharmacy Practical Training I	T	1	Y-000	TUE	17:00:00	18:00:00
+Pharmacy Practical Training II	T	1	Y-000	THU	17:00:00	18:00:00
+Pharmacy Practice Experience I	T	1	M-G03	SUN	12:00:00	14:00:00
+Pharmacy Practice Experience II	T	1	P-105	WED	08:00:00	10:00:00
+Pharmacy Practice Experience II	T	2	M-G09	WED	10:00:00	12:00:00
+Phlebotomy	L	1	P-B11	THU	08:00:00	10:00:00
+Phlebotomy	L	2	P-B11	THU	10:00:00	12:00:00
+Phlebotomy	T	1	M-G05	SUN	11:00:00	12:00:00
+Phlebotomy Diagnostic Techniques & Lab	L	1	P-B11	WED	14:00:00	16:00:00
+Phlebotomy Diagnostic Techniques & Lab	T	1	M-G07	WED	12:30:00	14:00:00
+Phlebotomy Diagnostic Techniques & Lab	T	1	M-G07	MON	12:30:00	14:00:00
+Phonetics	T	1	P-104	THU	10:30:00	12:30:00
+Phonology	T	1	B-G12	THU	10:30:00	12:30:00
+Physical Assessment	L	1	E-G14	WED	10:00:00	12:00:00
+Physical Assessment	T	1	P-G12	SUN	08:00:00	10:00:00
+Physical Geology	T	1	P-106	MON	12:30:00	14:00:00
+Physical Geology	T	1	P-106	THU	12:30:00	14:00:00
+Physical Pharmacy I	T	1	M-G04	SUN	08:00:00	10:00:00
+Physical Pharmacy I	T	2	E-G09	MON	08:00:00	10:00:00
+Physical Pharmacy II	L	1	P-B08	WED	12:00:00	14:00:00
+Physical Pharmacy II	L	2	P-B08	WED	14:00:00	16:00:00
+Physical Pharmacy II	T	1	M-G08	TUE	08:00:00	10:00:00
+Physical Pharmacy II	T	2	P-103	SUN	14:00:00	16:00:00
+Population Health Management	T	1	M-103	SAT	16:00:00	18:00:00
+Practical Training	T	1	Y-000	SUN	17:30:00	18:00:00
+Preclinical Endodontic Den	C	1	D-G17	SAT	10:00:00	13:00:00
+Preclinical Endodontic Den	C	2	D-G17	SAT	13:00:00	16:00:00
+Preclinical Endodontic Den	C	3	D-G17	WED	10:00:00	13:00:00
+Preclinical Endodontic Den	C	4	D-G17	WED	13:00:00	16:00:00
+Preclinical Endodontic Den	T	1	P-105	SAT	09:00:00	10:00:00
+Preclinical Endodontic Den	T	2	P-107	WED	08:00:00	09:00:00
+Preclinical Endodontic Den	T	3	B-G10	WED	09:00:00	10:00:00
+Preclinical Fixed Prosthodontics I	C	1	D-G17	SUN	13:00:00	16:00:00
+Preclinical Fixed Prosthodontics I	T	1	P-111	SUN	12:00:00	13:00:00
+Preclinical Fixed Prosthodontics II	C	1	D-G18	SAT	10:00:00	13:00:00
+Preclinical Fixed Prosthodontics II	C	2	D-G18	SUN	10:00:00	13:00:00
+Preclinical Fixed Prosthodontics II	C	3	D-G18	SUN	13:00:00	16:00:00
+Preclinical Fixed Prosthodontics II	T	1	P-102	SUN	08:00:00	09:00:00
+Preclinical Fixed Prosthodontics II	T	2	P-103	SAT	09:00:00	10:00:00
+Preclinical Operative Den I	C	1	D-G18	MON	10:00:00	13:00:00
+Preclinical Operative Den I	C	2	D-G18	MON	13:00:00	16:00:00
+Preclinical Operative Den I	C	3	D-G18	THU	10:00:00	13:00:00
+Preclinical Operative Den I	T	1	P-103	MON	08:00:00	09:00:00
+Preclinical Operative Den I	T	2	M-G04	THU	09:00:00	10:00:00
+Preclinical Operative Den II	C	1	D-G18	TUE	10:00:00	13:00:00
+Preclinical Operative Den II	T	1	E-G07	TUE	09:00:00	10:00:00
+Preclinical Oral Surgery	C	1	D-G15	SUN	10:00:00	12:00:00
+Preclinical Oral Surgery	T	1	P-G12	THU	09:00:00	10:00:00
+Preclinical Orthodontics	T	1	P-103	MON	15:00:00	17:00:00
+Preclinical Orthodontics	T	2	P-G02	TUE	15:00:00	17:00:00
+Preclinical Orthodontics	T	3	P-G05	TUE	10:00:00	12:00:00
+Preclinical Orthodontics	T	4	P-G09	TUE	13:00:00	15:00:00
+Preclinical Orthodontics	T	5	M-G09	TUE	08:00:00	10:00:00
+Preclinical Pedodentics	C	1	D-G17	TUE	10:00:00	12:00:00
+Preclinical Pedodentics	C	2	D-G17	TUE	13:00:00	15:00:00
+Preclinical Pedodentics	C	3	D-G17	THU	10:00:00	12:00:00
+Preclinical Pedodentics	C	4	D-G17	THU	13:00:00	15:00:00
+Preclinical Pedodentics	T	1	P-107	TUE	12:00:00	13:00:00
+Preclinical Pedodentics	T	2	P-108	THU	15:00:00	16:00:00
+Preclinical Pedodentics	T	3	P-102	THU	12:00:00	13:00:00
+Preclinical Prosthodontics I	C	1	C-B-02	SUN	10:00:00	13:00:00
+Preclinical Prosthodontics I	C	2	C-B-02	SUN	13:00:00	16:00:00
+Preclinical Prosthodontics I	C	3	C-B-02	WED	10:00:00	13:00:00
+Preclinical Prosthodontics I	C	4	C-B-02	WED	13:00:00	16:00:00
+Preclinical Prosthodontics I	T	1	M-104	SUN	09:00:00	10:00:00
+Preclinical Prosthodontics I	T	2	P-101	SAT	08:00:00	09:00:00
+Preclinical Prosthodontics II	C	1	C-B-02	SAT	10:00:00	13:00:00
+Preclinical Prosthodontics II	C	2	C-B-02	SAT	13:00:00	16:00:00
+Preclinical Prosthodontics II	C	3	C-B-02	MON	10:00:00	13:00:00
+Preclinical Prosthodontics II	C	4	C-B-02	MON	13:00:00	16:00:00
+Preclinical Prosthodontics II	T	1	M-G08	SAT	09:00:00	10:00:00
+Preclinical Prosthodontics II	T	2	P-103	MON	09:00:00	10:00:00
+Preclinical Prosthodontics III	C	1	D-G28	TUE	13:00:00	16:00:00
+Preclinical Prosthodontics III	T	1	P-111	THU	08:00:00	09:00:00
+Preclinical Prosthodontics IV	C	1	C-B-02	TUE	10:00:00	13:00:00
+Preclinical Prosthodontics IV	C	2	C-B-02	TUE	13:00:00	16:00:00
+Preclinical Prosthodontics IV	C	3	C-B-02	THU	10:00:00	13:00:00
+Preclinical Prosthodontics IV	C	4	C-B-02	THU	13:00:00	16:00:00
+Preclinical Prosthodontics IV	T	1	P-108	TUE	09:00:00	10:00:00
+Preclinical Prosthodontics IV	T	2	P-G12	THU	08:00:00	09:00:00
+Preclinical Prosthodontics IV	T	3	M-104	THU	09:00:00	10:00:00
+Principles of Biochemistry	L	1	M-B04	SAT	09:00:00	11:00:00
+Principles of Biochemistry	L	2	M-B04	SAT	14:00:00	16:00:00
+Principles of Biochemistry	T	1	M-105	SAT	08:00:00	09:00:00
+Principles of Entrepreneurship	T	1	M-108	SUN	12:30:00	14:00:00
+Principles of Entrepreneurship	T	1	M-G09	TUE	12:30:00	14:00:00
+Principles of Genetic Engineering & Lab	L	1	P-B14	TUE	08:00:00	10:00:00
+Principles of Genetic Engineering & Lab	T	1	M-G05	WED	12:30:00	14:00:00
+Principles of Genetic Engineering & Lab	T	1	M-G05	TUE	14:00:00	15:30:00
+Principles of Haematology & Lab	L	1	P-B11	SUN	14:00:00	16:00:00
+Principles of Haematology & Lab	L	2	P-B11	THU	12:00:00	14:00:00
+Principles of Haematology & Lab	L	3	P-B11	THU	14:00:00	16:00:00
+Principles of Haematology & Lab	T	1	M-105	SUN	09:30:00	11:00:00
+Principles of Haematology & Lab	T	1	M-105	TUE	09:30:00	11:00:00
+Principles of Haematology & Lab	T	2	P-101	WED	08:00:00	09:30:00
+Principles of Haematology & Lab	T	2	P-101	MON	08:00:00	09:30:00
+Principles of Macroeconomics	T	1	M-G02	MON	11:00:00	12:30:00
+Principles of Macroeconomics	T	1	B-G09	THU	08:00:00	09:30:00
+Principles of Management	T	1	P-G02	THU	08:00:00	09:30:00
+Principles of Management	T	1	P-G09	MON	12:30:00	14:00:00
+Principles of Marketing	T	1	M-104	MON	08:00:00	09:30:00
+Principles of Marketing	T	1	M-104	WED	08:00:00	09:30:00
+Principles of Medical Biology	T	1	M-G05	WED	08:00:00	10:00:00
+Principles of Medicinal Chemistry & Lab	L	1	P-B04	SAT	10:00:00	12:00:00
+Principles of Medicinal Chemistry & Lab	T	1	P-103	MON	10:00:00	12:00:00
+Principles of Microbiology	L	1	P-B01	SAT	12:00:00	14:00:00
+Principles of Microbiology	T	1	P-G12	WED	12:00:00	13:00:00
+Principles of Microeconomics	T	1	M-104	TUE	14:00:00	15:30:00
+Principles of Microeconomics	T	1	M-103	THU	09:30:00	11:00:00
+Principles of Pharmacology	T	1	M-103	MON	10:00:00	12:00:00
+Prodrugs	T	1	P-105	MON	10:00:00	11:00:00
+Professional Communication	T	1	P-G02	MON	12:00:00	14:00:00
+Professional Communication	T	2	M-G04	WED	14:00:00	16:00:00
+Professional Communication	T	3	M-G04	THU	10:00:00	12:00:00
+Professional Communication	T	4	M-G04	TUE	10:00:00	12:00:00
+Professional Communication	T	5	M-G02	THU	14:00:00	16:00:00
+Professional Communication	T	6	P-108	WED	12:00:00	14:00:00
+Professional Communication	T	7	M-G09	THU	12:00:00	14:00:00
+Professional Communication	T	8	M-G04	TUE	12:00:00	14:00:00
+Programming Concept and Algorithms	T	1	B-B01	SUN	12:00:00	14:00:00
+Programming Concept and Algorithms	T	1	B-B01	TUE	12:00:00	14:00:00
+Programming Concept and Algorithms	T	2	B-B06	SUN	14:00:00	16:00:00
+Programming Concept and Algorithms	T	2	B-B06	TUE	14:00:00	16:00:00
+Programming Concept and Algorithms	T	3	B-B05	MON	12:00:00	14:00:00
+Programming Concept and Algorithms	T	3	B-B05	WED	12:00:00	14:00:00
+Prosthodontics I	C	1	D-G08	SUN	10:00:00	13:00:00
+Prosthodontics I	C	2	D-G08	MON	10:00:00	13:00:00
+Prosthodontics I	C	3	D-G08	MON	13:00:00	16:00:00
+Prosthodontics I	C	4	D-G08	TUE	10:00:00	13:00:00
+Prosthodontics I	C	5	D-G08	TUE	13:00:00	16:00:00
+Prosthodontics I	T	1	M-G04	TUE	09:00:00	10:00:00
+Prosthodontics I	T	2	M-G02	MON	09:00:00	10:00:00
+Prosthodontics II	C	1	D-G08	SAT	10:00:00	13:00:00
+Prosthodontics II	C	2	D-G08	SAT	13:00:00	16:00:00
+Prosthodontics II	C	3	D-G08	SUN	13:00:00	16:00:00
+Prosthodontics II	C	4	D-G08	WED	10:00:00	13:00:00
+Prosthodontics II	C	5	D-G08	WED	13:00:00	16:00:00
+Prosthodontics II	C	6	D-G08	THU	10:00:00	13:00:00
+Prosthodontics II	C	7	D-G08	THU	13:00:00	16:00:00
+Prosthodontics II	T	1	M-108	SUN	16:00:00	17:00:00
+Prosthodontics II	T	2	P-102	WED	16:00:00	17:00:00
+Prosthodontics II	T	3	M-107	THU	09:00:00	10:00:00
+Prosthodontics III	C	1	D-112F	SAT	10:00:00	13:00:00
+Prosthodontics III	C	2	D-112F	SAT	13:00:00	16:00:00
+Prosthodontics III	C	3	D-112F	SUN	10:00:00	13:00:00
+Prosthodontics III	C	4	D-112F	SUN	13:00:00	16:00:00
+Prosthodontics III	C	5	D-112F	TUE	10:00:00	13:00:00
+Prosthodontics III	C	6	D-112F	TUE	13:00:00	16:00:00
+Prosthodontics III	T	1	M-111	SAT	08:00:00	09:00:00
+Prosthodontics III	T	2	M-G04	SAT	09:00:00	10:00:00
+Prosthodontics III	T	3	P-108	WED	09:00:00	10:00:00
+Prosthodontics IV	C	1	D-112F	MON	10:00:00	13:00:00
+Prosthodontics IV	C	2	D-112F	MON	13:00:00	16:00:00
+Prosthodontics IV	C	3	D-112F	WED	10:00:00	13:00:00
+Prosthodontics IV	C	4	D-112F	WED	13:00:00	16:00:00
+Prosthodontics IV	C	5	D-112F	THU	10:00:00	13:00:00
+Prosthodontics IV	C	6	D-112F	THU	13:00:00	16:00:00
+Prosthodontics IV	T	1	M-G09	SUN	08:00:00	09:00:00
+Prosthodontics IV	T	2	P-G05	TUE	08:00:00	09:00:00
+Prosthodontics IV	T	3	P-G08	THU	09:00:00	10:00:00
+Prosthodontics IV	T	4	P-G04	TUE	09:00:00	10:00:00
+Psychiatric and Mental Health Nursing	L	1	Y-000	WED	08:00:00	12:00:00
+Psychiatric and Mental Health Nursing	T	1	Y-000	WED	12:00:00	14:00:00
+Public Health Care and First Aid	L	1	E-G13	SAT	08:00:00	10:00:00
+Public Health Care and First Aid	L	2	E-G13	SAT	10:00:00	12:00:00
+Public Health Care and First Aid	L	3	E-G13	SAT	12:00:00	14:00:00
+Public Health Care and First Aid	L	4	E-G13	SAT	14:00:00	16:00:00
+Public Health Care and First Aid	L	5	E-G13	MON	14:00:00	16:00:00
+Public Health Care and First Aid	T	1	P-G02	THU	13:00:00	14:00:00
+Public Health Care and First Aid	T	2	P-G05	THU	14:00:00	15:00:00
+Public Health Care and First Aid	T	3	M-G05	THU	15:00:00	16:00:00
+Python Programming	T	1	B-B06	TUE	12:30:00	14:00:00
+Python Programming	T	1	B-B06	SUN	12:30:00	14:00:00
+Quality Control and Quality Assurance & Lab	L	1	P-B05	THU	14:00:00	16:00:00
+Quality Control and Quality Assurance & Lab	T	1	M-G07	THU	12:00:00	14:00:00
+Rehabilitation and Physiotherapy	T	1	P-103	TUE	08:00:00	10:00:00
+Reinforced Concrete I	T	1	P-104	MON	14:00:00	15:30:00
+Reinforced Concrete I	T	1	P-103	WED	14:00:00	15:30:00
+Research Methodology	T	1	M-G02	SUN	14:00:00	16:00:00
+Research Methodology	T	2	M-G08	MON	12:00:00	14:00:00
+Research Methodology	T	3	M-G08	MON	10:00:00	12:00:00
+Research Methodology	T	4	M-G02	THU	12:00:00	14:00:00
+Reservoir Simulation and Management	T	1	E-G11	MON	11:00:00	12:30:00
+Reservoir Simulation and Management	T	1	E-G12	THU	08:00:00	09:30:00
+Semantics	T	1	B-G12	WED	14:30:00	16:30:00
+Software Engineering	T	1	P-G03	TUE	16:00:00	17:30:00
+Software Engineering	T	1	P-G03	THU	16:00:00	17:30:00
+Software Engineering	T	2	B-B01	WED	12:30:00	14:00:00
+Software Engineering	T	2	B-B05	SUN	08:00:00	09:30:00
+Statistics for Business	T	1	M-107	SUN	09:30:00	11:00:00
+Statistics for Business	T	1	B-B06	TUE	09:30:00	11:00:00
+Statistics for Engineering	T	2	P-106	WED	12:30:00	14:00:00
+Statistics for Engineering	T	2	P-106	TUE	08:00:00	09:30:00
+Steel Structures	T	1	M-G02	MON	12:30:00	15:30:00
+Strength of Materials	T	1	B-G12	WED	08:00:00	09:30:00
+Strength of Materials	T	1	B-G12	MON	08:00:00	09:30:00
+Structural Analysis and Design	T	1	P-111	THU	11:00:00	12:30:00
+Structural Analysis and Design	T	1	P-111	TUE	11:00:00	12:30:00
+Syntax	T	1	B-G12	WED	09:30:00	11:30:00
+Taxation Accounting	T	1	E-G11	THU	09:30:00	11:00:00
+Taxation Accounting	T	1	E-G11	SUN	14:00:00	15:30:00
+Teaching Methods	T	1	P-104	SUN	12:00:00	14:00:00
+Techniques for Forensic Biology & Lab	L	1	P-B01	THU	12:00:00	14:00:00
+Techniques for Forensic Biology & Lab	T	1	M-111	THU	10:00:00	12:00:00
+Therapeutics I	T	1	M-111	TUE	12:00:00	14:00:00
+Therapeutics II	T	1	P-101	SUN	12:30:00	14:00:00
+Therapeutics II	T	1	P-108	TUE	11:00:00	12:30:00
+Therapeutics II	T	2	M-G04	SUN	15:30:00	17:00:00
+Therapeutics II	T	2	M-G09	THU	15:30:00	17:00:00
+Therapeutics II	T	3	E-G12	WED	08:00:00	11:00:00
+Therapeutics III	T	1	P-G09	SAT	14:00:00	15:30:00
+Therapeutics III	T	1	M-G09	THU	09:30:00	11:00:00
+Toxicology	L	1	C-B-03	SAT	08:00:00	10:00:00
+Toxicology	L	2	C-B-03	SAT	10:00:00	12:00:00
+Toxicology	L	3	C-B-03	SAT	14:00:00	16:00:00
+Toxicology	L	4	C-B-03	MON	08:00:00	10:00:00
+Toxicology	L	5	C-B-03	SAT	12:00:00	14:00:00
+Toxicology	T	1	P-106	TUE	12:30:00	14:00:00
+Toxicology	T	1	M-107	SUN	08:00:00	09:30:00
+Toxicology	T	2	P-G08	SUN	14:00:00	15:30:00
+Toxicology	T	2	P-G05	WED	14:00:00	15:30:00
+Translation I	T	1	B-G10	TUE	11:30:00	13:30:00
+Translation II	T	1	B-G10	TUE	08:00:00	10:00:00
+Transportation Engineering	T	1	P-105	MON	12:30:00	14:00:00
+Transportation Engineering	T	1	P-105	WED	12:30:00	14:00:00
+Unified Accounting System	T	1	E-G11	SUN	12:30:00	14:00:00
+Unified Accounting System	T	1	E-G11	TUE	12:30:00	14:00:00
+Water Resources	T	1	P-102	SUN	11:00:00	14:00:00
+Web Programming	T	1	P-G03	SUN	12:30:00	14:00:00
+Web Programming	T	1	P-G03	TUE	12:30:00	14:00:00
+Web Technology and Design	T	1	B-B05	TUE	14:00:00	15:30:00
+Web Technology and Design	T	1	P-G03	THU	12:30:00	14:00:00
+Web Technology and Design	T	3	B-B01	SUN	08:00:00	09:30:00
+Web Technology and Design	T	3	B-B05	TUE	08:00:00	09:30:00
+Well Test Analysis	T	1	B-G08	THU	09:30:00	11:00:00
+Well Test Analysis	T	1	P-103	MON	12:30:00	14:00:00
+Total classes: 1252
+Action
