@@ -142,6 +142,15 @@
           <span class="btn-text">+ Class</span>
         </button>
 
+        <button id="btn-komar-catalog" class="btn btn-secondary btn-mobile-action" title="Browse and select Komar University courses">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+          <span class="btn-text">Komar Classes</span>
+          <span class="badge-pill komar-badge-count">382</span>
+        </button>
+
         <button id="btn-plans" class="btn btn-secondary btn-mobile-action" title="Saved plans: save, load and compare schedules">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -208,7 +217,10 @@
             <h2 class="panel-title">Course Sections</h2>
             <span class="panel-subtitle">Select 1 section per course</span>
           </div>
-          <span id="courses-selected-count" class="badge">0 / 0 Selected</span>
+          <div class="panel-header-right">
+            <button id="btn-browse-komar-sidebar" class="btn btn-ghost btn-xs" title="Browse Komar University catalog">🎓 Catalog</button>
+            <span id="courses-selected-count" class="badge">0 / 0 Selected</span>
+          </div>
         </div>
 
         <div class="search-box">
@@ -454,6 +466,7 @@
             <button class="modal-tab active" data-tab="manual-entry">Add Class Manually</button>
             <button class="modal-tab" data-tab="text-import">Smart Text Parser</button>
             <button class="modal-tab" data-tab="busy-time">Busy Time</button>
+            <button class="modal-tab" data-tab="komar-catalog-tab">Komar Catalog</button>
           </div>
           <button id="btn-close-modal" class="btn btn-ghost icon-only">&times;</button>
         </div>
@@ -538,6 +551,94 @@
                 <button type="submit" class="btn btn-primary">Save Busy Time</button>
               </div>
             </form>
+          </div>
+
+          <!-- TAB 4: KOMAR CATALOG SHORTCUT -->
+          <div id="tab-komar-catalog-tab" class="tab-pane">
+            <div class="komar-tab-banner">
+              <div class="komar-tab-banner-icon">🎓</div>
+              <h3>Komar University Course Catalog</h3>
+              <p>Explore all 382 ready-made courses from the Komar semester schedule. Search, preview section timings and rooms, and select your classes to add them directly to your scheduler.</p>
+              <button type="button" id="btn-open-komar-from-import" class="btn btn-primary">
+                Open Course Catalog Browser
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: KOMAR UNIVERSITY COURSE CATALOG -->
+    <div id="komar-modal-overlay" class="modal-overlay hidden">
+      <div class="modal-card komar-modal-card" role="dialog" aria-modal="true" aria-labelledby="komar-catalog-title">
+        <div class="modal-header">
+          <div class="komar-modal-title-wrapper">
+            <div class="komar-title-icon-badge">🎓</div>
+            <div>
+              <div class="modal-title-row">
+                <h3 id="komar-catalog-title" class="modal-title">Komar University Catalog</h3>
+                <span class="arcade-badge-tag">382 CLASSES READY</span>
+              </div>
+              <p class="modal-subtitle">Search and select your courses to add all their sections to your scheduler.</p>
+            </div>
+          </div>
+          <button id="btn-close-komar-modal" class="btn btn-ghost icon-only" title="Close modal">&times;</button>
+        </div>
+
+        <div class="modal-body komar-modal-body">
+          <!-- SEARCH & FILTER TOOLBAR -->
+          <div class="komar-toolbar">
+            <div class="komar-search-wrapper">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <input type="text"
+                     id="komar-search-input"
+                     class="komar-search-input"
+                     placeholder="Search classes by name (e.g. Database, Calculus, English, Nursing)..." />
+              <button type="button" id="komar-search-clear" class="btn btn-ghost icon-only btn-xs hidden" title="Clear search">&times;</button>
+            </div>
+
+            <div class="komar-filter-row">
+              <div id="komar-filter-pills" class="komar-filter-pills">
+                <button type="button" class="komar-filter-pill active" data-filter="ALL">All (382)</button>
+                <button type="button" class="komar-filter-pill" data-filter="T">Theory (T)</button>
+                <button type="button" class="komar-filter-pill" data-filter="L">Lab (L)</button>
+                <button type="button" class="komar-filter-pill" data-filter="C">Clinical (C)</button>
+              </div>
+
+              <div class="komar-quick-actions">
+                <button type="button" id="komar-btn-select-all" class="btn btn-ghost btn-xs">Select All Filtered</button>
+                <button type="button" id="komar-btn-clear-selection" class="btn btn-ghost btn-xs">Clear Selection</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- COURSES LIST CONTAINER -->
+          <div id="komar-courses-list" class="komar-courses-list custom-scrollbar">
+            <!-- Dynamically populated course cards -->
+          </div>
+        </div>
+
+        <!-- MODAL FOOTER -->
+        <div class="modal-footer komar-modal-footer">
+          <div class="komar-footer-options">
+            <label class="komar-checkbox-inline" title="Uncheck to keep your current courses and add selected ones">
+              <input type="checkbox" id="komar-replace-existing" />
+              <span>Replace existing courses in planner</span>
+            </label>
+            <span id="komar-selected-count" class="komar-selection-badge">0 classes selected</span>
+          </div>
+
+          <div class="komar-footer-actions">
+            <button type="button" id="btn-cancel-komar" class="btn btn-secondary">Close</button>
+            <button type="button" id="komar-btn-apply" class="btn btn-primary" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Apply to Scheduler</span>
+            </button>
           </div>
         </div>
       </div>
